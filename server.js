@@ -48,14 +48,24 @@ app.get('/shit', (req, res) => {
   res.send('💩');
 });
 
-app.get('/pankek', (req, res) => {
+app.get('/rph/pankek', (req, res) => {
   res.setHeader('content-type','text/plain');
   res.send('lang developer of 0 languages');
 });
 
+app.get('/rph/grian', (req, res) => {
+  res.setHeader('content-type','text/plain');
+  res.send('best kotlin shill');
+});
+
+app.get('/rph/λ', (req, res) => {
+  res.setHeader('content-type','text/plain');
+  res.send('god of the stateless');
+});
+
 app.get('/wtmoo', (req, res) => {
   res.setHeader('content-type', 'text/plain');
-  res.send('idk');
+  res.send('eternal confusion');
 });
 
 app.get('/tld', (req, res) => {
@@ -69,9 +79,12 @@ app.get('/tld/for/:domain', async (req, res) => {
   const tldsRaw = await cache('https://data.iana.org/TLD/tlds-alpha-by-domain.txt', 'tlds', days(1));
   const tlds = tldsRaw.toLowerCase().split('\n').slice(1, -1);
   const ret = [];
-  for (let extras = 0; extras < 3; extras++) {
+  for (let extras = 0; extras < req.params.domain.length; extras++) {
     const slice = req.params.domain.slice(0, req.params.domain.length - extras);
     for (const tld of tlds) {
+      if (slice.length - tld.length < 3) {
+        continue;
+      }
       if (slice.endsWith(tld)) {
         console.log(slice, tld);
         ret.push(req.params.domain.replace(new RegExp(tld), '.$&/').replace(/\/$/, ''));
