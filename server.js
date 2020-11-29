@@ -1,7 +1,7 @@
 const fs = require('fs').promises,
   fsConst = require('fs').constants,
-  fetch = require('node-fetch'),
-  calc = require('mathjs').evaluate;
+  fetch = require('node-fetch')//,
+  //calc = require('mathjs').evaluate;
 
 
 const app = require('express')();
@@ -67,7 +67,7 @@ app.get('/wtmoo', (req, res) => {
 
 app.get('/calc/:expression', (req, res) => {
   res.setHeader('content-type', 'text/plain');
-  res.send(calc(req.params.expression).toString());
+  res.send('');//calc(req.params.expression).toString());
 });
 
 app.get('/tld', (req, res) => {
@@ -94,6 +94,21 @@ app.get('/tld/for/:domain', async (req, res) => {
     }
   }
   res.send(ret.join("\n"));
+});
+
+const engines = [
+  [[], 'https://hoogle.haskell.org/?hoogle=%q'],
+];
+const engined = {};
+for (const [aliases, url] of engines) { for (const alias of aliases) engined[alias] = url; }
+
+app.get('/q/:engine/:query', (req, res) => {
+  if (req.params.engine in engined) {
+    //
+  } else {
+    res.setHeader('content-type', 'text/plain');
+    res.status(404).send('invalid search engine');
+  }
 });
 
 app.get('/my', (req, res) => {
@@ -142,7 +157,13 @@ home += '<h5>programming languages</h5><ul>';
 for (const [aliases, url] of langs) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
 home += '</ul>';
 const distros = [
-  [['arch linux', 'archlinux', 'arch'], 'https://www.archlinux.org/'],
+  [['arch linux', 'archlinux', 'arch'], 'https://wiki.archlinux.org/index.php/Arch_Linux'],
+  [['ubuntu'], 'https://ubuntu.com/'],
+  [['opensuse', 'suse'], 'https://www.opensuse.org/'],
+  [['pop!_os', 'popos', 'pop'], 'https://pop.system76.com/'],
+  [['elementary os', 'elementaryos', 'elementary'], 'https://elementary.io/'],
+  [['linux mint', 'linuxmint', 'mint'], 'https://linuxmint.com/'],
+  [['artix linux', 'artixlinux', 'artix'], 'https://artixlinux.org/'],
 ];
 home += '<h5>linux distros</h5><ul>';
 for (const [aliases, url] of distros) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
@@ -155,7 +176,7 @@ app.get('/', (req, res) => {
 app.use((req, res, next) => {
   const url = decodeURIComponent(req.originalUrl.slice(1));
   console.log(url);
-  if (url in redirectd) { res.redirect(redirectd[url]); return; }
+  if (url.toLowerCase() in redirectd) { res.redirect(redirectd[url.toLowerCase()]); return; }
   next();
 });
 
