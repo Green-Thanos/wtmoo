@@ -36,4 +36,8 @@ const getHeaders = (req, res) => {
 app.get('/my/h', getHeaders);
 app.get('/my/headers', getHeaders);
 
-app.listen(process.env.PORT,);
+app.use((req, res, next) => {
+  let a = decodeURI(req.originalUrl.slice(1));
+});
+
+app.listen(process.env.PORT);
