@@ -1,17 +1,36 @@
 const fs = require('fs').promises,
+  fsConst = require('fs').constants,
   fetch = require('node-fetch');
 
 
 const app = require('express')();
 
-// TODO: this should return promise returning [data, cached]
-function cache(url, path, age) {
-  path = './data/' + path;
-}
-
 const minutes = n => n * 60000,
   hours = n => n * 3600000,
   days = n => n * 86400000;
+
+// TODO: this should return promise returning [data, cached]
+function cache(url, path, age) {
+  path = './data/' + path;
+  return fs.access(path, fsConst.R_OK | fsConst.W_OK)
+    .then(() => {
+      return fs.open(path, 'rw')
+        .then(f => {
+          return f.stat()
+            .then(st => {
+              if (new Date() - st.mtimeMs > days(1)) {
+                //
+              } else {
+                return f.readFile();
+              }
+            });
+        });
+    })
+    .catch(() => {
+      return fetch(url)
+        .then(res => res.text());
+    });
+}
 
 app.get('/', (req, res) => {
   res.send('<meta name="viewport" content="width=device-width,initial-scale=1"><title>wtmoo is</title><a href="/">help</a><br><a href="https://glitch.com/edit/#!/wtmoo">source</a>');
@@ -35,7 +54,7 @@ app.get('/tld', (req, res) => {
 });
 
 app.get('/my', (req, res) => {
-  res.send('<meta name="viewport" content="width=device-width,initial-scale=1"><title>what is my</title><a href="/">help</a><br><a href="/h">headers</a><br><a href="/ip">ip</a><br><a href="/ua">user agent</a><br><a href="https://glitch.com/edit/#!/wim">source</a>');
+  res.send('<meta name="viewport" content="width=device-width,initial-scale=1"><title>what is my</title><a href="/my">help</a><br><a href="/h">headers</a><br><a href="/ip">ip</a><br><a href="/ua">user agent</a><br><a href="https://glitch.com/edit/#!/wim">source</a>');
 });
 
 const getUserAgent = (req, res) => {
@@ -138,24 +157,22 @@ function isValidCalc(s) {
   return /^\s*(?:[\d_]+(?:\.[\d_]+)?)(?:(?:\s*[-+*/^()])+\s*(?:[\d_]+(?:\.[\d_]+)?))*[\s)]*$/.test(s);
 }
 
-function haskell(req, res) {
-  res.redirect('https://www.haskell.org/');
-}
-app.get('/hs', haskell); app.get('/haskell', haskell);
 const redirects = [
   [['hs', 'haskell'], 'https://www.haskell.org/'],
   [['node', 'nodejs', 'node.js'], 'https://nodejs.org/'],
+  [['go', 'golang'], 'https://golang.org/'],
+  [['js', 'javascript'], 'https://developer.mozilla.org/en-US/docs/Web/JavaScript'],
+  [['c++', 'cpp'], 'https://www.cppreference.com/'],
 ];
 const redirectd = {};
 for (const [aliases, url] of redirects) { for (const alias of aliases) { redirectd[alias] = url; } }
 
 app.use((req, res, next) => {
-  const url = req.originalUrl.slice(1);
-  if ()
-  let str = decodeURIComponent(url);
-  console.log(str);
-  if (isValidCalc(str)) {
-    const result = evaluate(lex(str));
+  const url = decodeURIComponent(req.originalUrl.slice(1));
+  console.log(url);
+  if (url in redirectd) { res.redirect(redirectd[url]); return; }
+  if (isValidCalc(url)) {
+    const result = evaluate(lex(url));
     if (typeof result !== 'undefined') { res.send(result[0].toString()); return; }
   }
   next();
