@@ -85,10 +85,10 @@ function evaluate(l, i=0) {
       } else if (tok === '-') {
         negateNext = !negateNext;
       } else if (tok === '(') {
-        let result = stack.push(evaluate(l, ++i));
-        if (!result) { return; }
-        let num; [num, i] = result;
-        stack.push(num);
+        let result = evaluate(l, ++i);
+        if (typeof result === 'undefined') { return; }
+        i = result[1];
+        stack.push(result[0]);
       } else {
         return; // invalid.
       }
@@ -111,14 +111,16 @@ function evaluate(l, i=0) {
 }
 
 function isValidCalc(s) {
-  return /^\s*(?:[\d_]+(?:\.[\d_]+)?)(?:(?:\s*[-+*/^()])+\s*(?:[\d_]+(?:\.[\d_]+)?))*\s*$/.test(s);
+  return /^\s*(?:[\d_]+(?:\.[\d_]+)?)(?:(?:\s*[-+*/^()])+\s*(?:[\d_]+(?:\.[\d_]+)?))*[\s)]*$/.test(s);
 }
 
 app.use((req, res, next) => {
-  let str = decodeURI(req.originalUrl.slice(1));
+  let str = decodeURIComponent(req.originalUrl.slice(1));
+  console.log(req.originalUrl, req.originalUrl.slice(1), str, isValidCalc(str));
   if (isValidCalc(str)) {
     const result = evaluate(lex(str));
-    if (result) { res.send(result[0]); }
+    console.log(result);
+    if (typeof result !== 'undefined') { res.send(result[0]); }
   }
 });
 
