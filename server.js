@@ -9,27 +9,31 @@ const minutes = n => n * 60000,
   hours = n => n * 3600000,
   days = n => n * 86400000;
 
-// TODO: this should return promise returning [data, cached]
-function cache(url, path, age) {
+function noop() {}
+
+async function cache(url, path, age = days(1), onchange = noop) {
   path = './data/' + path;
-  return fs.access(path, fsConst.R_OK | fsConst.W_OK)
-    .then(() => {
-      return fs.open(path, 'rw')
-        .then(f => {
-          return f.stat()
-            .then(st => {
-              if (new Date() - st.mtimeMs > days(1)) {
-                //
-              } else {
-                return f.readFile();
-              }
-            });
-        });
-    })
-    .catch(() => {
-      return fetch(url)
-        .then(res => res.text());
-    });
+  try {
+    await fs.access(path, fsConst.R_OK | fsConst.W_OK);
+    const file = await fs.open(path, 'rw');
+    const stat = await file.stat();
+    if (new Date() - stat.mtimeMs > age) {
+      const res = await fetch(url);
+      const body = await res.text();
+      onchange(body);
+      await file.writeFile(body);
+      return body;
+    } else {
+      return await file.readFile();
+    }
+  } catch {
+    const res = await fetch(url);
+    const body = await res.text();
+    onchange(body);
+    const file = await fs.open(path, 'rw');
+    await file.writeFile(body);
+    return body;
+  }
 }
 
 app.get('/', (req, res) => {
@@ -41,6 +45,11 @@ app.get('/shit', (req, res) => {
   res.send('💩');
 });
 
+app.get('/pankek', (req, res) => {
+  res.setHeader('content-type','text/plain');
+  res.send('lang developer of 0 languages');
+});
+
 app.get('/wtmoo', (req, res) => {
   res.setHeader('content-type', 'text/plain');
   res.send('idk');
@@ -48,13 +57,24 @@ app.get('/wtmoo', (req, res) => {
 
 app.get('/tld', (req, res) => {
   res.setHeader('content-type', 'text/plain');
-  fetch('https://data.iana.org/TLD/tlds-alpha-by-domain.txt')
-    .then(res => res.text())
+  cache('https://data.iana.org/TLD/tlds-alpha-by-domain.txt', 'tlds', days(1))
     .then(body => res.send(body.slice(body.indexOf('\n') + 1).toLowerCase()));
 });
 
+app.get('/tld/for/:domain', async (req, res) => {
+  res.setHeader('content-type', 'text/plain');
+  const tlds = await cache('https://data.iana.org/TLD/tlds-alpha-by-domain.txt', 'tlds', days(1));
+  const ret = [];
+  for (let extras = 0; extras < 3; extras ++) {
+    for (const tld of tlds) {
+      if (req.params.domain.endsWith(tld.slice(0, tld.length - extras)))
+    }
+  }
+  res.send(ret.join("\n"));
+});
+
 app.get('/my', (req, res) => {
-  res.send('<meta name="viewport" content="width=device-width,initial-scale=1"><title>what is my</title><a href="/my">help</a><br><a href="/h">headers</a><br><a href="/ip">ip</a><br><a href="/ua">user agent</a><br><a href="https://glitch.com/edit/#!/wim">source</a>');
+  res.send('<meta name="viewport" content="width=device-width,initial-scale=1"><title>what is my</title><a href="/my">help</a><br><a href="/my/h">headers</a><br><a href="/my/ip">ip</a><br><a href="/my/ua">user agent</a><br><a href="https://glitch.com/edit/#!/wim">source</a>');
 });
 
 const getUserAgent = (req, res) => {
