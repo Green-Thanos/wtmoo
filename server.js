@@ -36,8 +36,27 @@ const getHeaders = (req, res) => {
 app.get('/my/h', getHeaders);
 app.get('/my/headers', getHeaders);
 
+const $ = new Proxy({}, { get: (o, k) => Symbol.for(k) });
+
+function lex(s) {
+  return s.match(/(?:[\d_]+(?:\.[\d_]+)?)|[-+*/()]/g).map(m => /\d/.test(m) ? +m : m);
+}
+
+function evaluate(l, i=0) {
+  for (; i < l.length; i++) {
+    const tok = l[i];
+  }
+}
+
+function isValidCalc(s) {
+  return /^\s*(?:[\d_]+(?:\.[\d_]+)?)(?:(?:\s*[-+*/()])+\s*(?:[\d_]+(?:\.[\d_]+)?))*\s*$/.test(s);
+}
+
 app.use((req, res, next) => {
-  let a = decodeURI(req.originalUrl.slice(1));
+  let str = decodeURI(req.originalUrl.slice(1));
+  if (isValidCalc(str)) {
+    evaluate(lex(str));
+  }
 });
 
 app.listen(process.env.PORT);
