@@ -16,21 +16,25 @@ async function cache(url, path, age = days(1)) {
   path = './data/' + path;
   try {
     await fs.access(path, fsConst.R_OK | fsConst.W_OK);
-    const file = await fs.open(path, 'w+');
+    const file = await fs.open(path, 'a+');
     const stat = await file.stat();
     if (new Date() - stat.mtimeMs > age) {
       const res = await fetch(url);
       const body = await res.text();
       await file.writeFile(body);
+      await file.close();
       return body;
     } else {
-      return await file.readFile('utf8');
+      const res = await file.readFile('utf8');
+      await file.close();
+      return res;
     }
   } catch {
     const res = await fetch(url);
     const body = await res.text();
     const file = await fs.open(path, 'w+');
     await file.writeFile(body);
+    await file.close();
     return body;
   }
 }
@@ -63,12 +67,14 @@ app.get('/tld', (req, res) => {
 app.get('/tld/for/:domain', async (req, res) => {
   res.setHeader('content-type', 'text/plain');
   const tldsRaw = await cache('https://data.iana.org/TLD/tlds-alpha-by-domain.txt', 'tlds', days(1));
-  const tlds = tldsRaw.toLowerCase().split('\n').slice(1);
+  const tlds = tldsRaw.toLowerCase().split('\n').slice(1, -1);
   const ret = [];
-  for (let extras = 0; extras < 3; extras ++) {
+  for (let extras = 0; extras < 3; extras++) {
+    const slice = req.params.domain.slice(0, req.params.domain.length - extras);
     for (const tld of tlds) {
-      if (req.params.domain.slice(0, req.params.domain.length - extras).endsWith(tld)) {
-        ret.push(req.params.domain.replace(tld, '.$1/').replace(/\/$/, ''));
+      if (slice.endsWith(tld)) {
+        console.log(slice, tld);
+        ret.push(req.params.domain.replace(new RegExp(tld), '.$&/').replace(/\/$/, ''));
       }
     }
   }
