@@ -1,15 +1,36 @@
-const app = require("express")();
+const fs = require('fs'),
+  fetch = require('node-fetch');
+
+
+const app = require('express')();
+
+function cache(url, path, age) {
+  path = './data/' + path;
+}
+
+const minutes = n => n * 60000,
+  hours = n => n * 3600000,
+  days = n => n * 86400000;
 
 app.get('/', (req, res) => {
   res.send('<meta name="viewport" content="width=device-width,initial-scale=1"><title>wtmoo is</title><a href="/">help</a><br><a href="https://glitch.com/edit/#!/wtmoo">source</a>');
 });
 
 app.get('/shit', (req, res) => {
+  res.setHeader('content-type', 'text/plain');
   res.send('💩');
 });
 
 app.get('/wtmoo', (req, res) => {
+  res.setHeader('content-type', 'text/plain');
   res.send('idk');
+});
+
+app.get('/tld', (req, res) => {
+  res.setHeader('content-type', 'text/plain');
+  fetch('https://data.iana.org/TLD/tlds-alpha-by-domain.txt')
+    .then(res => res.text())
+    .then(body => res.send(body.slice(body.indexOf('\n') + 1).toLowerCase()));
 });
 
 app.get('/my', (req, res) => {
