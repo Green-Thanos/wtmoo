@@ -1,34 +1,39 @@
-// server.js
-// where your node app starts
+const app = require("express")();
 
-// we've started you off with Express (https://expressjs.com/)
-// but feel free to use whatever libraries or frameworks you'd like through `package.json`.
-const express = require("express");
-const app = express();
-
-// our default array of dreams
-const dreams = [
-  "Find and count some sheep",
-  "Climb a really tall mountain",
-  "Wash the dishes"
-];
-
-// make all the files in 'public' available
-// https://expressjs.com/en/starter/static-files.html
-app.use(express.static("public"));
-
-// https://expressjs.com/en/starter/basic-routing.html
-app.get("/", (request, response) => {
-  response.sendFile(__dirname + "/views/index.html");
+app.get('/', (req, res) => {
+  res.send('<meta name="viewport" content="width=device-width,initial-scale=1"><title>wtmoo is</title><a href="/">help</a><br><a href="https://glitch.com/edit/#!/wtmoo">source</a>');
 });
 
-// send the default array of dreams to the webpage
-app.get("/dreams", (request, response) => {
-  // express helps us take JS objects and send them as JSON
-  response.json(dreams);
+app.get('/wtmoo', (req, res) => {
+  res.send();
 });
 
-// listen for requests :)
-const listener = app.listen(process.env.PORT, () => {
-  console.log("Your app is listening on port " + listener.address().port);
-});
+const getUserAgent = (req, res) => {
+  res.setHeader('content-type', 'text/plain');
+  res.send(req.headers['user-agent']);
+};
+
+app.get('/my/ua', getUserAgent);
+app.get('/my/useragent', getUserAgent);
+
+const getIP = (req, res) => {
+  res.setHeader('content-type', 'text/plain');
+  res.send(req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for'].match(/[^,]+/)[0]);
+};
+
+app.get('/my/ip', getIP);
+app.get('/my/ipaddress', getIP);
+
+const getHeaders = (req, res) => {
+  res.setHeader('content-type', 'text/plain');
+  let s = '';
+  for (const k in req.headers) {
+    s += `${k}=${req.headers[k]}\n`;
+  }
+  res.send(s);
+};
+
+app.get('/my/h', getHeaders);
+app.get('/my/headers', getHeaders);
+
+app.listen(process.env.PORT,);
