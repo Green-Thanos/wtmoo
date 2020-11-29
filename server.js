@@ -12,6 +12,10 @@ app.get('/wtmoo', (req, res) => {
   res.send('idk');
 });
 
+app.get('/my', (req, res) => {
+  res.send('<meta name="viewport" content="width=device-width,initial-scale=1"><title>what is my</title><a href="/">help</a><br><a href="/h">headers</a><br><a href="/ip">ip</a><br><a href="/ua">user agent</a><br><a href="https://glitch.com/edit/#!/wim">source</a>');
+});
+
 const getUserAgent = (req, res) => {
   res.setHeader('content-type', 'text/plain');
   res.send(req.headers['user-agent']);
@@ -41,17 +45,15 @@ app.get('/my/h', getHeaders);
 app.get('/my/headers', getHeaders);
 
 function lex(s) {
-  return s.match(/(?:[\d_]+(?:\.[\d_]+)?)|[-+*/()]/g).map(m => /\d/.test(m) ? +m : m);
+  return s.match(/(?:[\d_]+(?:\.[\d_]+)?)|[-+*/^()]/g).map(m => /\d/.test(m) ? +m : m);
 }
 
-function tighterThan(op, cmp) {
+function tighterThanOrEq(op, cmp) {
   let res;
   switch (op) {
-    case '+': res = '*/^'.includes(cmp); break;
-    case '-': res = '*/^'.includes(cmp); break;
-    case '*': res = cmp === '^'; break;
-    case '/': res = cmp === '^'; break;
-    case '^': res = false; break;
+    case '+': case '-': res = '+-*/^'.includes(cmp); break;
+    case '*': case '/': res = '*/^'.includes(cmp); break;
+    case '^': res = cmp === '^'; break;
   }
   return res;
 }
@@ -98,7 +100,7 @@ function evaluate(l, i=0) {
       } else if (typeof tok === 'number') {
         return; // invalid.
       } else {
-        while (ops.length > 0 && tighterThan(tok, ops[ops.length - 1])) {
+        while (ops.length > 0 && tighterThanOrEq(tok, ops[ops.length - 1])) {
           applyOp(stack, ops.pop());
         }
         ops.push(tok);
@@ -116,12 +118,13 @@ function isValidCalc(s) {
 
 app.use((req, res, next) => {
   let str = decodeURIComponent(req.originalUrl.slice(1));
-  console.log(req.originalUrl, req.originalUrl.slice(1), str, isValidCalc(str));
+  console.log(str, isValidCalc(str));
   if (isValidCalc(str)) {
     const result = evaluate(lex(str));
     console.log(result);
-    if (typeof result !== 'undefined') { res.send(result[0]); }
+    if (typeof result !== 'undefined') { res.send(result[0].toString()); return; }
   }
+  next();
 });
 
 app.listen(process.env.PORT);
