@@ -40,10 +40,34 @@ const getHeaders = (req, res) => {
 app.get('/my/h', getHeaders);
 app.get('/my/headers', getHeaders);
 
-const $ = new Proxy({}, { get: (o, k) => Symbol.for(k) });
-
 function lex(s) {
   return s.match(/(?:[\d_]+(?:\.[\d_]+)?)|[-+*/()]/g).map(m => /\d/.test(m) ? +m : m);
+}
+
+function tighterThan(op, cmp) {
+  let res;
+  switch (op) {
+    case '+': res = '*/^'.includes(cmp); break;
+    case '-': res = '*/^'.includes(cmp); break;
+    case '*': res = cmp === '^'; break;
+    case '/': res = cmp === '^'; break;
+    case '^': res = false; break;
+  }
+  return res;
+}
+
+function applyOp(stack, op) {
+  const r = stack.pop(),
+    l = stack.pop();
+  let res;
+  switch (op) {
+    case '+': res = l + r; break;
+    case '-': res = l - r; break;
+    case '*': res = l * r; break;
+    case '/': res = l / r; break;
+    case '^': res = l ** r; break;
+  }
+  stack.push(res);
 }
 
 function evaluate(l, i=0) {
@@ -61,24 +85,33 @@ function evaluate(l, i=0) {
       } else if (tok === '-') {
         negateNext = !negateNext;
       } else if (tok === '(') {
-        let result = stack.push(evaluate(l, i));
+        let result = stack.push(evaluate(l, ++i));
         if (!result) { return; }
         let num; [num, i] = result;
         stack.push(num);
+      } else {
+        return; // invalid.
       }
     } else {
       if (tok === ')') {
-        while (stack.length > 1) {
+        break;
+      } else if (typeof tok === 'number') {
+        return; // invalid.
+      } else {
+        while (ops.length > 0 && tighterThan(tok, ops[ops.length - 1])) {
           applyOp(stack, ops.pop());
         }
-        return [stack[0], ++i];
+        ops.push(tok);
+        expectNumber = true;
       }
     }
   }
+  while (stack.length > 1) { applyOp(stack, ops.pop()); }
+  return [stack[0], ++i];
 }
 
 function isValidCalc(s) {
-  return /^\s*(?:[\d_]+(?:\.[\d_]+)?)(?:(?:\s*[-+*/()])+\s*(?:[\d_]+(?:\.[\d_]+)?))*\s*$/.test(s);
+  return /^\s*(?:[\d_]+(?:\.[\d_]+)?)(?:(?:\s*[-+*/^()])+\s*(?:[\d_]+(?:\.[\d_]+)?))*\s*$/.test(s);
 }
 
 app.use((req, res, next) => {
