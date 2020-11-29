@@ -41,7 +41,8 @@ async function cache(url, path, age = days(1)) {
 }
 
 app.get('/', (req, res) => {
-  res.send('<meta name="viewport" content="width=device-width,initial-scale=1"><title>wtmoo is</title><a href="/">help</a><br><a href="https://glitch.com/edit/#!/wtmoo">source</a>');
+  res.send('<meta name="viewport" content="width=device-width,initial-scale=1"><title>wtmoo is</title><a href="/">help</a><br>\
+<a href="https://glitch.com/edit/#!/wtmoo">source</a>');
 });
 
 app.get('/shit', (req, res) => {
