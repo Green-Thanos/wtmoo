@@ -4,8 +4,12 @@ app.get('/', (req, res) => {
   res.send('<meta name="viewport" content="width=device-width,initial-scale=1"><title>wtmoo is</title><a href="/">help</a><br><a href="https://glitch.com/edit/#!/wtmoo">source</a>');
 });
 
+app.get('/shit', (req, res) => {
+  res.send('💩');
+});
+
 app.get('/wtmoo', (req, res) => {
-  res.send();
+  res.send('idk');
 });
 
 const getUserAgent = (req, res) => {
@@ -43,8 +47,33 @@ function lex(s) {
 }
 
 function evaluate(l, i=0) {
+  const stack = [];
+  const ops = [];
+  let expectNumber = true;
+  let negateNext = false;
   for (; i < l.length; i++) {
     const tok = l[i];
+    if (expectNumber) {
+      if (typeof tok === 'number') {
+        stack.push(negateNext ? -tok : tok);
+        expectNumber = false;
+        negateNext = false;
+      } else if (tok === '-') {
+        negateNext = !negateNext;
+      } else if (tok === '(') {
+        let result = stack.push(evaluate(l, i));
+        if (!result) { return; }
+        let num; [num, i] = result;
+        stack.push(num);
+      }
+    } else {
+      if (tok === ')') {
+        while (stack.length > 1) {
+          applyOp(stack, ops.pop());
+        }
+        return [stack[0], ++i];
+      }
+    }
   }
 }
 
@@ -55,7 +84,8 @@ function isValidCalc(s) {
 app.use((req, res, next) => {
   let str = decodeURI(req.originalUrl.slice(1));
   if (isValidCalc(str)) {
-    evaluate(lex(str));
+    const result = evaluate(lex(str));
+    if (result) { res.send(result[0]); }
   }
 });
 
