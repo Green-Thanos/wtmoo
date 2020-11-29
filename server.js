@@ -1,9 +1,10 @@
-const fs = require('fs'),
+const fs = require('fs').promises,
   fetch = require('node-fetch');
 
 
 const app = require('express')();
 
+// TODO: this should return promise returning [data, cached]
 function cache(url, path, age) {
   path = './data/' + path;
 }
@@ -137,12 +138,24 @@ function isValidCalc(s) {
   return /^\s*(?:[\d_]+(?:\.[\d_]+)?)(?:(?:\s*[-+*/^()])+\s*(?:[\d_]+(?:\.[\d_]+)?))*[\s)]*$/.test(s);
 }
 
+function haskell(req, res) {
+  res.redirect('https://www.haskell.org/');
+}
+app.get('/hs', haskell); app.get('/haskell', haskell);
+const redirects = [
+  [['hs', 'haskell'], 'https://www.haskell.org/'],
+  [['node', 'nodejs', 'node.js'], 'https://nodejs.org/'],
+];
+const redirectd = {};
+for (const [aliases, url] of redirects) { for (const alias of aliases) { redirectd[alias] = url; } }
+
 app.use((req, res, next) => {
-  let str = decodeURIComponent(req.originalUrl.slice(1));
-  console.log(str, isValidCalc(str));
+  const url = req.originalUrl.slice(1);
+  if ()
+  let str = decodeURIComponent(url);
+  console.log(str);
   if (isValidCalc(str)) {
     const result = evaluate(lex(str));
-    console.log(result);
     if (typeof result !== 'undefined') { res.send(result[0].toString()); return; }
   }
   next();
