@@ -40,11 +40,6 @@ async function cache(url, path, age = days(1)) {
   }
 }
 
-app.get('/', (req, res) => {
-  res.send('<meta name="viewport" content="width=device-width,initial-scale=1"><title>wtmoo is</title><a href="/">help</a><br>\
-<a href="https://glitch.com/edit/#!/wtmoo">source</a>');
-});
-
 app.get('/shit', (req, res) => {
   res.setHeader('content-type', 'text/plain');
   res.send('💩');
@@ -133,15 +128,23 @@ const getHeaders = (req, res) => {
 app.get('/my/h', getHeaders);
 app.get('/my/headers', getHeaders);
 
+let home = '<meta name="viewport" content="width=device-width,initial-scale=1"><style>h1,h2,h3,h4,h5,h6{margin:0.5em 0;}ul{margin:0;padding-inline-start:20px;}</style><title>wtmoo is</title><a href="/">help</a><br><a href="https://glitch.com/edit/#!/wtmoo">source</a><br>';
+
 const redirects = [
-  [['hs', 'haskell'], 'https://www.haskell.org/'],
-  [['node', 'nodejs', 'node.js'], 'https://nodejs.org/'],
+  [['haskell', 'hs'], 'https://www.haskell.org/'],
+  [['node.js', 'node', 'nodejs'], 'https://nodejs.org/'],
   [['go', 'golang'], 'https://golang.org/'],
-  [['js', 'javascript'], 'https://developer.mozilla.org/en-US/docs/Web/JavaScript'],
+  [['javascript', 'js'], 'https://developer.mozilla.org/en-US/docs/Web/JavaScript'],
   [['c++', 'cpp'], 'https://www.cppreference.com/'],
 ];
 const redirectd = {};
-for (const [aliases, url] of redirects) { for (const alias of aliases) { redirectd[alias] = url; } }
+home += '<h5>programming languages</h5><ul>';
+for (const [aliases, url] of redirects) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
+home += '</ul>'
+
+app.get('/', (req, res) => {
+  res.send(home);
+});
 
 app.use((req, res, next) => {
   const url = decodeURIComponent(req.originalUrl.slice(1));
