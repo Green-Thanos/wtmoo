@@ -15,10 +15,10 @@
 
     :focus { outline: none; }
     #title { font-size: 500%; }
-    #searchbar { width: 60%; display: flex; }
+    #searchbar { width: 60%; max-width: 50em; display: flex; }
     input { font-size: 200%; font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace; border: 1px solid #888; padding: 0 6px; }
     #bang.error { background-color: #fbb; }
-    #bang { background-color: #eee; text-align: right; width: 20%; border-radius: 5px 0 0 5px; } #query { width: 80%; border-left: none; border-radius: 0 5px 5px 0; }
+    #bang { background-color: #eee; text-align: right; width: fit-content(20%); border-radius: 5px 0 0 5px; } #query { width: 80%; border-left: none; border-radius: 0 5px 5px 0; }
   </style>
 </head>
 <body>
@@ -67,6 +67,14 @@
             e.preventDefault();
             e.stopPropagation();
           }
+          break;
+        case 'Enter':
+          if (bang.value.slice(1) in engined) {
+            const url = engined[bang.value.slice(1)].replace('%q', encodeURIComponent(query.value)).replace('%+q', encodeURIComponent(query.value.replace(/ /g, '+')));
+            location.href = url;
+          }
+          e.preventDefault();
+          e.stopPropagation();
           break;
       }
     }
