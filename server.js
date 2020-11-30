@@ -342,6 +342,7 @@ const langs = [
   [['racket'], 'https://racket-lang.org/'],
   [['wolfram language', 'mathematica'], 'https://www.wolfram.com/language/'],
   [['processing'], 'https://processing.org/'],
+  [['asm', 'x86', 'assembly'], 'https://www.felixcloutier.com/x86/'],
   [['q#', 'qsharp', 'qdk'], 'https://docs.microsoft.com/en-us/quantum/'],
   [['c#9', 'csharp9'], 'https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9'],
   [['c#8', 'csharp8'], 'https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8'],
