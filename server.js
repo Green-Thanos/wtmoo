@@ -44,6 +44,11 @@ app.get('/ask', (req, res) => {
   res.redirect('https://dontasktoask.com/');
 });
 
+app.get('/helpvampire', (req, res) => {
+  fs.readFile('pages/vampire.html', 'utf8')
+    .then(text => res.send(text));
+});
+
 app.get('/shit', (req, res) => {
   res.setHeader('content-type', 'text/plain');
   res.send('💩');
@@ -92,7 +97,7 @@ app.get('/tld/for/:domain', async (req, res) => {
         continue;
       }
       if (slice.endsWith(tld)) {
-        console.log(slice, tld);
+        // console.log(slice, tld);
         ret.push(req.params.domain.replace(new RegExp(tld), '.$&/').replace(/\/$/, ''));
       }
     }
