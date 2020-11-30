@@ -37,23 +37,25 @@
     let bang = document.getElementById('bang'),
       query = document.getElementById('query');
     function onBangKeyup(e) {
+      if (e.ctrlKey || e.altKey || e.shiftKey) { return; }
       if (bang.value.length === 0) {
         bang.value = '!';
         return;
       }
       switch (e.key) {
         case ' ':
-          query.focus();
+          query.focus(); query.selectionStart = 0; query.value = '';
           e.preventDefault();
           e.stopPropagation();
           break;
       }
     }
     function onQueryKeyup(e) {
+      if (e.ctrlKey || e.altKey || e.shiftKey) { return; }
       switch (e.key) {
         case 'Backspace':
           if (query.value.length === 0) {
-            bang.focus();
+            bang.focus(); bang.selectionStart = bang.value.length;
             e.preventDefault();
             e.stopPropagation();
           }
