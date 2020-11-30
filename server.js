@@ -225,9 +225,21 @@ const engineList = [];
 for (const [aliases, url] of engines) { engineList.push(aliases[0]); for (const alias of aliases) { engined[alias] = url; } }
 
 app.get('/favicon.ico', (req, res) => res.sendFile('favicon.ico', { root: __dirname }));
+app.get('/search.xml', (req, res) => res.sendFile('pages/search.xml', { root: __dirname }));
 
 app.get('/q', (req, res) => {
-  res.send(searchHome);
+  if (req.query.q) {
+    const match = req.query.q.match(/^!?(.+?) (.+)$/);
+    if (match === null) {
+      res.setHeader('content-type', 'text/plain');
+      res.status(404).send('invalid search');
+    } else {
+      const [_full, engine, query] = match;
+      res.redirect(`/q/${engine}/${query}`);
+    }
+  } else {
+    res.send(searchHome);
+  }
 });
 
 app.get('/q/list', (req, res) => {
@@ -329,6 +341,7 @@ const langs = [
   [['c#8', 'csharp8'], 'https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8'],
   [['c#7', 'csharp7'], 'https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7'],
   [['c#6', 'csharp6'], 'https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6'],
+  [['typescript', 'ts'], 'https://www.typescriptlang.org/'],
 ];
 const redirectd = {};
 home += '<h5>programming languages</h5><ul>';
