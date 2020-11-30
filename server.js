@@ -122,8 +122,7 @@ const engines = [
 let searchHome; fs.readFile('pages/search.html', 'utf8').then(text => searchHome = text.replace('$', JSON.stringify(engines)));
 const engined = {};
 const engineList = [];
-const engineBangs = [];
-for (const [aliases, url] of engines) { engineList.push(aliases[0]); for (const alias of aliases) { engined[alias] = url; engineBangs.push(alias, url); } }
+for (const [aliases, url] of engines) { engineList.push(aliases[0]); for (const alias of aliases) { engined[alias] = url; } }
 
 let favicon; fs.readFile('favicon.ico').then(bin => favicon = bin);
 app.get('/favicon.ico', (req, res) => {

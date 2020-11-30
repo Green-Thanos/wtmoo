@@ -41,12 +41,27 @@
     const engines = $;
     const engined = {};
     const engineList = [];
-    const engineBangs = [];
-    for (const [aliases, url] of engines) { engineList.push(aliases[0]); for (const alias of aliases) { engined[alias] = url; engineBangs.push(alias, url); } }
+    const engineNames = {};
+    for (const [aliases, url] of engines) { const name = aliases[0]; engineList.push(name); for (const alias of aliases) { engined[alias] = url; enginesNames[alias] = name; } }
     
     let bang = document.getElementById('bang'),
-      query = document.getElementById('query');
+      query = document.getElementById('query'),
+      engines = document.getElementById('engines');
     query.focus();
+    function refreshEngines() {
+      while (engines.lastChild) {
+        engines.removeChild(engines.lastChild);
+      }
+      const queryEngine = bang.value.slice(1);
+      for (const engine of engines) {
+        if (queryEngine.includes(engine)) {
+          const result = document.createElement('div');
+          if (queryEngine === engine) {
+            //
+          }
+        }
+      }
+    }
     function onBangKeydown(e) {
       switch (e.key) {
         case ' ':
@@ -54,6 +69,8 @@
           e.preventDefault();
           e.stopPropagation();
           break;
+        default:
+          refreshEngines();
       }
     }
     function onBangKeyup(e) {
@@ -71,7 +88,7 @@
       switch (e.key) {
         case 'Backspace':
           if (query.value.length === 0) {
-            bang.focus(); engines.classList.remove('hidden'); bang.selectionStart = bang.value.length;
+            bang.focus(); refreshEngines(); engines.classList.remove('hidden'); bang.selectionStart = bang.value.length;
             e.preventDefault();
             e.stopPropagation();
           }
@@ -86,10 +103,14 @@
           break;
       }
     }
+    function onEnginesClick(e) {
+      console.log(e, e.target);
+    }
     bang.addEventListener('keydown', onBangKeydown);
     bang.addEventListener('keyup', onBangKeyup);
     bang.addEventListener('focusout', onBangFocusout);
     query.addEventListener('keydown', onQueryKeydown);
+    engines.addEventListener('click', onEnginesClick);
   </script>
 </body>
 </html>
