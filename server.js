@@ -116,34 +116,56 @@ app.get('/tld/for/:domain', async (req, res) => {
 });
 
 const engines = [
+  // general
   [['google', 'g'], 'https://www.google.com/search?q=%+q'],
   [['bing', 'b'], 'https://www.bing.com/search?q=%+q'],
   [['duckduckgo', 'ddg'], 'https://duckduckgo.com/?q=%+q'],
   [['ecosia', 'e'], 'https://www.ecosia.org/search?q=%+q'],
-  [['wikipedia', 'wp', 'w'], 'https://en.wikipedia.org/w/index.php?search=%+q'],
+  // videos
   [['youtube', 'yt'], 'https://www.youtube.com/results?search_query=%+q'],
+  [['twitch', 'twitch.tv', 'ttv'], 'https://www.twitch.tv/search?term=%q'],
+  // info
+  [['wikipedia', 'wp', 'w'], 'https://en.wikipedia.org/w/index.php?search=%+q'],
   [['stack overflow', 'stackoverflow', 'so'], 'https://stackoverflow.com/search?q=%+q'],
-  [['cnn'], 'https://edition.cnn.com/search?q=%+q'],
-  [['nbc'], 'https://www.nbcnews.com/search/?q=%+q'],
-  [['time'], 'https://time.com/search/?q=%+q'],
-  [['glitch', 'gl'], 'https://glitch.com/search?q=%q'],
-  [['slashdot', 'sd'], 'https://slashdot.org/index2.pl?fhfilter=%+q'],
-  [['new scientist', 'newscientist', 'ns'], 'https://www.newscientist.com/search/?q=%+q'],
-  [['hacker news', 'hackernews', 'hn'], 'https://hn.algolia.com/?q=%+q'],
-  [['hoogle', 'hgl'], 'https://hoogle.haskell.org/?hoogle=%q'],
-  [['mercurial', 'merc', 'hg'], 'https://www.mercurial-scm.org/wiki/Mercurial?action=fullsearch&value=%+q'],
-  [['github', 'gh'], 'https://github.com/search?q=%+q'],
-  [['gitlab', 'gl'], 'https://gitlab.com/search?search=%+q'],
-  [['archwiki', 'arch wiki', 'arch'], 'https://wiki.archlinux.org/index.php?search=%+q'],
-  [['aur', 'arch user repository', 'archuserrepository'], 'https://aur.archlinux.org/packages/?K=%+q'],
-  [['esolang', 'eso'], 'https://esolangs.org/w/index.php?search=%+q'],
-  [['deviantart', 'da'], 'https://www.deviantart.com/search?q=%q'],
-  [['wattpad', 'watt'], 'https://www.wattpad.com/search/%q'],
   [['super user', 'superuser', 'su'], 'https://superuser.com/search?q=%+q'],
   [['ask ubuntu', 'askubuntu', 'au'], 'https://askubuntu.com/search?q=%+q'],
   [['codegolf.se', 'codegolf.stackexchange', 'codegolfse', 'cgse'], 'https://codegolf.stackexchange.com/search?q=%+q'],
-  [['pixiv'], 'https://www.pixiv.net/en/tags/%q/artworks?s_mode=s_tag'],
+  // news
+  [['cnn'], 'https://edition.cnn.com/search?q=%+q'],
+  [['nbc'], 'https://www.nbcnews.com/search/?q=%+q'],
+  [['time'], 'https://time.com/search/?q=%+q'],
+  [['slashdot', 'sd'], 'https://slashdot.org/index2.pl?fhfilter=%+q'],
+  [['new scientist', 'newscientist', 'ns'], 'https://www.newscientist.com/search/?q=%+q'],
+  [['hacker news', 'hackernews', 'hn'], 'https://hn.algolia.com/?q=%+q'],
+  // version control
+  [['github', 'gh'], 'https://github.com/search?q=%+q'],
+  [['gitlab', 'gl'], 'https://gitlab.com/search?search=%+q'],
+  [['glitch', 'gl'], 'https://glitch.com/search?q=%q'],
+  // misc tech
+  [['archwiki', 'arch wiki', 'arch'], 'https://wiki.archlinux.org/index.php?search=%+q'],
+  [['aur', 'arch user repository', 'archuserrepository'], 'https://aur.archlinux.org/packages/?K=%+q'],
+  [['hoogle', 'hgl'], 'https://hoogle.haskell.org/?hoogle=%q'],
+  [['mdn', 'mozilla developer network'], 'https://developer.mozilla.org/en-US/search?q=%+q'],
+  [['mercurial', 'merc', 'hg'], 'https://www.mercurial-scm.org/wiki/Mercurial?action=fullsearch&value=%+q'],
+  [['esolang', 'eso'], 'https://esolangs.org/w/index.php?search=%+q'],
+  // funding
   [['patreon', 'pat'], 'https://www.patreon.com/search?q=%+q'],
+  [['gofundme', 'gfm'], 'https://gofundme.com/mvc.php?route=homepage_norma/search&term=%q'],
+  [['pixiv'], 'https://www.pixiv.net/en/tags/%q/artworks?s_mode=s_tag'],
+  // art
+  [['deviantart', 'da'], 'https://www.deviantart.com/search?q=%q'],
+  [['fantia', 'ft'], 'https://fantia.jp/fanclubs?keyword=%+q'],
+  [['fanbox', 'pixiv fanbox', 'pxfb'], 'https://www.fanbox.cc/search?type=creator&q=%q'],
+  [['wattpad', 'watt'], 'https://www.wattpad.com/search/%q'],
+  // social networks
+  [['facebook', 'fb'], 'https://www.facebook.com/search/top/?q=%q'],
+  [['twitter', 'tw'], 'https://twitter.com/search?q=%q'],
+  [['reddit', 'rd'], 'https://www.reddit.com/search?q=%+q'],
+  [['imgur'], 'https://imgur.com/search?q=%q'],
+  // gifs
+  [['gfycat', 'gc'], 'https://gfycat.com/gifs/search/%+q'],
+  [['giphy', 'gp'], 'https://giphy.com/search/%-q'],
+  [['tenor', 'tn'], 'https://tenor.com/search/%-q'],
 ];
 let searchHome; fs.readFile('pages/search.html', 'utf8').then(text => searchHome = text.replace('$', JSON.stringify(engines)));
 const engined = {};
@@ -167,7 +189,10 @@ app.get('/q/list', (req, res) => {
 
 app.get('/q/:engine/:query', (req, res) => {
   if (req.params.engine in engined) {
-    res.redirect(engined[req.params.engine].replace('%q', encodeURIComponent(req.params.query)).replace('%+q', encodeURIComponent(req.params.query.replace(/ /g, '+'))));
+    res.redirect(engined[req.params.engine]
+      .replace('%q', encodeURIComponent(req.params.query))
+      .replace('%+q', encodeURIComponent(req.params.query.replace(/\s+/g, '+')))
+      .replace('%-q', encodeURIComponent(req.params.query.replace(/\s+/g, '-'))));
   } else {
     res.setHeader('content-type', 'text/plain');
     res.status(404).send('invalid search engine');

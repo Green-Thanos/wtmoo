@@ -104,7 +104,10 @@
           break;
         case 'Enter':
           if (bang.value.slice(1) in engined) {
-            const url = engined[bang.value.slice(1)].replace('%q', encodeURIComponent(query.value)).replace('%+q', encodeURIComponent(query.value.replace(/ /g, '+')));
+            const url = engined[bang.value.slice(1)]
+              .replace('%q', encodeURIComponent(query.value))
+              .replace('%+q', encodeURIComponent(query.value.replace(/\s+/g, '+')))
+              .replace('%-q', encodeURIComponent(query.value.replace(/\s+/g, '-')));
             location.href = url;
           }
           e.preventDefault();
