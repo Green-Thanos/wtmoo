@@ -271,6 +271,8 @@ const langs = [
   [['kotlin'], 'https://kotlinlang.org/'],
   [['java'], 'https://www.java.com/'],
   [['c#', 'csharp'], 'https://docs.microsoft.com/en-us/dotnet/csharp/'],
+  [['f#', 'fsharp'], 'https://fsharp.org/'],
+  [['q#', 'qsharp', 'qdk'], 'https://docs.microsoft.com/en-us/quantum/'],
 ];
 const redirectd = {};
 home += '<h5>programming languages</h5><ul>';
@@ -284,9 +286,37 @@ const distros = [
   [['elementary os', 'elementaryos', 'elementary'], 'https://elementary.io/'],
   [['linux mint', 'linuxmint', 'mint'], 'https://linuxmint.com/'],
   [['artix linux', 'artixlinux', 'artix'], 'https://artixlinux.org/'],
+  [['manjaro'], 'https://manjaro.org/'],
 ];
 home += '<h5>linux distros</h5><ul>';
 for (const [aliases, url] of distros) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
+home += '</ul>';
+const softwares = [
+  [['curl'], 'https://curl.se/'],
+  [['drupal'], 'https://www.drupal.org/'],
+  [['laravel'], 'https://laravel.com/'],
+  [['mongodb', 'mongo'], 'https://www.mongodb.com/'],
+  [['sqlite'], 'https://www.sqlite.org/index.html'],
+  [['mysql'], 'https://www.mysql.com/'],
+];
+home += '<h5>software</h5><ul>';
+for (const [aliases, url] of softwares) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
+home += '</ul>';
+const organizations = [
+  [['gnu'], 'https://www.gnu.org/home.en.html'],
+  [['apache'], 'https://www.apache.org/'],
+  [['free software foundation', 'freesoftwarefoundation', 'fsf'], 'https://www.fsf.org/'],
+  [['jetbrains'], 'https://www.jetbrains.com/'],
+  [['microsoft', 'ms'], 'https://www.microsoft.com/'],
+  [['microsoft research', 'msr'], 'https://www.microsoft.com/en-us/research/'],
+  [['google atap', 'atap'], 'https://atap.google.com/'],
+  [['battelle'], 'https://www.battelle.org/'],
+  [['intel'], 'http://intel.com/'],
+  [['amd'], 'https://www.amd.com/'],
+  [['nvidia'], 'https://www.nvidia.com/'],
+];
+home += '<h5>organizations (and companies)</h5><ul>';
+for (const [aliases, url] of organizations) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
 home += '</ul>';
 
 app.get('/', (req, res) => {
