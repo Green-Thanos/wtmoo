@@ -356,6 +356,8 @@ home += '<h5>programming competitions</h5><ul>';
 for (const [aliases, url] of competitions) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 const misc = [
+  [['sbcl'], 'http://www.sbcl.org/'],
+  [['clhs'], 'http://www.lispworks.com/documentation/lw50/CLHS/Front/Contents.htm'],
   [['vtuber', 'virtual youtuber'], 'https://virtualyoutuber.fandom.com/wiki/Virtual_YouTuber_Wiki'],
 ];
 home += '<h5>misc</h5><ul>';
