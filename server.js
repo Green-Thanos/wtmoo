@@ -44,9 +44,9 @@ app.get('/ask', (req, res) => {
   res.redirect('https://dontasktoask.com/');
 });
 
+let vamp; fs.readFile('pages/vampire.html', 'utf8').then(text => vamp = text);
 app.get('/helpvampire', (req, res) => {
-  fs.readFile('pages/vampire.html', 'utf8')
-    .then(text => res.send(text));
+  res.send(vamp);
 });
 
 app.get('/shit', (req, res) => {
@@ -111,6 +111,7 @@ const engines = [
   [['duckduckgo', 'ddg'], 'https://duckduckgo.com/?q=%+q'],
   [['ecosia', 'e'], 'https://www.ecosia.org/search?q=%+q'],
   [['wikipedia', 'wp', 'w'], 'https://en.wikipedia.org/w/index.php?search=%+q'],
+  [['youtube', 'yt'], 'https://www.youtube.com/results?search_query=%+q'],
   [['hoogle', 'hgl'], 'https://hoogle.haskell.org/?hoogle=%q'],
   [['mercurial', 'merc', 'hg'], 'https://www.mercurial-scm.org/wiki/Mercurial?action=fullsearch&value=%+q'],
   [['github', 'gh'], 'https://github.com/search?q=%+q'],
@@ -119,7 +120,7 @@ const engines = [
   [['aur', 'arch user repository', 'archuserrepository'], 'https://aur.archlinux.org/packages/?K=%+q'],
 ];
 const engined = {};
-const searchHome = '';
+let searchHome; fs.readFile('pages/search.html', 'utf8').then(text => searchHome = text);
 const engineList = [];
 const engineBangs = [];
 for (const [aliases, url] of engines) { engineList.push(aliases[0]); for (const alias of aliases) { engined[alias] = url; engineBangs.push(alias, url); } }
