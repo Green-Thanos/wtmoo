@@ -429,12 +429,6 @@ const competitions = [
 home += '<h5>programming competitions</h5><ul>';
 for (const [aliases, url] of competitions) { home += `<li><a href="/encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
-const people = [
-  [],
-];
-home += '<h5>people</h5><ul>';
-for (const [aliases, url] of people) { home += `<li><a href="/encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
-home += '</ul>';
 const misc = [
   [['sbcl'], 'http://www.sbcl.org/'],
   [['clhs'], 'http://www.lispworks.com/documentation/lw50/CLHS/Front/Contents.htm'],
