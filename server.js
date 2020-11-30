@@ -264,7 +264,13 @@ const langs = [
   [['node.js', 'node', 'nodejs'], 'https://nodejs.org/'],
   [['go', 'golang'], 'https://golang.org/'],
   [['javascript', 'js'], 'https://developer.mozilla.org/en-US/docs/Web/JavaScript'],
-  [['c++', 'cpp'], 'https://www.cppreference.com/'],
+  [['c++', 'cpp', 'cplusplus'], 'https://www.cppreference.com/'],
+  [['ada', 'adacore'], 'https://www.adacore.com/about-ada'],
+  [['fortran'], 'https://gcc.gnu.org/fortran/'],
+  [['scala'], 'https://www.scala-lang.org/'],
+  [['kotlin'], 'https://kotlinlang.org/'],
+  [['java'], 'https://www.java.com/'],
+  [['c#', 'csharp'], 'https://docs.microsoft.com/en-us/dotnet/csharp/'],
 ];
 const redirectd = {};
 home += '<h5>programming languages</h5><ul>';
