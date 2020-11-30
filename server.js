@@ -97,14 +97,19 @@ app.get('/tld/for/:domain', async (req, res) => {
 });
 
 const engines = [
-  [[], 'https://hoogle.haskell.org/?hoogle=%q'],
+  [['google', 'g'], 'https://www.google.com/search?q=%+q'],
+  [['duckduckgo', 'ddg'], 'https://duckduckgo.com/?q=%+q'],
+  [['wikipedia', 'wp', 'w'], 'https://en.wikipedia.org/w/index.php?search=%+q'],
+  [['hoogle', 'hgl'], 'https://hoogle.haskell.org/?hoogle=%q'],
+  [['mercurial', 'merc', 'hg'], 'https://www.mercurial-scm.org/wiki/Mercurial?action=fullsearch&value=%+q'],
+  [['github', 'gh'], 'https://github.com/search?q=%+q'],
 ];
 const engined = {};
 for (const [aliases, url] of engines) { for (const alias of aliases) engined[alias] = url; }
 
 app.get('/q/:engine/:query', (req, res) => {
   if (req.params.engine in engined) {
-    //
+    res.redirect(engined[req.params.engine].replace('%q', encodeURIComponent(req.params.query)).replace('%+q', encodeURIComponent(req.params.query.replace(/ /g, '+'))));
   } else {
     res.setHeader('content-type', 'text/plain');
     res.status(404).send('invalid search engine');
