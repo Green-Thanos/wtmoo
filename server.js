@@ -479,6 +479,7 @@ const misc = [
   [['clhs'], 'http://www.lispworks.com/documentation/lw50/CLHS/Front/Contents.htm'],
   [['vtuber', 'virtual youtuber'], 'https://virtualyoutuber.fandom.com/wiki/Virtual_YouTuber_Wiki'],
   [['monokai'], 'https://monokai.pro/'],
+  [['unicode'], 'https://shapecatcher.com/'],
 ];
 home += '<h5>misc</h5><ul>';
 for (const [aliases, url] of misc) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
