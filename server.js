@@ -280,6 +280,7 @@ const langs = [
   [['f#', 'fsharp'], 'https://fsharp.org/'],
   [['forth'], 'https://www.forth.com/forth/'],
   [['common lisp', 'clisp'], 'https://common-lisp.net/'],
+  [['racket'], 'https://racket-lang.org/'],
   [['wolfram language', 'mathematica'], 'https://www.wolfram.com/language/'],
   [['processing'], 'https://processing.org/'],
   [['q#', 'qsharp', 'qdk'], 'https://docs.microsoft.com/en-us/quantum/'],
@@ -316,6 +317,8 @@ const libs = [
   [['three.js', 'threejs'], 'https://threejs.org/'],
   [['p5.js', 'p5js', 'p5'], 'https://p5js.org/'],
   [['d3.js', 'd3js', 'd3'], 'https://d3js.org/'],
+  [['anaconda python', 'anacondapython', 'anaconda'], 'https://www.anaconda.com/products/individual'],
+  [['jupyter', 'jupyterlab', 'jupyter notebook', 'jupyternotebook'], 'https://jupyter.org/'],
 ];
 home += '<h5>frameworks and libraries</h5><ul>';
 for (const [aliases, url] of libs) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
@@ -326,12 +329,21 @@ const organizations = [
   [['free software foundation', 'freesoftwarefoundation', 'fsf'], 'https://www.fsf.org/'],
   [['jetbrains'], 'https://www.jetbrains.com/'],
   [['microsoft', 'ms'], 'https://www.microsoft.com/'],
+  [['amazon'], 'https://www.aboutamazon.com/'],
+  [['ibm'], 'https://www.ibm.com/'],
+  // research
   [['microsoft research', 'msr'], 'https://www.microsoft.com/en-us/research/'],
+  [['inria'], 'https://www.inria.fr/en'],
   [['google atap', 'atap'], 'https://atap.google.com/'],
   [['battelle'], 'https://www.battelle.org/'],
+  // hardware
   [['intel'], 'http://intel.com/'],
   [['amd'], 'https://www.amd.com/'],
   [['nvidia'], 'https://www.nvidia.com/'],
+  // publishers
+  [['oreilly'], 'https://www.oreilly.com/'],
+  [['wiley'], 'https://www.wiley.com/'],
+  [['jacaranda'], 'https://www.jacaranda.com.au/'],
 ];
 home += '<h5>organizations (and companies)</h5><ul>';
 for (const [aliases, url] of organizations) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
