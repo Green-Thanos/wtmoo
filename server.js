@@ -117,7 +117,8 @@ app.get('/tld/for/:domain', async (req, res) => {
       }
       if (slice.endsWith(tld)) {
         // console.log(slice, tld);
-        ret.push(req.params.domain.replace(new RegExp(tld + `(?=.{}$)``), '.$&/').replace(/\/$/, ''));
+        const d = req.params.domain;
+        ret.push((d.slice(0, slice.length - tld.length) + '.' + d.slice(slice.length - tld.length, slice.length) + '/' + d.slice(slice.length)).replace(/\/$/, ''));
       }
     }
   }
@@ -408,6 +409,10 @@ const organizations = [
   [['oreilly'], 'https://www.oreilly.com/'],
   [['wiley'], 'https://www.wiley.com/'],
   [['jacaranda'], 'https://www.jacaranda.com.au/'],
+  // tech
+  [['apple'], 'https://www.apple.com/'],
+  [['tesla'], 'https://www.tesla.com/'],
+  [['spacex'], 'https://www.spacex.com/'],
 ];
 home += '<h5>organizations (and companies)</h5><ul>';
 for (const [aliases, url] of organizations) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
@@ -416,14 +421,25 @@ const competitions = [
   [['project euler', 'pe'], 'https://projecteuler.net/'],
   [['advent of code', 'aoc'], 'https://adventofcode.com/'],
   [['google code jam', 'code jam', 'gcj'], 'https://codingcompetitions.withgoogle.com/codejam'],
+  [['code.golf', 'code golf', 'code-golf.io', 'codegolf.io', 'codegolfio', 'cgio'], 'https://code.golf/'],
+  [['anarchy golf', 'anagol'], 'http://golf.shinh.org/'],
+  [['vimgolf', 'vimg'], 'https://www.vimgolf.com/'],
+  [['cssbattle', 'cssb'], 'https://cssbattle.dev/'],
 ];
 home += '<h5>programming competitions</h5><ul>';
 for (const [aliases, url] of competitions) { home += `<li><a href="/encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
+home += '</ul>';
+const people = [
+  [],
+];
+home += '<h5>people</h5><ul>';
+for (const [aliases, url] of people) { home += `<li><a href="/encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 const misc = [
   [['sbcl'], 'http://www.sbcl.org/'],
   [['clhs'], 'http://www.lispworks.com/documentation/lw50/CLHS/Front/Contents.htm'],
   [['vtuber', 'virtual youtuber'], 'https://virtualyoutuber.fandom.com/wiki/Virtual_YouTuber_Wiki'],
+  [['monokai'], 'https://monokai.pro/'],
 ];
 home += '<h5>misc</h5><ul>';
 for (const [aliases, url] of misc) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
