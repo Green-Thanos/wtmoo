@@ -160,6 +160,7 @@ const engines = [
   [['aur', 'yay', 'pacaur', 'aura', 'pakku', 'paru', 'pikaur', 'trizen'], 'https://aur.archlinux.org/packages/?K=%+q'],
   [['pypi', 'pip'], 'https://pypi.org/search/?q=%+q'],
   [['npm'], 'https://www.npmjs.com/search?q=%q'],
+  [['deno'], 'https://deno.land/x?query=%+q'],
   [['yarn'], 'https://yarnpkg.com/?q=%q'],
   [['hoogle', 'hgl'], 'https://hoogle.haskell.org/?hoogle=%q'],
   [['nuget'], 'https://www.nuget.org/packages?q=%+q'],
@@ -236,7 +237,16 @@ app.get('/q/:engine/:query', (req, res) => {
 });
 
 app.get('/embed', (req, res) => {
-  res.send(`<head>${req.query.title || req.query.t ? `<meta content="${req.query.t || req.query.t}" property="og:title">` : ''}</head>`);
+  res.send(
+    '<head>' +
+      (req.query.title || req.query.t ? `<meta content="${req.query.title || req.query.t}" property="og:title">` : '') +
+      (req.query.site || req.query.s ? `<meta content="${req.query.site || req.query.s}" property="og:site_name">` : '') +
+      (req.query.description || req.query.desc || req.query.d ? `<meta content="${req.query.description || req.query.desc || req.query.d}" property="og:description">` : '') +
+      (req.query.image || req.query.i ? `<meta content="${req.query.image || req.query.i}" property="og:image">` : '') +
+      (req.query.imageUrl || req.query.imageurl || req.query.iu ? `<meta content="${req.query.imageurl || req.query.imageUrl || req.query.iu}" property="og:image">` : '') +
+      (req.query.color || req.query.c ? `<meta name="theme-color" content="#${req.query.color || req.query.c}">` : '') + 
+    '</head>'
+  );
 });
 
 app.get('/my', (req, res) => {
@@ -287,7 +297,6 @@ let home = '<meta name="viewport" content="width=device-width,initial-scale=1"><
 
 const langs = [
   [['haskell', 'hs'], 'https://www.haskell.org/'],
-  [['node.js', 'node', 'nodejs'], 'https://nodejs.org/'],
   [['go', 'golang'], 'https://golang.org/'],
   [['javascript', 'js'], 'https://developer.mozilla.org/en-US/docs/Web/JavaScript'],
   [['c++', 'cpp', 'cplusplus'], 'https://www.cppreference.com/'],
@@ -340,6 +349,8 @@ const libs = [
   [['d3.js', 'd3js', 'd3'], 'https://d3js.org/'],
   [['anaconda python', 'anaconda'], 'https://www.anaconda.com/products/individual'],
   [['jupyter', 'jupyter lab', 'jupyter notebook'], 'https://jupyter.org/'],
+  [['node.js', 'node', 'nodejs'], 'https://nodejs.org/'],
+  [['deno'], 'https://deno.land/'],
 ];
 home += '<h5>frameworks and libraries</h5><ul>';
 for (const [aliases, url] of libs) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
@@ -370,6 +381,7 @@ home += '<h5>organizations (and companies)</h5><ul>';
 for (const [aliases, url] of organizations) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 const competitions = [
+  [['project euler', 'pe'], 'https://projecteuler.net/'],
   [['advent of code', 'aoc'], 'https://adventofcode.com/'],
   [['google code jam', 'code jam', 'gcj'], 'https://codingcompetitions.withgoogle.com/codejam'],
 ];
