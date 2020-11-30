@@ -124,7 +124,12 @@ const engines = [
   [['youtube', 'yt'], 'https://www.youtube.com/results?search_query=%+q'],
   [['stack overflow', 'stackoverflow', 'so'], 'https://stackoverflow.com/search?q=%+q'],
   [['cnn'], 'https://edition.cnn.com/search?q=%+q'],
+  [['nbc'], 'https://www.nbcnews.com/search/?q=%+q'],
   [['time'], 'https://time.com/search/?q=%+q'],
+  [['glitch', 'gl'], 'https://glitch.com/search?q=%q'],
+  [['slashdot', 'sd'], 'https://slashdot.org/index2.pl?fhfilter=%+q'],
+  [['new scientist', 'newscientist', 'ns'], 'https://www.newscientist.com/search/?q=%+q'],
+  [['hacker news', 'hackernews', 'hn'], 'https://hn.algolia.com/?q=%+q'],
   [['hoogle', 'hgl'], 'https://hoogle.haskell.org/?hoogle=%q'],
   [['mercurial', 'merc', 'hg'], 'https://www.mercurial-scm.org/wiki/Mercurial?action=fullsearch&value=%+q'],
   [['github', 'gh'], 'https://github.com/search?q=%+q'],
@@ -134,6 +139,11 @@ const engines = [
   [['esolang', 'eso'], 'https://esolangs.org/w/index.php?search=%+q'],
   [['deviantart', 'da'], 'https://www.deviantart.com/search?q=%q'],
   [['wattpad', 'watt'], 'https://www.wattpad.com/search/%q'],
+  [['super user', 'superuser', 'su'], 'https://superuser.com/search?q=%+q'],
+  [['ask ubuntu', 'askubuntu', 'au'], 'https://askubuntu.com/search?q=%+q'],
+  [['codegolf.se', 'codegolf.stackexchange', 'codegolfse', 'cgse'], 'https://codegolf.stackexchange.com/search?q=%+q'],
+  [['pixiv'], 'https://www.pixiv.net/en/tags/%q/artworks?s_mode=s_tag'],
+  [['patreon', 'pat'], 'https://www.patreon.com/search?q=%+q'],
 ];
 let searchHome; fs.readFile('pages/search.html', 'utf8').then(text => searchHome = text.replace('$', JSON.stringify(engines)));
 const engined = {};
