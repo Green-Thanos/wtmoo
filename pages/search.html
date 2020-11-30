@@ -23,8 +23,7 @@
     #bang.error { background-color: #fbb; }
     #bang { background-color: #eee; text-align: right; width: 20%; border-radius: 5px 0 0 5px; } #query { width: 80%; border-left: none; border-radius: 0 5px 5px 0; }
     #bangnote { width: 20%; }
-    #engines { width: 100%; display: flex; flex-flow: row wrap; }
-    #engines > div { width: 20%; }
+    #engines { width: 100%; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; }
     #engines > div > :nth-child(1) { text-align: left; }
     #engines > div > :nth-child(2) { text-align: right; }
     #engines > .current { background-color: #eee; }
@@ -65,17 +64,23 @@
       } else {
         bangnote.innerText = '';
       }
+      const toAdd = [];
+      if (queryEngine in engined) { toAdd.push(queryEngine); }
       for (const engine of allEngines) {
-        if (engine.includes(queryEngine)) {
-          const result = document.createElement('div');
-          if (queryEngine === engine) { result.classList.add('current'); }
-          const bang = document.createElement('div'),
-            name = document.createElement('div');
-          bang.innerHTML = '<b>!</b>' + engine.replace(new RegExp(queryEngine), '<b>$&</b>');
-          name.innerText = engineNames[engine];
-          result.appendChild(bang); result.appendChild(name);
-          enginesDiv.appendChild(result);
-        }
+        if (engine.startsWith(queryEngine)) { toAdd.push(engine); }
+      }
+      for (const engine of allEngines) {
+        if (engine.includes(queryEngine) && !engine.startsWith(queryEngine)) { toAdd.push(engine); }
+      }
+      for (const engine of toAdd) {
+        const result = document.createElement('div');
+        if (queryEngine === engine) { result.classList.add('current'); }
+        const bang = document.createElement('div'),
+          name = document.createElement('div');
+        bang.innerHTML = '<b>!</b>' + engine.replace(new RegExp(queryEngine), '<b>$&</b>');
+        name.innerText = engineNames[engine];
+        result.appendChild(bang); result.appendChild(name);
+        enginesDiv.appendChild(result);
       }
     }
     function onBangKeydown(e) {
