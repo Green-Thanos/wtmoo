@@ -1,49 +1,67 @@
 <html>
-  <head>
-    <title>wtmoo metasearch</title>
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
+<head>
+  <title>wtmoo metasearch</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    }
+
+    body {
+      display: flex;
+      flex-flow: column nowrap;
+    }
+    
+    #title {
+      font-size: 500%;
+    }
+
+    #searchbar {
+      width: 60%; display: flex;
+    }
+    
+    input { font-size: 200%; font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace; }
+    #bang { width: 20%; } #query { width: 80%; }
+  </style>
+</head>
+<body>
+  <center>
+    <h1 id="title">!wtmoo</h1>
+    <form id="searchbar">
+      <input type="text" id="bang">
+      <input type="text" id="query">
+    </form>
+  </center>
+  <script>
+    let bang = document.getElementById('bang'),
+      query = document.getElementById('query');
+    function onBangInput(e) {
+      if (bang.value.length === 0) {
+        bang.value = '!';
+        return;
       }
-      
-      body {
-        display: flex;
+      switch (e.key) {
+        case ' ':
+          query.focus();
+          e.preventDefault();
+          e.stopPropagation();
+          break;
       }
-    </style>
-  </head>
-  <body>
-    <input type="text" id="bang">
-    <input type="text" id="query">
-    <script>
-      let bang = document.getElementById('bang'),
-        query = document.getElementById('query');
-      function onBangInput(e) {
-        if (bang.value.length === 0) {
-          bang.value = '!';
-          return;
-        }
-        switch (e.key) {
-          case ' ':
-            query.focus();
+    }
+    function onQueryInput(e) {
+      switch (e.key) {
+        case 'Backspace':
+          if (query.value.length === 0) {
+            bang.focus();
             e.preventDefault();
             e.stopPropagation();
-            break;
-        }
+          }
+          break;
       }
-      function onQueryInput(e) {
-        switch (e.key) {
-          case 'Backspace':
-            if (query.value.length === 0) {
-              bang.focus();
-              e.preventDefault();
-              e.stopPropagation();
-            }
-            break;
-        }
-      }
-      bang.addEventListener('input', onBangInput);
-      query.addEventListener('input', onQueryInput);
-    </script>
-  </body>
+    }
+    bang.addEventListener('input', onBangInput);
+    query.addEventListener('input', onQueryInput);
+  </script>
+</body>
 </html>
