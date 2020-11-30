@@ -276,8 +276,8 @@ const langs = [
   [['kotlin'], 'https://kotlinlang.org/'],
   [['java'], 'https://www.java.com/'],
   [['python', 'py'], 'https://www.python.org/about/'],
-  [['c#', 'csharp'], 'https://docs.microsoft.com/en-us/dotnet/csharp/'],
-  [['f#', 'fsharp'], 'https://fsharp.org/'],
+  [['c#', 'c sharp'], 'https://docs.microsoft.com/en-us/dotnet/csharp/'],
+  [['f#', 'f sharp'], 'https://fsharp.org/'],
   [['forth'], 'https://www.forth.com/forth/'],
   [['common lisp', 'clisp'], 'https://common-lisp.net/'],
   [['racket'], 'https://racket-lang.org/'],
@@ -291,7 +291,7 @@ const langs = [
 ];
 const redirectd = {};
 home += '<h5>programming languages</h5><ul>';
-for (const [aliases, url] of langs) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
+for (const [aliases, url] of langs) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 const distros = [
   [['arch linux', 'archlinux', 'arch'], 'https://wiki.archlinux.org/index.php/Arch_Linux'],
@@ -304,7 +304,7 @@ const distros = [
   [['manjaro'], 'https://manjaro.org/'],
 ];
 home += '<h5>linux distros</h5><ul>';
-for (const [aliases, url] of distros) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
+for (const [aliases, url] of distros) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 const libs = [
   [['curl'], 'https://curl.se/'],
@@ -317,16 +317,16 @@ const libs = [
   [['three.js', 'threejs'], 'https://threejs.org/'],
   [['p5.js', 'p5js', 'p5'], 'https://p5js.org/'],
   [['d3.js', 'd3js', 'd3'], 'https://d3js.org/'],
-  [['anaconda python', 'anacondapython', 'anaconda'], 'https://www.anaconda.com/products/individual'],
-  [['jupyter', 'jupyterlab', 'jupyter notebook', 'jupyternotebook'], 'https://jupyter.org/'],
+  [['anaconda python', 'anaconda'], 'https://www.anaconda.com/products/individual'],
+  [['jupyter', 'jupyter lab', 'jupyter notebook'], 'https://jupyter.org/'],
 ];
 home += '<h5>frameworks and libraries</h5><ul>';
-for (const [aliases, url] of libs) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
+for (const [aliases, url] of libs) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 const organizations = [
   [['gnu'], 'https://www.gnu.org/home.en.html'],
   [['apache'], 'https://www.apache.org/'],
-  [['free software foundation', 'freesoftwarefoundation', 'fsf'], 'https://www.fsf.org/'],
+  [['free software foundation', 'fsf'], 'https://www.fsf.org/'],
   [['jetbrains'], 'https://www.jetbrains.com/'],
   [['microsoft', 'ms'], 'https://www.microsoft.com/'],
   [['amazon'], 'https://www.aboutamazon.com/'],
@@ -346,14 +346,20 @@ const organizations = [
   [['jacaranda'], 'https://www.jacaranda.com.au/'],
 ];
 home += '<h5>organizations (and companies)</h5><ul>';
-for (const [aliases, url] of organizations) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
+for (const [aliases, url] of organizations) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 const competitions = [
-  [['advent of code', 'adventofcode', 'aoc'], 'https://adventofcode.com/'],
-  [['google code jam', 'googlecodejam', 'code jam', 'codejam', 'gcj'], 'https://codingcompetitions.withgoogle.com/codejam'],
+  [['advent of code', 'aoc'], 'https://adventofcode.com/'],
+  [['google code jam', 'code jam', 'gcj'], 'https://codingcompetitions.withgoogle.com/codejam'],
 ];
 home += '<h5>programming competitions</h5><ul>';
-for (const [aliases, url] of competitions) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
+for (const [aliases, url] of competitions) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
+home += '</ul>';
+const misc = [
+  [['vtuber', 'virtual youtuber'], 'https://virtualyoutuber.fandom.com/wiki/Virtual_YouTuber_Wiki'],
+];
+home += '<h5>misc</h5><ul>';
+for (const [aliases, url] of misc) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 
 app.get('/', (req, res) => {
@@ -364,6 +370,7 @@ app.use((req, res, next) => {
   const url = decodeURIComponent(req.originalUrl.slice(1));
   console.log(url);
   if (url.toLowerCase() in redirectd) { res.redirect(redirectd[url.toLowerCase()]); return; }
+  if (url.toLowerCase().replace(/_+/g, ' ') in redirectd) { res.redirect(redirectd[url.toLowerCase().replace(/_+/g, ' ')]); return; }
   next();
 });
 
