@@ -1,12 +1,13 @@
-function lazy(fn) {
-  
+function lazy(name, fn) {
+  Object.defineProperty(global, name, { get: () => { const val = fn(); Object.defineProperty(global, name, val); return val} });
 }
 
 const fs = require('fs').promises,
   fsConst = require('fs').constants,
   fetch = require('node-fetch'),
-  cookieParser = require('cookie-parser')//,
-  //calc = require('mathjs').evaluate;
+  cookieParser = require('cookie-parser');
+/* global calc */
+lazy('calc', () => require('mathjs').evaluate);
 
 
 // TODO: dark theme
@@ -90,7 +91,7 @@ app.get('/wtmoo.png', (req, res) => res.sendFile('wtmoo.png', { root: __dirname 
 
 app.get('/calc/:expression', (req, res) => {
   res.setHeader('content-type', 'text/plain');
-  res.send(require("mathjs").evaluate(req.params.expression).toString());
+  res.send(calc(req.params.expression).toString());
 });
 
 app.get('/tld', (req, res) => {
