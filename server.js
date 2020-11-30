@@ -152,11 +152,17 @@ const engines = [
   [['gitlab', 'gl'], 'https://gitlab.com/search?search=%+q'],
   [['glitch', 'gl'], 'https://glitch.com/search?q=%q'],
   // repositories
-  [['aur', 'arch user repository', 'archuserrepository'], 'https://aur.archlinux.org/packages/?K=%+q'],
+  [['aur', 'arch user repository', 'archuserrepository', 'yay', 'pacaur', 'aura', 'pakku', 'paru', 'pikaur', 'trizen'], 'https://aur.archlinux.org/packages/?K=%+q'],
   [['pypi', 'pip', 'python package index', 'pythonpackageindex'], 'https://pypi.org/search/?q=%+q'],
   [['npm', 'node package manager', 'nodepackagemanager'], 'https://www.npmjs.com/search?q=%q'],
+  [['yarn'], 'https://yarnpkg.com/?q=%q'],
   [['hoogle', 'hgl'], 'https://hoogle.haskell.org/?hoogle=%q'],
+  [['nuget'], 'https://www.nuget.org/packages?q=%+q'],
   [['crates.io', 'cratesio', 'cio'], 'https://crates.io/search?q=%q'],
+  [['cpan', 'comprehensive perl archive network', 'comprehensiveperlarchivenetwork'], 'https://metacpan.org/search?q=%+q'],
+  [['cran', 'comprehensive r archive network', 'comprehensiverarchivenetwork'], 'https://www.google.com/search?q=%+q&domains=r-project.org&sitesearch=r-project.org'],
+  [['ubuntu packages', 'up', 'apt'], 'https://packages.ubuntu.com/search?keywords=%+q'],
+  [['raku modules', 'rakumodules', 'rakum'], 'https://modules.raku.org/search/?q=%+q'],
   // misc tech
   [['cpp reference', 'cppreference', 'cppr'], 'https://cppreference.com/mwiki/index.php?search=%+q'],
   [['archwiki', 'arch wiki', 'arch'], 'https://wiki.archlinux.org/index.php?search=%+q'],
@@ -165,6 +171,7 @@ const engines = [
   [['mdn', 'mozilla developer network'], 'https://developer.mozilla.org/en-US/search?q=%+q'],
   [['mercurial', 'merc', 'hg'], 'https://www.mercurial-scm.org/wiki/Mercurial?action=fullsearch&value=%+q'],
   [['esolang', 'eso'], 'https://esolangs.org/w/index.php?search=%+q'],
+  [['raku'], 'https://www.google.com/search?q=site%3Adocs.raku.org+%q'],
   // funding
   [['patreon', 'pat'], 'https://www.patreon.com/search?q=%+q'],
   [['gofundme', 'gfm'], 'https://gofundme.com/mvc.php?route=homepage_norma/search&term=%q'],
