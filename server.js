@@ -96,6 +96,13 @@ app.get('/tld/for/:domain', async (req, res) => {
   res.send(ret.join("\n"));
 });
 
+app.get('/qp/ww/:query', async (req, res) => {
+  const url = 'http://www.wikiwand.com/api/searchwiki/en/' + encodeURIComponent(req.params.query);
+  const resultsRaw = await fetch(url);
+  const results = await results.json();
+  
+});
+
 const engines = [
   [['google', 'g'], 'https://www.google.com/search?q=%+q'],
   [['duckduckgo', 'ddg'], 'https://duckduckgo.com/?q=%+q'],
@@ -106,6 +113,7 @@ const engines = [
   [['gitlab', 'gl'], 'https://gitlab.com/search?search=%+q'],
   [['archwiki', 'arch wiki', 'arch'], 'https://wiki.archlinux.org/index.php?search=%+q'],
   [['aur', 'arch user repository', 'archuserrepository'], 'https://aur.archlinux.org/packages/?K=%+q'],
+  [['wikiwand', 'ww'], '/qp/ww/%q']
 ];
 const engined = {};
 const searchHome = '';
