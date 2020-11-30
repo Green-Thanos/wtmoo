@@ -8,7 +8,8 @@
     html, body {
       height: 100%;
       margin: 0;
-      font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+      font-family: Whitney, 'Hind Light', 'Ek Mukta', Cantarell, 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
+      /* font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace; */
     }
 
     body {
@@ -19,14 +20,20 @@
     :focus { outline: none; }
     #title { font-size: 500%; }
     #content { width: 60%; max-width: 50em; display: flex; flex-flow: row wrap; }
-    input { font-size: 200%; font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace; border: 1px solid #888; padding: 0 6px; }
+    input {
+      font-size: 200%; border: 1px solid #888; padding: 0 6px;
+      font-family: Whitney, 'Hind Light', 'Ek Mukta', Cantarell, 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
+      /* font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace; */
+    }
     #bang.error { background-color: #fbb; }
     #bang { background-color: #eee; text-align: right; width: 20%; border-radius: 5px 0 0 5px; } #query { width: 80%; border-left: none; border-radius: 0 5px 5px 0; }
     #bangnote { width: 20%; }
     #engines { width: 100%; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; }
     #engines > div > :nth-child(1) { text-align: left; }
     #engines > div > :nth-child(2) { text-align: right; }
-    #engines > .current { background-color: #eee; }
+    #engines > :nth-child(odd) { background-color: #eee; }
+    #engines > .current { background-color: #cce; }
+    .bang { color: #2962ff; }
     .hidden { display: none; }
   </style>
 </head>
@@ -67,7 +74,7 @@
       const toAdd = [];
       if (queryEngine in engined) { toAdd.push(queryEngine); }
       for (const engine of allEngines) {
-        if (engine.startsWith(queryEngine)) { toAdd.push(engine); }
+        if (engine.startsWith(queryEngine) && engine !== queryEngine) { toAdd.push(engine); }
       }
       for (const engine of allEngines) {
         if (engine.includes(queryEngine) && !engine.startsWith(queryEngine)) { toAdd.push(engine); }
@@ -78,6 +85,7 @@
         const bang = document.createElement('div'),
           name = document.createElement('div');
         bang.innerHTML = '<b>!</b>' + engine.replace(new RegExp(queryEngine), '<b>$&</b>');
+        bang.classList.add('bang');
         name.innerText = engineNames[engine];
         result.appendChild(bang); result.appendChild(name);
         enginesDiv.appendChild(result);
