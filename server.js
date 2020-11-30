@@ -40,6 +40,10 @@ async function cache(url, path, age = days(1)) {
   }
 }
 
+app.get('/ask', (req, res) => {
+  res.redirect('https://dontasktoask.com/');
+});
+
 app.get('/shit', (req, res) => {
   res.setHeader('content-type', 'text/plain');
   res.send('💩');
@@ -96,16 +100,11 @@ app.get('/tld/for/:domain', async (req, res) => {
   res.send(ret.join("\n"));
 });
 
-app.get('/qp/ww/:query', async (req, res) => {
-  const url = 'http://www.wikiwand.com/api/searchwiki/en/' + encodeURIComponent(req.params.query);
-  const resultsRaw = await fetch(url);
-  const results = await results.json();
-  
-});
-
 const engines = [
   [['google', 'g'], 'https://www.google.com/search?q=%+q'],
+  [['bing', 'b'], 'https://www.bing.com/search?q=%+q'],
   [['duckduckgo', 'ddg'], 'https://duckduckgo.com/?q=%+q'],
+  [['ecosia', 'e'], 'https://www.ecosia.org/search?q=%+q'],
   [['wikipedia', 'wp', 'w'], 'https://en.wikipedia.org/w/index.php?search=%+q'],
   [['hoogle', 'hgl'], 'https://hoogle.haskell.org/?hoogle=%q'],
   [['mercurial', 'merc', 'hg'], 'https://www.mercurial-scm.org/wiki/Mercurial?action=fullsearch&value=%+q'],
@@ -113,12 +112,12 @@ const engines = [
   [['gitlab', 'gl'], 'https://gitlab.com/search?search=%+q'],
   [['archwiki', 'arch wiki', 'arch'], 'https://wiki.archlinux.org/index.php?search=%+q'],
   [['aur', 'arch user repository', 'archuserrepository'], 'https://aur.archlinux.org/packages/?K=%+q'],
-  [['wikiwand', 'ww'], '/qp/ww/%q']
 ];
 const engined = {};
 const searchHome = '';
 const engineList = [];
-for (const [aliases, url] of engines) { engineList.push(aliases[0]); for (const alias of aliases) engined[alias] = url; }
+const engineBangs = [];
+for (const [aliases, url] of engines) { engineList.push(aliases[0]); for (const alias of aliases) { engined[alias] = url; engineBangs.push(alias, url); } }
 
 app.get('/q', (req, res) => {
   res.send(searchHome);
