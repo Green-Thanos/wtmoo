@@ -103,9 +103,23 @@ const engines = [
   [['hoogle', 'hgl'], 'https://hoogle.haskell.org/?hoogle=%q'],
   [['mercurial', 'merc', 'hg'], 'https://www.mercurial-scm.org/wiki/Mercurial?action=fullsearch&value=%+q'],
   [['github', 'gh'], 'https://github.com/search?q=%+q'],
+  [['gitlab', 'gl'], 'https://gitlab.com/search?search=%+q'],
+  [['archwiki', 'arch wiki', 'arch'], 'https://wiki.archlinux.org/index.php?search=%+q'],
+  [['aur', 'arch user repository', 'archuserrepository'], 'https://aur.archlinux.org/packages/?K=%+q'],
 ];
 const engined = {};
-for (const [aliases, url] of engines) { for (const alias of aliases) engined[alias] = url; }
+const searchHome = '';
+const engineList = [];
+for (const [aliases, url] of engines) { engineList.push(aliases[0]); for (const alias of aliases) engined[alias] = url; }
+
+app.get('/q', (req, res) => {
+  res.send(searchHome);
+});
+
+app.get('/q/list', (req, res) => {
+  res.setHeader('content-type', 'text/plain');
+  res.send(engineList.join('\n') + '\n');
+});
 
 app.get('/q/:engine/:query', (req, res) => {
   if (req.params.engine in engined) {
