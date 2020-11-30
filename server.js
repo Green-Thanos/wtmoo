@@ -73,6 +73,10 @@ app.get('/rph/grian', (req, res) => {
   res.send('best kotlin shill');
 });
 
+app.get('/lizard', (req, res) => {
+  res.redirect('https://cdn.glitch.com/0cd3bfc0-6ead-44dc-a210-6a4af7171875%2Flizard.jpeg?v=1606762167454');
+});
+
 app.get('/rph/neko', (req, res) => {
   res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style><a href="https://skneko.moe">a cat</a>');
 });
@@ -170,6 +174,13 @@ const engines = [
   [['ubuntu packages', 'up', 'apt'], 'https://packages.ubuntu.com/search?keywords=%+q'],
   [['raku modules', 'rakumodules', 'rakum'], 'https://modules.raku.org/search/?q=%+q'],
   [['chocolatey', 'choco'], 'https://chocolatey.org/search?q=%+q'],
+  [['chrome web store', 'cws'], 'https://chrome.google.com/webstore/search/%q'],
+  [['chrome themes', 'crt'], 'https://chrome.google.com/webstore/search/%q?_category=themes'],
+  [['firefox add-ons', 'firefox addons', 'ffa'], 'https://addons.mozilla.org/en-US/firefox/search/?q=%q'],
+  [['jetbrains marketplace', 'jetbrains plugins', 'jbm', 'jbp'], 'https://plugins.jetbrains.com/search?search=%q'],
+  [['vscode marketplace', 'vscm'], 'https://marketplace.visualstudio.com/search?term=a%20%5E&target=VSCode'],
+  [['vs marketplace', 'vsm'], 'https://marketplace.visualstudio.com/search?term=a%20%5E&target=VS'],
+  [['azure devops', 'ado'], 'https://marketplace.visualstudio.com/search?term=a%20%5E&target=AzureDevOps'],
   // misc tech
   [['cpp reference', 'cppreference', 'cppr'], 'https://cppreference.com/mwiki/index.php?search=%+q'],
   [['wolfram language', 'wolframlanguage', 'mathematica'], 'https://search.wolfram.com/?query=%+q'],
