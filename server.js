@@ -141,10 +141,17 @@ const engines = [
   [['github', 'gh'], 'https://github.com/search?q=%+q'],
   [['gitlab', 'gl'], 'https://gitlab.com/search?search=%+q'],
   [['glitch', 'gl'], 'https://glitch.com/search?q=%q'],
-  // misc tech
-  [['archwiki', 'arch wiki', 'arch'], 'https://wiki.archlinux.org/index.php?search=%+q'],
+  // repositories
   [['aur', 'arch user repository', 'archuserrepository'], 'https://aur.archlinux.org/packages/?K=%+q'],
+  [['pypi', 'pip', 'python package index', 'pythonpackageindex'], 'https://pypi.org/search/?q=%+q'],
+  [['npm', 'node package manager', 'nodepackagemanager'], 'https://www.npmjs.com/search?q=%q'],
   [['hoogle', 'hgl'], 'https://hoogle.haskell.org/?hoogle=%q'],
+  [['crates.io', 'cratesio', 'cio'], 'https://crates.io/search?q=%q'],
+  // misc tech
+  [['cpp reference', 'cppreference', 'cppr'], 'https://cppreference.com/mwiki/index.php?search=%+q'],
+  [['archwiki', 'arch wiki', 'arch'], 'https://wiki.archlinux.org/index.php?search=%+q'],
+  [['python 3', 'python3', 'python', 'py3', 'py'], 'https://docs.python.org/3/search.html?q=%+q'],
+  [['python 2', 'python2', 'py2'], 'https://docs.python.org/2/search.html?q=%+q'],
   [['mdn', 'mozilla developer network'], 'https://developer.mozilla.org/en-US/search?q=%+q'],
   [['mercurial', 'merc', 'hg'], 'https://www.mercurial-scm.org/wiki/Mercurial?action=fullsearch&value=%+q'],
   [['esolang', 'eso'], 'https://esolangs.org/w/index.php?search=%+q'],
