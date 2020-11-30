@@ -15,19 +15,27 @@
 
     :focus { outline: none; }
     #title { font-size: 500%; }
-    #searchbar { width: 60%; max-width: 50em; display: flex; }
+    #content { width: 60%; max-width: 50em; display: flex; flex-flow: row wrap; }
     input { font-size: 200%; font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace; border: 1px solid #888; padding: 0 6px; }
     #bang.error { background-color: #fbb; }
-    #bang { background-color: #eee; text-align: right; width: fit-content(20%); border-radius: 5px 0 0 5px; } #query { width: 80%; border-left: none; border-radius: 0 5px 5px 0; }
+    #bang { background-color: #eee; text-align: right; width: 20%; border-radius: 5px 0 0 5px; } #query { width: 80%; border-left: none; border-radius: 0 5px 5px 0; }
+    #bangnote { width: 20%; }
+    #engines { width: 100%; }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
   <center>
     <h1 id="title">!wtmoo</h1>
-    <form id="searchbar">
+    <div id="content">
+      <!-- TODO: grow if it's too big -->
       <input type="text" id="bang" value="!g">
       <input type="text" id="query" placeholder="search here">
-    </form>
+      <span id="bangnote">google</span>
+      <div id="engines" class="hidden">
+        
+      </div>
+    </div>
   </center>
   <script>
     const engines = $;
@@ -42,7 +50,7 @@
     function onBangKeydown(e) {
       switch (e.key) {
         case ' ':
-          query.focus(); query.selectionStart = 0; query.value = '';
+          query.focus(); engines.classList.add('hidden'); query.selectionStart = 0; query.value = '';
           e.preventDefault();
           e.stopPropagation();
           break;
@@ -63,7 +71,7 @@
       switch (e.key) {
         case 'Backspace':
           if (query.value.length === 0) {
-            bang.focus(); bang.selectionStart = bang.value.length;
+            bang.focus(); engines.classList.remove('hidden'); bang.selectionStart = bang.value.length;
             e.preventDefault();
             e.stopPropagation();
           }
