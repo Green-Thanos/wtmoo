@@ -1,5 +1,6 @@
 <html>
   <head>
+    <title>wtmoo metasearch</title>
     <style>
       html, body {
         height: 100%;
@@ -12,6 +13,37 @@
     </style>
   </head>
   <body>
-    
+    <input type="text" id="bang">
+    <input type="text" id="query">
+    <script>
+      let bang = document.getElementById('bang'),
+        query = document.getElementById('query');
+      function onBangInput(e) {
+        if (bang.value.length === 0) {
+          bang.value = '!';
+          return;
+        }
+        switch (e.key) {
+          case ' ':
+            query.focus();
+            e.preventDefault();
+            e.stopPropagation();
+            break;
+        }
+      }
+      function onQueryInput(e) {
+        switch (e.key) {
+          case 'Backspace':
+            if (query.value.length === 0) {
+              bang.focus();
+              e.preventDefault();
+              e.stopPropagation();
+            }
+            break;
+        }
+      }
+      bang.addEventListener('input', onBangInput);
+      query.addEventListener('input', onQueryInput);
+    </script>
   </body>
 </html>
