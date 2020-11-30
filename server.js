@@ -63,6 +63,10 @@ app.get('/shit', (req, res) => {
   res.send('💩');
 });
 
+app.get('/programming', (req, res) => {
+  res.redirect('https://www.edx.org/course/cs50s-introduction-to-computer-science');
+});
+
 app.get('/rph/pankek', (req, res) => {
   res.setHeader('content-type','text/plain');
   res.send('lang developer of 0 languages');
@@ -364,7 +368,8 @@ home += '<h5>linux distros</h5><ul>';
 for (const [aliases, url] of distros) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 const dewm = [
-  [[]],
+  [['kde'], 'https://kde.org/'],
+  [['gnome'], 'https://www.gnome.org/'],
   [['mate'], 'https://mate-desktop.org/'],
   [['xmonad'], 'https://xmonad.org/'],
   [['i3'], 'https://i3wm.org/'],
@@ -458,6 +463,8 @@ const competitions = [
   [['project euler', 'pe'], 'https://projecteuler.net/'],
   [['advent of code', 'aoc'], 'https://adventofcode.com/'],
   [['google code jam', 'code jam', 'gcj'], 'https://codingcompetitions.withgoogle.com/codejam'],
+  [['codeforces'], 'http://codeforces.com/'],
+  [['codewars'], 'https://www.codewars.com/'],
   [['code.golf', 'code golf', 'code-golf.io', 'codegolf.io', 'codegolfio', 'cgio'], 'https://code.golf/'],
   [['anarchy golf', 'anagol'], 'http://golf.shinh.org/'],
   [['vimgolf', 'vimg'], 'https://www.vimgolf.com/'],
