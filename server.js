@@ -120,10 +120,17 @@ const engines = [
   [['google', 'g'], 'https://www.google.com/search?q=%+q'],
   [['bing', 'b'], 'https://www.bing.com/search?q=%+q'],
   [['duckduckgo', 'ddg'], 'https://duckduckgo.com/?q=%+q'],
-  [['ecosia', 'e'], 'https://www.ecosia.org/search?q=%+q'],
+  [['ecosia', 'ec'], 'https://www.ecosia.org/search?q=%+q'],
   [['lmgtfy'], 'https://lmgtfy.app/#gsc.q=%q'],
   // non text
-  [['lmgtfy images', 'lmgtfyi'], 'https://lmgtfy.app/#gsc.tab=1&gsc.q=%q']
+  [['google images', 'googleimages', 'gimages', 'gi'], 'https://www.google.com/search?q=%+q&tbm=isch'],
+  [['google videos', 'googlevideos', 'gvideos', 'ggv'], 'https://www.google.com/search?q=%+q&tbm=vid'],
+  [['google maps', 'googlemaps', 'gmaps', 'ggm'], 'https://www.google.com/maps/search/%+q'],
+  [['google news', 'googlenews', 'gnews', 'ggn'], 'https://www.google.com/search?q=%+q&tbm=nws'],
+  [['google shopping', 'googleshopping', 'gshopping', 'ggs'], 'https://www.google.com/search?q=%+q&tbm=shop'],
+  [['google books', 'googlebooks', 'gbooks', 'gb'], 'https://www.google.com/search?q=%+q&tbm=bks'],
+  [['google finance', 'googlefinance', 'gfinance', 'ggf'], 'https://www.google.com/search?q=%+q&tbm=fin'],
+  [['lmgtfy images', 'lmgtfyi'], 'https://lmgtfy.app/#gsc.tab=1&gsc.q=%q'],
   // videos
   [['youtube', 'yt'], 'https://www.youtube.com/results?search_query=%+q'],
   [['twitch', 'twitch.tv', 'ttv'], 'https://www.twitch.tv/search?term=%q'],
@@ -176,6 +183,12 @@ const engines = [
   [['gfycat', 'gc'], 'https://gfycat.com/gifs/search/%+q'],
   [['giphy', 'gp'], 'https://giphy.com/search/%-q'],
   [['tenor', 'tn'], 'https://tenor.com/search/%-q'],
+  // shopping
+  [['amazon', 'a'], 'https://www.amazon.com/s?k=%+q'],
+  [['ebay', 'e'], 'https://www.ebay.com/sch/i.html?_nkw=%+q'],
+  // learning
+  [['khan academy', 'ka'], 'https://www.khanacademy.org/search?page_search_query=%+q'],
+  [['geogebra', 'ggb'], 'https://www.geogebra.org/search/%q'],
 ];
 let searchHome; fs.readFile('pages/search.html', 'utf8').then(text => searchHome = text.replace('$', JSON.stringify(engines)));
 const engined = {};
