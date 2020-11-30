@@ -348,6 +348,13 @@ const organizations = [
 home += '<h5>organizations (and companies)</h5><ul>';
 for (const [aliases, url] of organizations) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
 home += '</ul>';
+const competitions = [
+  [['advent of code', 'adventofcode', 'aoc'], 'https://adventofcode.com/'],
+  [['google code jam', 'googlecodejam', 'code jam', 'codejam', 'gcj'], 'https://codingcompetitions.withgoogle.com/codejam'],
+];
+home += '<h5>programming competitions</h5><ul>';
+for (const [aliases, url] of competitions) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
+home += '</ul>';
 
 app.get('/', (req, res) => {
   res.send(home);
