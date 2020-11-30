@@ -52,6 +52,7 @@
     
     let bang = document.getElementById('bang'),
       query = document.getElementById('query'),
+      bangnote = document.getElementById('bangnote'),
       enginesDiv = document.getElementById('engines');
     query.focus();
     function refreshEngines() {
@@ -59,6 +60,11 @@
         enginesDiv.removeChild(enginesDiv.lastChild);
       }
       const queryEngine = bang.value.slice(1);
+      if (queryEngine in engineNames) {
+        bangnote.innerText = engineNames[queryEngine];
+      } else {
+        bangnote.innerText = '';
+      }
       for (const engine of allEngines) {
         if (engine.includes(queryEngine)) {
           const result = document.createElement('div');

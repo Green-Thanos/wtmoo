@@ -44,10 +44,7 @@ app.get('/ask', (req, res) => {
   res.redirect('https://dontasktoask.com/');
 });
 
-let vamp; fs.readFile('pages/vampire.html', 'utf8').then(text => vamp = text);
-app.get('/helpvampire', (req, res) => {
-  res.send(vamp);
-});
+app.get('/helpvampire', (req, res) => res.sendFile('pages/vampire.html'));
 
 app.get('/recursion', (req, res) => {
   res.send('see <a href="/recursion">recursion</a>');
@@ -78,11 +75,7 @@ app.get('/wtmoo', (req, res) => {
   res.send('eternal confusion');
 });
 
-let wtmooPng; fs.readFile('wtmoo.png').then(bin => wtmooPng = bin);
-app.get('/wtmoo.png', (req, res) => {
-  res.setHeader('content-type', 'image.png');
-  res.send(wtmooPng);
-});
+app.get('/wtmoo.png', (req, res) => res.sendFile('wtmoo.png'));
 
 app.get('/calc/:expression', (req, res) => {
   res.setHeader('content-type', 'text/plain');
@@ -163,6 +156,7 @@ const engines = [
   [['cran', 'comprehensive r archive network', 'comprehensiverarchivenetwork'], 'https://www.google.com/search?q=%+q&domains=r-project.org&sitesearch=r-project.org'],
   [['ubuntu packages', 'up', 'apt'], 'https://packages.ubuntu.com/search?keywords=%+q'],
   [['raku modules', 'rakumodules', 'rakum'], 'https://modules.raku.org/search/?q=%+q'],
+  [['chocolatey', 'choco'], 'https://chocolatey.org/search?q=%+q'],
   // misc tech
   [['cpp reference', 'cppreference', 'cppr'], 'https://cppreference.com/mwiki/index.php?search=%+q'],
   [['archwiki', 'arch wiki', 'arch'], 'https://wiki.archlinux.org/index.php?search=%+q'],
@@ -196,17 +190,14 @@ const engines = [
   // learning
   [['khan academy', 'ka'], 'https://www.khanacademy.org/search?page_search_query=%+q'],
   [['geogebra', 'ggb'], 'https://www.geogebra.org/search/%q'],
+  [['learnxinyminutes', 'lxiym'], 'https://learnxinyminutes.com/docs/%q'],
 ];
 let searchHome; fs.readFile('pages/search.html', 'utf8').then(text => searchHome = text.replace('$', JSON.stringify(engines)));
 const engined = {};
 const engineList = [];
 for (const [aliases, url] of engines) { engineList.push(aliases[0]); for (const alias of aliases) { engined[alias] = url; } }
 
-let favicon; fs.readFile('favicon.ico').then(bin => favicon = bin);
-app.get('/favicon.ico', (req, res) => {
-  res.setHeader('content-type', 'image/x-icon');
-  res.send(favicon);
-});
+app.get('/favicon.ico', (req, res) => res.sendFile('favicon.ico'));
 
 app.get('/q', (req, res) => {
   res.send(searchHome);
