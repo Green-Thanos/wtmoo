@@ -125,6 +125,12 @@ const engineList = [];
 const engineBangs = [];
 for (const [aliases, url] of engines) { engineList.push(aliases[0]); for (const alias of aliases) { engined[alias] = url; engineBangs.push(alias, url); } }
 
+let favicon; fs.readFile('favicon.ico').then(bin => favicon = bin);
+app.get('/favicon.ico', (req, res) => {
+  res.setHeader('content-type', 'image/x-icon');
+  res.send(favicon);
+});
+
 app.get('/q', (req, res) => {
   res.send(searchHome);
 });

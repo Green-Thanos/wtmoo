@@ -12,15 +12,10 @@
       display: flex;
       flex-flow: column nowrap;
     }
-    
-    #title {
-      font-size: 500%;
-    }
 
-    #searchbar {
-      width: 60%; display: flex;
-    }
-    
+    :focus { outline: none; }
+    #title { font-size: 500%; }
+    #searchbar { width: 60%; display: flex; }
     input { font-size: 200%; font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace; border: 1px solid #888; padding: 0 6px; }
     #bang.error { background-color: #fbb; }
     #bang { background-color: #eee; text-align: right; width: 20%; border-radius: 5px 0 0 5px; } #query { width: 80%; border-left: none; border-radius: 0 5px 5px 0; }
