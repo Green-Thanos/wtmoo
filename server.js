@@ -5,6 +5,7 @@ const fs = require('fs').promises,
   //calc = require('mathjs').evaluate;
 
 
+// TODO: dark theme
 const app = require('express')();
 app.use(cookieParser());
 
@@ -161,6 +162,7 @@ const engines = [
   [['chocolatey', 'choco'], 'https://chocolatey.org/search?q=%+q'],
   // misc tech
   [['cpp reference', 'cppreference', 'cppr'], 'https://cppreference.com/mwiki/index.php?search=%+q'],
+  [['wolfram language', 'wolframlanguage', 'mathematica'], 'https://search.wolfram.com/?query=%+q'],
   [['archwiki', 'arch wiki', 'arch'], 'https://wiki.archlinux.org/index.php?search=%+q'],
   [['python 3', 'python3', 'python', 'py3', 'py'], 'https://docs.python.org/3/search.html?q=%+q'],
   [['python 2', 'python2', 'py2'], 'https://docs.python.org/2/search.html?q=%+q'],
@@ -194,6 +196,7 @@ const engines = [
   [['khan academy', 'ka'], 'https://www.khanacademy.org/search?page_search_query=%+q'],
   [['geogebra', 'ggb'], 'https://www.geogebra.org/search/%q'],
   [['learnxinyminutes', 'lxiym'], 'https://learnxinyminutes.com/docs/%q'],
+  [['wolfram alpha', 'wolfram|alpha', 'wolframalpha', 'w|a', 'wa'], 'https://www.wolframalpha.com/input/?i=%+q'],
 ];
 let searchHome; fs.readFile('pages/search.html', 'utf8').then(text => searchHome = text.replace('$', JSON.stringify(engines)));
 const engined = {};
@@ -275,6 +278,10 @@ const langs = [
   [['python', 'py'], 'https://www.python.org/about/'],
   [['c#', 'csharp'], 'https://docs.microsoft.com/en-us/dotnet/csharp/'],
   [['f#', 'fsharp'], 'https://fsharp.org/'],
+  [['forth'], 'https://www.forth.com/forth/'],
+  [['common lisp', 'clisp'], 'https://common-lisp.net/'],
+  [['wolfram language', 'mathematica'], 'https://www.wolfram.com/language/'],
+  [['processing'], 'https://processing.org/'],
   [['q#', 'qsharp', 'qdk'], 'https://docs.microsoft.com/en-us/quantum/'],
   [['c#9', 'csharp9'], 'https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9'],
   [['c#8', 'csharp8'], 'https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8'],
@@ -298,16 +305,20 @@ const distros = [
 home += '<h5>linux distros</h5><ul>';
 for (const [aliases, url] of distros) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
 home += '</ul>';
-const softwares = [
+const libs = [
   [['curl'], 'https://curl.se/'],
   [['drupal'], 'https://www.drupal.org/'],
   [['laravel'], 'https://laravel.com/'],
   [['mongodb', 'mongo'], 'https://www.mongodb.com/'],
   [['sqlite'], 'https://www.sqlite.org/index.html'],
   [['mysql'], 'https://www.mysql.com/'],
+  [['math.js', 'mathjs'], 'https://mathjs.org/'],
+  [['three.js', 'threejs'], 'https://threejs.org/'],
+  [['p5.js', 'p5js', 'p5'], 'https://p5js.org/'],
+  [['d3.js', 'd3js', 'd3'], 'https://d3js.org/'],
 ];
-home += '<h5>software</h5><ul>';
-for (const [aliases, url] of softwares) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
+home += '<h5>frameworks and libraries</h5><ul>';
+for (const [aliases, url] of libs) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = url; } }
 home += '</ul>';
 const organizations = [
   [['gnu'], 'https://www.gnu.org/home.en.html'],
