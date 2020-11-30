@@ -362,19 +362,27 @@ for (const [aliases, url] of distros) { home += `<li><a href="/${encodeURICompon
 home += '</ul>';
 const libs = [
   [['curl'], 'https://curl.se/'],
+  // server related
   [['drupal'], 'https://www.drupal.org/'],
   [['laravel'], 'https://laravel.com/'],
   [['mongodb', 'mongo'], 'https://www.mongodb.com/'],
+  // dbs
   [['sqlite'], 'https://www.sqlite.org/index.html'],
   [['mysql'], 'https://www.mysql.com/'],
+  // js libs
   [['math.js', 'mathjs'], 'https://mathjs.org/'],
   [['three.js', 'threejs'], 'https://threejs.org/'],
   [['p5.js', 'p5js', 'p5'], 'https://p5js.org/'],
   [['d3.js', 'd3js', 'd3'], 'https://d3js.org/'],
+  // notebooks
   [['anaconda python', 'anaconda'], 'https://www.anaconda.com/products/individual'],
   [['jupyter', 'jupyter lab', 'jupyter notebook'], 'https://jupyter.org/'],
+  // runtimes
   [['node.js', 'node', 'nodejs'], 'https://nodejs.org/'],
   [['deno'], 'https://deno.land/'],
+  // build systems
+  [['dune'], 'https://dune.readthedocs.io/en/stable/'],
+  [['cabal'], 'https://www.haskell.org/cabal/'],
 ];
 home += '<h5>frameworks and libraries</h5><ul>';
 for (const [aliases, url] of libs) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }

@@ -1,8 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-    <ShortName>wtmoo metasearch</ShortName>
-    <Description>ddg ripoff</Description>
-    <Tags></Tags>
-    <Contact>ehern.lee@gmail.com</Contact>
-    <Url type="text/html" template="https://wtmoo.is/q/{searchTerms}"/>
+  <ShortName>wtmoo metasearch</ShortName>
+  <Description>ddg ripoff</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/x-icon">https://wtmoo.is/favicon.ico</Image>
+  <Tags></Tags>
+  <Contact>ehern.lee@gmail.com</Contact>
+  <Url type="text/html" template="https://wtmoo.is/q?q={searchTerms}"/>
+  <moz:SearchForm>https://wtmoo.is/q</moz:SearchForm>
 </OpenSearchDescription>
