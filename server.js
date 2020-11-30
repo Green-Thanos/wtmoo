@@ -49,6 +49,10 @@ app.get('/helpvampire', (req, res) => {
   res.send(vamp);
 });
 
+app.get('/recursion', (req, res) => {
+  res.send('see <a href="/recursion">recursion</a>');
+});
+
 app.get('/shit', (req, res) => {
   res.setHeader('content-type', 'text/plain');
   res.send('💩');
@@ -118,12 +122,18 @@ const engines = [
   [['ecosia', 'e'], 'https://www.ecosia.org/search?q=%+q'],
   [['wikipedia', 'wp', 'w'], 'https://en.wikipedia.org/w/index.php?search=%+q'],
   [['youtube', 'yt'], 'https://www.youtube.com/results?search_query=%+q'],
+  [['stack overflow', 'stackoverflow', 'so'], 'https://stackoverflow.com/search?q=%+q'],
+  [['cnn'], 'https://edition.cnn.com/search?q=%+q'],
+  [['time'], 'https://time.com/search/?q=%+q'],
   [['hoogle', 'hgl'], 'https://hoogle.haskell.org/?hoogle=%q'],
   [['mercurial', 'merc', 'hg'], 'https://www.mercurial-scm.org/wiki/Mercurial?action=fullsearch&value=%+q'],
   [['github', 'gh'], 'https://github.com/search?q=%+q'],
   [['gitlab', 'gl'], 'https://gitlab.com/search?search=%+q'],
   [['archwiki', 'arch wiki', 'arch'], 'https://wiki.archlinux.org/index.php?search=%+q'],
   [['aur', 'arch user repository', 'archuserrepository'], 'https://aur.archlinux.org/packages/?K=%+q'],
+  [['esolang', 'eso'], 'https://esolangs.org/w/index.php?search=%+q'],
+  [['deviantart', 'da'], 'https://www.deviantart.com/search?q=%q'],
+  [['wattpad', 'watt'], 'https://www.wattpad.com/search/%q'],
 ];
 let searchHome; fs.readFile('pages/search.html', 'utf8').then(text => searchHome = text.replace('$', JSON.stringify(engines)));
 const engined = {};
