@@ -235,6 +235,10 @@ app.get('/q/:engine/:query', (req, res) => {
   }
 });
 
+app.get('/embed', (req, res) => {
+  res.send(`<head>${req.query.title || req.query.t ? `<meta content="${req.query.t || req.query.t}" property="og:title">` : ''}</head>`);
+});
+
 app.get('/my', (req, res) => {
   res.send('<meta name="viewport" content="width=device-width,initial-scale=1"><title>what is my</title><a href="/my">help</a><br><a href="/my/h">headers</a><br><a href="/my/ip">ip</a><br><a href="/my/ua">user agent</a><br><a href="https://glitch.com/edit/#!/wim">source</a>');
 });
@@ -308,7 +312,7 @@ const langs = [
 ];
 const redirectd = {};
 home += '<h5>programming languages</h5><ul>';
-for (const [aliases, url] of langs) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
+for (const [aliases, url] of langs) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 const distros = [
   [['arch linux', 'archlinux', 'arch'], 'https://wiki.archlinux.org/index.php/Arch_Linux'],
@@ -321,7 +325,7 @@ const distros = [
   [['manjaro'], 'https://manjaro.org/'],
 ];
 home += '<h5>linux distros</h5><ul>';
-for (const [aliases, url] of distros) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
+for (const [aliases, url] of distros) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 const libs = [
   [['curl'], 'https://curl.se/'],
@@ -338,7 +342,7 @@ const libs = [
   [['jupyter', 'jupyter lab', 'jupyter notebook'], 'https://jupyter.org/'],
 ];
 home += '<h5>frameworks and libraries</h5><ul>';
-for (const [aliases, url] of libs) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
+for (const [aliases, url] of libs) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 const organizations = [
   [['gnu'], 'https://www.gnu.org/home.en.html'],
@@ -363,14 +367,14 @@ const organizations = [
   [['jacaranda'], 'https://www.jacaranda.com.au/'],
 ];
 home += '<h5>organizations (and companies)</h5><ul>';
-for (const [aliases, url] of organizations) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
+for (const [aliases, url] of organizations) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 const competitions = [
   [['advent of code', 'aoc'], 'https://adventofcode.com/'],
   [['google code jam', 'code jam', 'gcj'], 'https://codingcompetitions.withgoogle.com/codejam'],
 ];
 home += '<h5>programming competitions</h5><ul>';
-for (const [aliases, url] of competitions) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
+for (const [aliases, url] of competitions) { home += `<li><a href="/encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 const misc = [
   [['sbcl'], 'http://www.sbcl.org/'],
@@ -378,7 +382,7 @@ const misc = [
   [['vtuber', 'virtual youtuber'], 'https://virtualyoutuber.fandom.com/wiki/Virtual_YouTuber_Wiki'],
 ];
 home += '<h5>misc</h5><ul>';
-for (const [aliases, url] of misc) { home += `<li><a href="/${aliases[0]}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
+for (const [aliases, url] of misc) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 
 app.get('/', (req, res) => {
