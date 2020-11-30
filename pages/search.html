@@ -1,5 +1,8 @@
 <html>
 <head>
+  <meta content="wtmoo metasearch" property="og:title">
+  <meta content="wtmoo" property="og:site_name">
+  <meta content="https://wtmoo.is/wtmoo.png" property="og:image">
   <title>wtmoo metasearch</title>
   <style>
     html, body {
@@ -22,8 +25,9 @@
     #bangnote { width: 20%; }
     #engines { width: 100%; display: flex; flex-flow: row wrap; }
     #engines > div { width: 20%; }
+    #engines > div > :nth-child(1) { text-align: left; }
     #engines > div > :nth-child(2) { text-align: right; }
-    #engines.current { background-color: #eee; }
+    #engines > .current { background-color: #eee; }
     .hidden { display: none; }
   </style>
 </head>
@@ -56,12 +60,12 @@
       }
       const queryEngine = bang.value.slice(1);
       for (const engine of allEngines) {
-        if (queryEngine.includes(engine)) {
+        if (engine.includes(queryEngine)) {
           const result = document.createElement('div');
           if (queryEngine === engine) { result.classList.add('current'); }
           const bang = document.createElement('div'),
             name = document.createElement('div');
-          bang.innerText = '<b>!</b>' + engine.replace(new RegExp(queryEngine), '<b>$&</b>');
+          bang.innerHTML = '<b>!</b>' + engine.replace(new RegExp(queryEngine), '<b>$&</b>');
           name.innerText = engineNames[engine];
           result.appendChild(bang); result.appendChild(name);
           enginesDiv.appendChild(result);
@@ -75,8 +79,6 @@
           e.preventDefault();
           e.stopPropagation();
           break;
-        default:
-          refreshEngines();
       }
     }
     function onBangKeyup(e) {
@@ -84,6 +86,7 @@
       if (bang.value.length === 0) {
         bang.value = '!';
       }
+      refreshEngines();
       if (bang.value.slice(1) in engined) { bang.classList.remove('error'); } else { bang.classList.add('error'); }
     }
     function onBangFocusout(e) {

@@ -74,6 +74,12 @@ app.get('/wtmoo', (req, res) => {
   res.send('eternal confusion');
 });
 
+let wtmooPng; fs.readFile('wtmoo.png').then(bin => wtmooPng = bin);
+app.get('/wtmoo.png', (req, res) => {
+  res.setHeader('content-type', 'image.png');
+  res.send(wtmooPng);
+});
+
 app.get('/calc/:expression', (req, res) => {
   res.setHeader('content-type', 'text/plain');
   res.send('');//calc(req.params.expression).toString());
