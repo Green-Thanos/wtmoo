@@ -1,10 +1,12 @@
 const fs = require('fs').promises,
   fsConst = require('fs').constants,
-  fetch = require('node-fetch')//,
+  fetch = require('node-fetch'),
+  cookieParser = require('cookie-parser')//,
   //calc = require('mathjs').evaluate;
 
 
 const app = require('express')();
+app.use(cookieParser());
 
 const minutes = n => n * 60000,
   hours = n => n * 3600000,
@@ -270,9 +272,14 @@ const langs = [
   [['scala'], 'https://www.scala-lang.org/'],
   [['kotlin'], 'https://kotlinlang.org/'],
   [['java'], 'https://www.java.com/'],
+  [['python', 'py'], 'https://www.python.org/about/'],
   [['c#', 'csharp'], 'https://docs.microsoft.com/en-us/dotnet/csharp/'],
   [['f#', 'fsharp'], 'https://fsharp.org/'],
   [['q#', 'qsharp', 'qdk'], 'https://docs.microsoft.com/en-us/quantum/'],
+  [['c#9', 'csharp9'], 'https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9'],
+  [['c#8', 'csharp8'], 'https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8'],
+  [['c#7', 'csharp7'], 'https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7'],
+  [['c#6', 'csharp6'], 'https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6'],
 ];
 const redirectd = {};
 home += '<h5>programming languages</h5><ul>';
