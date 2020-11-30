@@ -21,8 +21,9 @@
       width: 60%; display: flex;
     }
     
-    input { font-size: 200%; font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace; border: 1px solid #888; }
-    #bang { width: 20%; border-radius: 5px 0 0 5px; } #query { width: 80%; border-left: none; border-radius: 0 5px 5px 0; }
+    input { font-size: 200%; font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace; border: 1px solid #888; padding: 0 6px; }
+    #bang.error { background-color: #fbb; }
+    #bang { background-color: #eee; text-align: right; width: 20%; border-radius: 5px 0 0 5px; } #query { width: 80%; border-left: none; border-radius: 0 5px 5px 0; }
   </style>
 </head>
 <body>
@@ -34,14 +35,16 @@
     </form>
   </center>
   <script>
+    const engines = $;
+    const engined = {};
+    const engineList = [];
+    const engineBangs = [];
+    for (const [aliases, url] of engines) { engineList.push(aliases[0]); for (const alias of aliases) { engined[alias] = url; engineBangs.push(alias, url); } }
+    
     let bang = document.getElementById('bang'),
       query = document.getElementById('query');
-    function onBangKeyup(e) {
-      if (e.ctrlKey || e.altKey || e.shiftKey) { return; }
-      if (bang.value.length === 0) {
-        bang.value = '!';
-        return;
-      }
+    query.focus();
+    function onBangKeydown(e) {
       switch (e.key) {
         case ' ':
           query.focus(); query.selectionStart = 0; query.value = '';
@@ -50,7 +53,17 @@
           break;
       }
     }
-    function onQueryKeyup(e) {
+    function onBangKeyup(e) {
+      if (e.ctrlKey || e.altKey || e.shiftKey) { return; }
+      if (bang.value.length === 0) {
+        bang.value = '!';
+      }
+      if (bang.value.slice(1) in engined) { bang.classList.remove('error'); } else { bang.classList.add('error'); }
+    }
+    function onBangFocusout(e) {
+      if (bang.value.slice(1) in engined) { bang.classList.remove('error'); } else { bang.classList.add('error'); }
+    }
+    function onQueryKeydown(e) {
       if (e.ctrlKey || e.altKey || e.shiftKey) { return; }
       switch (e.key) {
         case 'Backspace':
@@ -62,8 +75,10 @@
           break;
       }
     }
+    bang.addEventListener('keydown', onBangKeydown);
     bang.addEventListener('keyup', onBangKeyup);
-    query.addEventListener('keyup', onQueryKeyup);
+    bang.addEventListener('focusout', onBangFocusout);
+    query.addEventListener('keydown', onQueryKeydown);
   </script>
 </body>
 </html>
