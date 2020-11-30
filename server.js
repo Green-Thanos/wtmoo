@@ -1,3 +1,7 @@
+function lazy(fn) {
+  
+}
+
 const fs = require('fs').promises,
   fsConst = require('fs').constants,
   fetch = require('node-fetch'),
@@ -47,7 +51,7 @@ app.get('/ask', (req, res) => {
   res.redirect('https://dontasktoask.com/');
 });
 
-app.get('/helpvampire', (req, res) => res.sendFile('pages/vampire.html'));
+app.get('/helpvampire', (req, res) => res.sendFile('pages/vampire.html', { root: __dirname }));
 
 app.get('/recursion', (req, res) => {
   res.send('see <a href="/recursion">recursion</a>');
@@ -68,6 +72,10 @@ app.get('/rph/grian', (req, res) => {
   res.send('best kotlin shill');
 });
 
+app.get('/rph/neko', (req, res) => {
+  res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style><a href="https://skneko.moe">a cat</a>');
+});
+
 app.get('/rph/λ', (req, res) => {
   res.setHeader('content-type','text/plain');
   res.send('god of the stateless');
@@ -78,11 +86,11 @@ app.get('/wtmoo', (req, res) => {
   res.send('eternal confusion');
 });
 
-app.get('/wtmoo.png', (req, res) => res.sendFile('wtmoo.png'));
+app.get('/wtmoo.png', (req, res) => res.sendFile('wtmoo.png', { root: __dirname }));
 
 app.get('/calc/:expression', (req, res) => {
   res.setHeader('content-type', 'text/plain');
-  res.send('');//calc(req.params.expression).toString());
+  res.send(require("mathjs").evaluate(req.params.expression).toString());
 });
 
 app.get('/tld', (req, res) => {
@@ -203,7 +211,7 @@ const engined = {};
 const engineList = [];
 for (const [aliases, url] of engines) { engineList.push(aliases[0]); for (const alias of aliases) { engined[alias] = url; } }
 
-app.get('/favicon.ico', (req, res) => res.sendFile('favicon.ico'));
+app.get('/favicon.ico', (req, res) => res.sendFile('favicon.ico', { root: __dirname }));
 
 app.get('/q', (req, res) => {
   res.send(searchHome);
