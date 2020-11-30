@@ -3,7 +3,7 @@
   <meta content="wtmoo metasearch" property="og:title">
   <meta content="wtmoo" property="og:site_name">
   <meta content="https://wtmoo.is/wtmoo.png" property="og:image">
-  <link rel="search" type="application/opensearchdescription+xml" href="https://wtmoo.is/search.xml" title="wtmoo metasearch" />
+  <link rel="search" type="application/opensearchdescription+xml" href="https://wtmoo.is/search.xml" title="wtmoo metasearch">
   <title>wtmoo metasearch</title>
   <style>
     html, body {
@@ -109,6 +109,9 @@
       refreshEngines();
       if (bang.value.slice(1) in engined) { bang.classList.remove('error'); } else { bang.classList.add('error'); }
     }
+    function onBangFocusin(e) {
+      bang.selectionStart = 0;
+    }
     function onBangFocusout(e) {
       if (bang.value.slice(1) in engined) { bang.classList.remove('error'); } else { bang.classList.add('error'); }
     }
@@ -140,6 +143,7 @@
     }
     bang.addEventListener('keydown', onBangKeydown);
     bang.addEventListener('keyup', onBangKeyup);
+    bang.addEventListener('focusin', onBangFocusin);
     bang.addEventListener('focusout', onBangFocusout);
     query.addEventListener('keydown', onQueryKeydown);
     enginesDiv.addEventListener('click', onEnginesClick);

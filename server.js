@@ -117,7 +117,7 @@ app.get('/tld/for/:domain', async (req, res) => {
       }
       if (slice.endsWith(tld)) {
         // console.log(slice, tld);
-        ret.push(req.params.domain.replace(new RegExp(tld), '.$&/').replace(/\/$/, ''));
+        ret.push(req.params.domain.replace(new RegExp(tld + `(?=.{}$)``), '.$&/').replace(/\/$/, ''));
       }
     }
   }
