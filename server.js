@@ -358,9 +358,19 @@ const distros = [
   [['linux mint', 'linuxmint', 'mint'], 'https://linuxmint.com/'],
   [['artix linux', 'artixlinux', 'artix'], 'https://artixlinux.org/'],
   [['manjaro'], 'https://manjaro.org/'],
+  [['nixos'], 'https://nixos.org/'],
 ];
 home += '<h5>linux distros</h5><ul>';
 for (const [aliases, url] of distros) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
+home += '</ul>';
+const dewm = [
+  [[]],
+  [['mate'], 'https://mate-desktop.org/'],
+  [['xmonad'], 'https://xmonad.org/'],
+  [['i3'], 'https://i3wm.org/'],
+];
+home += '<h5>desktop environments and window managers</h5><ul>';
+for (const [aliases, url] of dewm) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 const libs = [
   [['curl'], 'https://curl.se/'],
@@ -371,6 +381,9 @@ const libs = [
   // dbs
   [['sqlite'], 'https://www.sqlite.org/index.html'],
   [['mysql'], 'https://www.mysql.com/'],
+  // build systems
+  [['dune'], 'https://dune.readthedocs.io/en/stable/'],
+  [['cabal'], 'https://www.haskell.org/cabal/'],
   // js libs
   [['math.js', 'mathjs'], 'https://mathjs.org/'],
   [['three.js', 'threejs'], 'https://threejs.org/'],
@@ -379,13 +392,35 @@ const libs = [
   // notebooks
   [['anaconda python', 'anaconda'], 'https://www.anaconda.com/products/individual'],
   [['jupyter', 'jupyter lab', 'jupyter notebook'], 'https://jupyter.org/'],
-  // server frameworks/runtimes
-  [['rails', 'ruby on rails'], 'https://rubyonrails.org/'],
+  // runtimes
   [['node.js', 'node', 'nodejs'], 'https://nodejs.org/'],
   [['deno'], 'https://deno.land/'],
-  // build systems
-  [['dune'], 'https://dune.readthedocs.io/en/stable/'],
-  [['cabal'], 'https://www.haskell.org/cabal/'],
+  // server frameworks/runtimes
+  [['rails', 'ruby on rails'], 'https://rubyonrails.org/'],
+  [['express', 'express.js', 'expressjs'], 'https://expressjs.com/'],
+  [['flask'], 'https://flask.palletsprojects.com/'],
+  [['django'], 'https://www.djangoproject.com/'],
+  [['yesod'], 'https://www.yesodweb.com/'],
+  // static site generators
+  [['jekyll'], 'https://jekyllrb.com/'],
+  [['hakyll'], 'https://jaspervdj.be/hakyll/'],
+  // templating engines
+  [['mustache'], 'https://mustache.github.io/'],
+  [['nunjucks'], 'https://mozilla.github.io/nunjucks/'],
+  [['handlebars'], 'https://handlebarsjs.com/'],
+  // web frameworks
+  [['react'], 'https://reactjs.org/'],
+  [['vue'], 'https://vuejs.org/'],
+  [['angular'], 'https://angular.io/'],
+  // parsers
+  [['bison'], 'https://www.gnu.org/software/bison/'],
+  [['jison'], 'https://zaa.ch/jison/'],
+  [['lalrpop'], 'https://lalrpop.github.io/lalrpop/'],
+  [['nearley'], 'https://nearley.js.org/'],
+  [['yaep'], 'https://github.com/vnmakarov/yaep'],
+  [['parsec'], 'https://hackage.haskell.org/package/parsec'],
+  [['megaparsec'], 'https://hackage.haskell.org/package/megaparsec'],
+  [['attoparsec'], 'https://hackage.haskell.org/package/attoparsec'],
 ];
 home += '<h5>frameworks and libraries</h5><ul>';
 for (const [aliases, url] of libs) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
