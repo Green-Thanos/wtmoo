@@ -193,6 +193,7 @@ const engines = [
   [['esolang', 'eso'], 'https://esolangs.org/w/index.php?search=%+q'],
   [['raku'], 'https://www.google.com/search?q=site%3Adocs.raku.org+%q'],
   [['caniuse', 'ciu'], 'https://caniuse.com/?search=%q'],
+  [['ncatlab', 'nlab'], 'https://ncatlab.org/nlab/search?query=%+q'],
   // funding
   [['patreon', 'pat'], 'https://www.patreon.com/search?q=%+q'],
   [['gofundme', 'gfm'], 'https://gofundme.com/mvc.php?route=homepage_norma/search&term=%q'],
@@ -378,7 +379,8 @@ const libs = [
   // notebooks
   [['anaconda python', 'anaconda'], 'https://www.anaconda.com/products/individual'],
   [['jupyter', 'jupyter lab', 'jupyter notebook'], 'https://jupyter.org/'],
-  // runtimes
+  // server frameworks/runtimes
+  [['rails', 'ruby on rails'], 'https://rubyonrails.org/'],
   [['node.js', 'node', 'nodejs'], 'https://nodejs.org/'],
   [['deno'], 'https://deno.land/'],
   // build systems
