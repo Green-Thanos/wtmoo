@@ -146,7 +146,7 @@ const engines = [
   // version control
   [['github', 'gh'], 'https://github.com/search?q=%+q'],
   [['gitlab', 'gl'], 'https://gitlab.com/search?search=%+q'],
-  [['glitch', 'gl'], 'https://glitch.com/search?q=%q'],
+  [['glitch', 'gli'], 'https://glitch.com/search?q=%q'],
   // repositories
   [['aur', 'yay', 'pacaur', 'aura', 'pakku', 'paru', 'pikaur', 'trizen'], 'https://aur.archlinux.org/packages/?K=%+q'],
   [['pypi', 'pip'], 'https://pypi.org/search/?q=%+q'],
