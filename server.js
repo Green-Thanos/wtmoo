@@ -81,6 +81,10 @@ app.get('/lizard', (req, res) => {
   res.redirect('https://cdn.glitch.com/0cd3bfc0-6ead-44dc-a210-6a4af7171875%2Flizard.jpeg?v=1606762167454');
 });
 
+app.get('/yeo', (req, res) => {
+  res.redirect('https://cdn.glitch.com/0cd3bfc0-6ead-44dc-a210-6a4af7171875%2Fc08dbfc2-8710-43dd-8eed-e097b1296781.image.png?v=1606923594058');
+});
+
 app.get('/rph/neko', (req, res) => {
   res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style><a href="https://skneko.moe">a cat</a>');
 });
@@ -497,5 +501,9 @@ app.use((req, res, next) => {
   if (url.toLowerCase().replace(/_+/g, ' ') in redirectd) { res.redirect(redirectd[url.toLowerCase().replace(/_+/g, ' ')]); return; }
   next();
 });
+
+app.use((req, res, next) => {
+  res.status(404).sendFile("pages/404.html", { root: __dirname });
+})
 
 app.listen(process.env.PORT);
