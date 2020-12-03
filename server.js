@@ -13,6 +13,7 @@ lazy('calc', () => require('mathjs').evaluate);
 // TODO: dark theme
 const app = require('express')();
 app.use(cookieParser());
+app.use('/ace', require('express').static('ace'));
 
 const minutes = n => n * 60000,
   hours = n => n * 3600000,
@@ -98,6 +99,8 @@ app.get('/wtmoo', (req, res) => {
   res.setHeader('content-type', 'text/plain');
   res.send('eternal confusion');
 });
+
+app.get('/run', (req, res) => res.sendFile('pages/run.html', { root: __dirname }));
 
 app.get('/wtmoo.png', (req, res) => res.sendFile('wtmoo.png', { root: __dirname }));
 

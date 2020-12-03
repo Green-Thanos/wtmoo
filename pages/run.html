@@ -1,9 +1,33 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-
+  <style>
+    html,body{height:100%;width:100%;margin:0;}
+    #content{height:100%;}
+    #editor{height:100%;}
+  </style>
+  <script src="ace/ace.js"></script>
 </head>
 <body>
-
+  <div id="content">
+    <div id="toolbar"><button id="run" onclick="run"></button></div>
+    <div id="editor"></div>
+  </div>
+  <script>
+    // TODO: service worker
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/javascript");
+    console.log(editor);
+    function run() {
+      const value = editor.session.getValue();
+      const console_ = console;
+      let s = '';
+      console = function (...args) {
+        if ()
+      }
+      eval(value);
+    }
+  </script>
 </body>
 </html>
