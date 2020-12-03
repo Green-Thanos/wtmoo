@@ -3,49 +3,57 @@
 <head>
   <style>
     html,body{height:100%;width:100%;margin:0;}
+    body,button,pre,code,.ace_editor{font-family:'FantasqueSansMono NF','Jetbrains Mono','Fira Code',Iosevka,Consolas,Andale Mono WT,Andale Mono,Lucida Console,Lucida Sans Typewriter,DejaVu Sans Mono,Bitstream Vera Sans Mono,Liberation Mono,Nimbus Mono L,Monaco,Courier New,Courier,monospace;}
     #content{height:100%;display:flex;flex-flow:column;}
-    #toolbar{flex:0 1 auto;}#editor{flex:3 0 auto;}#output{flex:2 0 auto;}
-    button{background-color:#0008;border: none;color:unset;}
+    #toolbar{flex:0 1 auto;padding:0.5em;}#editor{flex:3 0 auto;}#output{flex:2 0 auto;}
+    button{background-color:#0008;border: none;color:unset;padding:0.5em;}
   </style>
   <script src="ace/ace.js"></script>
 </head>
 <body>
   <div id="content">
     <div id="toolbar"><button id="run" onclick="run">Run!</button></div>
+    Code
     <div id="editor"></div>
+    Output
     <div id="output"></div>
   </div>
   <script>
-    function pseudoConsole(...args) {
-      if (args[0].includes('%')) {
-        const format = args.shift();
-        let value;
-        function next() { return value = args.shift(); }
-        s += format.replace(/%(\.(\d+)([df])|.)/g, (match, char, number, char2) => {
-          switch (char) {
-            case '%': return '%';
-            case 'd': return typeof next() === 'number' ? Math.floor(value) : 0;
-            case 'f': return typeof next() === 'number' ? value : 0;
-            default:
-              if (char.length > 1) {
-                const precision = Number(number);
-                switch (char2) {
-                  case d: return (typeof next() === 'number' ? Math.floor(value) : 0).padStart(precision, '0');
-                  case f: return (typeof next() === 'number' ? value : 0).toFixed(precision);
+    const pseudoConsole = {
+      _value: '',
+      log(...args) {
+        if (args[0].includes('%')) {
+          const format = args.shift();
+          let value;
+          function next() { return value = args.shift(); }
+          this._value += format.replace(/%(\.(\d+)([df])|.)/g, (match, char, number, char2) => {
+            switch (char) {
+              case '%': return '%';
+              case 'd': return typeof next() === 'number' ? Math.floor(value) : 0;
+              case 'f': return typeof next() === 'number' ? value : 0;
+              default:
+                if (char.length > 1) {
+                  const precision = Number(number);
+                  switch (char2) {
+                    case d: return (typeof next() === 'number' ? Math.floor(value) : 0).padStart(precision, '0');
+                    case f: return (typeof next() === 'number' ? value : 0).toFixed(precision);
+                  }
                 }
-              }
-              return '%' + char;
-          }
-        });
-      }
+                return '%' + char;
+            }
+          }) + '\n';
+        }
+      },
+      clear() {
+        const result = this._value;
+        this._value = '';
+        return result;
+      },
     }
     // TODO: service worker
     const editorEl = document.getElementById('editor');
     const editor = ace.edit("editor");
-    const _setTheme = editor.setTheme.bind(editor);
-    editor.setTheme = function setTheme(...args) {
-      _setTheme(...args);
-      setTimeout(function() {
+    const observer = new MutationObserver(function () {
       for (const cls of Array.from(document.body.classList)) {
         if (cls.startsWith('ace')) { document.body.classList.remove(cls); }
       }
@@ -54,16 +62,16 @@
           document.body.classList.add(cls);
         }
       }
-      }, 10);
-    }
+    });
+    observer.observe(editorEl, { attributes: true });
     editor.setTheme("ace/theme/monokai");
     editor.session.setMode("ace/mode/javascript");
     console.log(editor);
     function run() {
       const value = editor.session.getValue();
-      const console_ = console;
-      let s = '';
+      const console = pseudoConsole;
       eval(value);
+      return console.clear();
     }
   </script>
 </body>
