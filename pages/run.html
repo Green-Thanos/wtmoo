@@ -3,15 +3,17 @@
 <head>
   <style>
     html,body{height:100%;width:100%;margin:0;}
-    #content{height:100%;}
-    #editor{height:100%;}
+    #content{height:100%;display:flex;flex-flow:column;}
+    #toolbar{flex:0 1 auto;}#editor{flex:3 0 auto;}#output{flex:2 0 auto;}
+    button{background-color:#0008;border: none;color:unset;}
   </style>
   <script src="ace/ace.js"></script>
 </head>
 <body>
   <div id="content">
-    <div id="toolbar"><button id="run" onclick="run"></button></div>
+    <div id="toolbar"><button id="run" onclick="run">Run!</button></div>
     <div id="editor"></div>
+    <div id="output"></div>
   </div>
   <script>
     function pseudoConsole(...args) {
@@ -22,14 +24,14 @@
         s += format.replace(/%(\.(\d+)([df])|.)/g, (match, char, number, char2) => {
           switch (char) {
             case '%': return '%';
-            case 'd': return typeof next() === 'number' ? Math.floor(value) : NaN;
-            case 'f': return typeof next() === 'number' ? value : NaN;
+            case 'd': return typeof next() === 'number' ? Math.floor(value) : 0;
+            case 'f': return typeof next() === 'number' ? value : 0;
             default:
               if (char.length > 1) {
                 const precision = Number(number);
                 switch (char2) {
-                  case d: return typeof next() === 'number' ? Math.floor(value) : NaN;
-                  case f: return typeof next() === 'number' : value.toFixed(precision) : NaN;
+                  case d: return (typeof next() === 'number' ? Math.floor(value) : 0).padStart(precision, '0');
+                  case f: return (typeof next() === 'number' ? value : 0).toFixed(precision);
                 }
               }
               return '%' + char;
@@ -38,7 +40,22 @@
       }
     }
     // TODO: service worker
-    var editor = ace.edit("editor");
+    const editorEl = document.getElementById('editor');
+    const editor = ace.edit("editor");
+    const _setTheme = editor.setTheme.bind(editor);
+    editor.setTheme = function setTheme(...args) {
+      _setTheme(...args);
+      setTimeout(function() {
+      for (const cls of Array.from(document.body.classList)) {
+        if (cls.startsWith('ace')) { document.body.classList.remove(cls); }
+      }
+      for (const cls of Array.from(editorEl.classList)) {
+        if (cls.startsWith('ace') && cls !== 'ace_editor') {
+          document.body.classList.add(cls);
+        }
+      }
+      }, 10);
+    }
     editor.setTheme("ace/theme/monokai");
     editor.session.setMode("ace/mode/javascript");
     console.log(editor);
