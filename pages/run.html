@@ -14,6 +14,29 @@
     <div id="editor"></div>
   </div>
   <script>
+    function pseudoConsole(...args) {
+      if (args[0].includes('%')) {
+        const format = args.shift();
+        let value;
+        function next() { return value = args.shift(); }
+        s += format.replace(/%(\.(\d+)([df])|.)/g, (match, char, number, char2) => {
+          switch (char) {
+            case '%': return '%';
+            case 'd': return typeof next() === 'number' ? Math.floor(value) : NaN;
+            case 'f': return typeof next() === 'number' ? value : NaN;
+            default:
+              if (char.length > 1) {
+                const precision = Number(number);
+                switch (char2) {
+                  case d: return typeof next() === 'number' ? Math.floor(value) : NaN;
+                  case f: return typeof next() === 'number' : value.toFixed(precision) : NaN;
+                }
+              }
+              return '%' + char;
+          }
+        });
+      }
+    }
     // TODO: service worker
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
@@ -23,9 +46,6 @@
       const value = editor.session.getValue();
       const console_ = console;
       let s = '';
-      console = function (...args) {
-        if ()
-      }
       eval(value);
     }
   </script>
