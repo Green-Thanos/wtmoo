@@ -179,6 +179,7 @@ const engines = [
   [['deno'], 'https://deno.land/x?query=%+q'],
   [['yarn'], 'https://yarnpkg.com/?q=%q'],
   [['hoogle', 'hgl'], 'https://hoogle.haskell.org/?hoogle=%q'],
+  [['currygle', 'currgle', 'cgl'], 'https://www-ps.informatik.uni-kiel.de/kics2/currygle/results?query=%+q'],
   [['nuget'], 'https://www.nuget.org/packages?q=%+q'],
   [['crates.io', 'cratesio', 'cio'], 'https://crates.io/search?q=%q'],
   [['cpan'], 'https://metacpan.org/search?q=%+q'],
