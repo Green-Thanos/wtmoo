@@ -407,6 +407,7 @@ const engines = [
   [['super user', 'superuser', 'su'], 'https://superuser.com/search?q=%+q'],
   [['ask ubuntu', 'askubuntu', 'au'], 'https://askubuntu.com/search?q=%+q'],
   [['codegolf.se', 'codegolfse', 'cgse'], 'https://codegolf.stackexchange.com/search?q=%+q'],
+  [['oeis'], 'http://oeis.org/search?q=%+q'],
   // news
   [['cnn'], 'https://edition.cnn.com/search?q=%+q'],
   [['nbc'], 'https://www.nbcnews.com/search/?q=%+q'],
