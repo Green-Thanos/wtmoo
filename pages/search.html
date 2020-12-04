@@ -15,29 +15,28 @@
     }
 
     body {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      display: flex;
       flex-flow: column nowrap;
     }
 
     :focus { outline: none; }
     #title { font-size: 500%; }
-    #content { width: 60%; max-width: 50em; display: flex; flex-flow: row wrap; }
+    #content { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; width: 60%; max-width: 50em; }
     input {
       font-size: 200%; border: 1px solid #888; padding: 0 6px;
       font-family: Whitney, 'Hind Light', 'Ek Mukta', Cantarell, 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
       /* font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace; */
     }
     #bang.error { background-color: #fbb; }
-    #bang { background-color: #eee; text-align: right; grid-column: 1 / 2; border-radius: 5px 0 0 5px; } #query { width: 80%; border-left: none; border-radius: 0 5px 5px 0; }
-    #bangnote { width: 20%; }
-    #engines { width: 100%; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; }
+    #bang { background-color: #eee; text-align: right; grid-column: 1 / 2; grid-row: 1 / 2; border-radius: 5px 0 0 5px; } #query { grid-column: 2 / 6; grid-row: 1 / 2; border-left: none; border-radius: 0 5px 5px 0; }
+    #bangnote { grid-column: 1 / 2; grid-row: 2 / 3; }
+    #engines { grid-column: 1 / 6; grid-row: 3 / 4; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; }
     #engines > div > :nth-child(1) { text-align: left; }
     #engines > div > :nth-child(2) { text-align: right; }
     #engines > :nth-child(odd) { background-color: #eee; }
     #engines > .current { background-color: #cce; }
     .bang { color: #2962ff; }
-    .hidden { display: none; }
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
