@@ -13,5 +13,5 @@ link('analyzing','./analyzer'),
 link('and generating.','./generator'),
 text(link('ide integration','./langserver'), ' is also part of the language but not really part of compilation'),
 ),
-block()
+text(`we will be making a simple c-like language. ${link('here', './spec')} is the specification of the language - click there to get started`) 
 )
