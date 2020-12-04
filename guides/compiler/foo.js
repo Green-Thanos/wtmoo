@@ -1,6 +1,7 @@
-/* globals html, title, heading, subheading, block */
+/* globals html, title, text, heading, subheading, block */
 // NOTE: cb = pre(code())
 html(
-title`a title here`,
+title`wtmoo is a compiler`,
+text``,
 block()
 )
