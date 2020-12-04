@@ -156,7 +156,7 @@ app.get('/rph/neko', (req, res) => {
 <meta content="really a cat irl" property="og:description">\
 <meta content="skneko.moe" property="og:site_name">\
 <meta content="https://wtmoo.is/images/rph/neko.png" property="og:image">\
-<meta name="theme-color" content="#332156">\
+<meta name="theme-color" content="#ad1457">\
 <link type="application/json+oembed" href="https://wtmoo.is/rph/neko.json" />\
 <a href="https://skneko.moe">a cat</a>');
 });
