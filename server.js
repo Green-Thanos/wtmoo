@@ -82,11 +82,31 @@ app.get('learn/programming', (req, res) => {
   res.redirect('https://www.edx.org/course/cs50s-introduction-to-computer-science');
 });
 
-// 
-app.get('learn/css/grid')
+app.get('learn/css', (req, res) => {
+  res.redirect('https://css-tricks.com/where-do-you-learn-html-css-in-2020/');
+});
 
-// https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-// cool than
+app.get('learn/css/grid', (req, res) => {
+  res.redirect('https://css-tricks.com/snippets/css/complete-guide-grid/');
+});
+
+app.get('learn/css/flex', (req, res) => {
+  res.redirect('/learn/css/flexbox'); // ah :ok_hand:
+});
+
+app.get('learn/css/flexbox', (req, res) => {
+  res.redirect('https://css-tricks.com/snippets/css/a-guide-to-flexbox/');
+});
+
+app.get('learn/ai', (req, res) => {
+  res.setHeader('content-type', 'text/plain');
+  res.send('still being determined');
+});
+
+app.get('learn/regex', (req, res) => {
+  res.setHeader('content-type', 'text/plain');
+  res.send('still being determined');
+});
 // rph / 
 
 app.get('/rph', (req, res) => {
@@ -676,6 +696,7 @@ const misc = [
   [['monokai'], 'https://monokai.pro/'],
   [['unicode'], 'https://shapecatcher.com/'],
   [['tryitonline', 'tio'], 'https://tio.run/'],
+  [['codegolf.stackexchange', 'codegolf.se', 'ppcg.se', 'ppcg', 'cgse'], 'https://codegolf.stackexchange.com/'],
 ];
 home += '<h5>misc</h5><ul>';
 for (const [aliases, url] of misc) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
