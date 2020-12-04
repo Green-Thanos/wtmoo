@@ -127,6 +127,7 @@ app.get('/rph/rare.json', (req, res) => {
   res.setHeader('content-type', 'application/json+oembed');
   res.send(`{
   "author_name": "rare",
+  "author_url": "https://github.com/neverRare",
   "cache_age": 300,
   "thumbnail_url": "https://wtmoo.is/images/rph/rare.png"
 }`);
