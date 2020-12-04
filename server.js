@@ -115,8 +115,9 @@ redirect('/learn/hs', '/learn/haskell');
 
 redirect('/learn/interpreter', 'http://craftinginterpreters.com/contents.html');
 
-redirect('/learn/compiler/haskell', 'http://dev.stephendiehl.com/fun/');
+redirect('/learn/compiler/haskell', 'https://www.stephendiehl.com/llvm/'); // 'http://dev.stephendiehl.com/fun/');
 redirect('/learn/compiler/hs', '/learn/compiler/haskell');
+redirect('/learn/compiler/llvm', 'http://llvm.org/docs/tutorial/');
 
 redirect('/learn/softwareverification', 'https://softwarefoundations.cis.upenn.edu/');
 redirect('/learn/verification', '/learn/softwareverification');
