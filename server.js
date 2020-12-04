@@ -114,6 +114,16 @@ redirect('/learn/haskell', 'http://learnyouahaskell.com/chapters');
 redirect('/learn/hs', '/learn/haskell');
 
 redirect('/learn/interpreter', 'http://craftinginterpreters.com/contents.html');
+
+redirect('/learn/compiler/haskell', 'http://dev.stephendiehl.com/fun/');
+redirect('/learn/compiler/hs', '/learn/compiler/haskell');
+
+redirect('/learn/softwareverification', 'https://softwarefoundations.cis.upenn.edu/');
+redirect('/learn/verification', '/learn/softwareverification');
+
+redirect('/learn/pltheory', 'https://plfa.github.io/');
+
+redirect('/learn/lean', 'https://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/');
 // rph / 
 
 app.get('/rph', (req, res) => {
