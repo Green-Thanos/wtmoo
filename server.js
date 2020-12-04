@@ -86,6 +86,12 @@ app.get('/yeo', (req, res) => {
   res.redirect('https://cdn.glitch.com/0cd3bfc0-6ead-44dc-a210-6a4af7171875%2Fc08dbfc2-8710-43dd-8eed-e097b1296781.image.png?v=1606923594058');
 });
 
+app.get('/guides/*', async (req, res, next) => {
+  const url = decodeURIComponent(req.originalUrl.slice(8));
+  console.log(req.originalUrl, url);
+  next();
+});
+
 // learn / 
 redirect('/learn/js', 'https://javascript.info/');
 redirect('/learn/javascript', '/learn/js');
@@ -748,14 +754,6 @@ app.use((req, res, next) => {
   console.log(url);
   if (url.toLowerCase() in redirectd) { res.redirect(redirectd[url.toLowerCase()]); return; }
   if (url.toLowerCase().replace(/_+/g, ' ') in redirectd) { res.redirect(redirectd[url.toLowerCase().replace(/_+/g, ' ')]); return; }
-  next();
-});
-
-app.use(async (req, res, next) => {
-  const url_ = decodeURIComponent(req.originalUrl.slice(1));
-  if (url_.startsWith('guides/')) {
-    const url = url_.slice(7);
-  }
   next();
 });
 
