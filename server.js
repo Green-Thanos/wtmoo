@@ -68,6 +68,14 @@ app.get('/programming', (req, res) => {
   res.redirect('https://www.edx.org/course/cs50s-introduction-to-computer-science');
 });
 
+app.get('/lizard', (req, res) => {
+  res.redirect('https://cdn.glitch.com/0cd3bfc0-6ead-44dc-a210-6a4af7171875%2Flizard.jpeg?v=1606762167454');
+});
+
+app.get('/yeo', (req, res) => {
+  res.redirect('https://cdn.glitch.com/0cd3bfc0-6ead-44dc-a210-6a4af7171875%2Fc08dbfc2-8710-43dd-8eed-e097b1296781.image.png?v=1606923594058');
+});
+
 app.get('/rph/pankek', (req, res) => {
   res.setHeader('content-type','text/plain');
   res.send('lang developer of 0 languages');
@@ -78,12 +86,13 @@ app.get('/rph/grian', (req, res) => {
   res.send('best kotlin shill');
 });
 
-app.get('/lizard', (req, res) => {
-  res.redirect('https://cdn.glitch.com/0cd3bfc0-6ead-44dc-a210-6a4af7171875%2Flizard.jpeg?v=1606762167454');
-});
-
-app.get('/yeo', (req, res) => {
-  res.redirect('https://cdn.glitch.com/0cd3bfc0-6ead-44dc-a210-6a4af7171875%2Fc08dbfc2-8710-43dd-8eed-e097b1296781.image.png?v=1606923594058');
+app.get('/rph/arson', (req, res) => {
+  res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
+<meta content="arson" property="og:title">\
+<meta content="don\'t worry he\'s not actually an arsonist" property="og:description">\
+<meta content="mee42.dev" property="og:site_name">\
+<meta content="https://wtmoo.is/wtmoo.png" property="og:image">\
+<a href="https://mee42.dev/">not actually an arsonist</a>');
 });
 
 app.get('/rph/neko', (req, res) => {
