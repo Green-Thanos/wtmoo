@@ -100,7 +100,7 @@ app.get('/rph/grian', (req, res) => {
 <meta content="best kotlin shill" property="og:description">\
 <meta content="https://wtmoo.is/images/rph/grian.png" property="og:image">\
 <meta name="theme-color" content="#e6c296">\
-<link type="application/json+oembed" href="https://wtmoo.is/rph/pankek.json" />\
+<link type="application/json+oembed" href="https://wtmoo.is/rph/grian.json" />\
 best kotlin shill');
 });
 
