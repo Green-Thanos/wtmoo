@@ -90,6 +90,7 @@ app.get('/rph/pankek.json', (req, res) => {
   res.setHeader('content-type', 'application/json+oembed');
   res.send(`{
   "author_name": "pankek",
+  "author_url": "http://github.com/somebody1234",
   "cache_age": 300,
   "thumbnail_url": "https://wtmoo.is/images/rph/pankek.png"
 }`);
@@ -128,6 +129,25 @@ app.get('/rph/rare.json', (req, res) => {
   "author_name": "rare",
   "cache_age": 300,
   "thumbnail_url": "https://wtmoo.is/images/rph/rare.png"
+}`);
+});
+
+app.get('/rph/aplet', (req, res) => {
+  res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
+<meta content="jaba applet" property="og:description">\
+<meta content="https://wtmoo.is/images/rph/aplet.png" property="og:image">\
+<meta name="theme-color" content="#f1e05a">\
+<link type="application/json+oembed" href="https://wtmoo.is/rph/aplet.json" />\
+');
+});
+
+app.get('/rph/aplet.json', (req, res) => {
+  res.setHeader('content-type', 'application/json+oembed');
+  res.send(`{
+  "author_name": "aplet",
+  "author_url": "https://github.com/Aplet123",
+  "cache_age": 300,
+  "thumbnail_url": "https://wtmoo.is/images/rph/aplet.png"
 }`);
 });
 
