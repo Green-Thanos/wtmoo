@@ -98,7 +98,7 @@ app.get('/rph/arson', (req, res) => {
 
 app.get('/rph/neko', (req, res) => {
   res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
-<meta content="neko" property="og:title">\
+<meta content="aka neko" property="og:title">\
 <meta content="really a cat irl" property="og:description">\
 <meta content="skneko.moe" property="og:site_name">\
 <meta content="https://wtmoo.is/images/rph/neko.png" property="og:image">\
@@ -107,11 +107,13 @@ app.get('/rph/neko', (req, res) => {
 });
 
 app.get('/rph/neko.json', (req, res) => {
-  res.setHeader('content-type', 'application/json');
+  res.setHeader('content-type', 'application/json+oembed');
   res.send(`{
-  "title": "neko",
+  "title": "aka neko",
   "author_name": "SaltyKawaiiNeko",
-  "author_url": "https://skneko.moe"
+  "author_url": "https://skneko.moe",
+  "cache_age": 300,
+  "thumbnail_url": "https://wtmoo.is/images/rph/neko.png"
 }`);
 });
 
