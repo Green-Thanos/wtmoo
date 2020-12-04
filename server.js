@@ -77,6 +77,25 @@ app.get('/yeo', (req, res) => {
   res.redirect('https://cdn.glitch.com/0cd3bfc0-6ead-44dc-a210-6a4af7171875%2Fc08dbfc2-8710-43dd-8eed-e097b1296781.image.png?v=1606923594058');
 });
 
+app.get('/rph', (req, res) => {
+  res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
+<meta content="lang developer of 0 languages" property="og:description">\
+<meta content="https://wtmoo.is/images/rph/pankek.png" property="og:image">\
+<meta name="theme-color" content="#90f3ee">\
+<link type="application/json+oembed" href="https://wtmoo.is/rph/index.json" />\
+<a href="http://github.com/somebody1234">lang developer of 0 languages</a>');
+});
+
+app.get('/rph/index.json', (req, res) => {
+  res.setHeader('content-type', 'application/json+oembed');
+  res.send(`{
+  "author_name": "r/ProgrammerHumor discord",
+  "author_url": "",
+  "cache_age": 300,
+  "thumbnail_url": "https://wtmoo.is/images/rph/pankek.png"
+}`);
+});
+
 app.get('/rph/pankek', (req, res) => {
   res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
 <meta content="lang developer of 0 languages" property="og:description">\
