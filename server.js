@@ -155,6 +155,25 @@ app.get('/rph/rph.json', (req, res) => {
 }`);
 });
 
+app.get('/rph/bbworld', (req, res) => {
+  res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
+<meta content="" property="og:description">\
+<meta content="https://wtmoo.is/images/rph/bbworld.png" property="og:image">\
+<meta name="theme-color" content="#90f3ee">\
+<link type="application/json+oembed" href="https://wtmoo.is/rph/bbworld.json" />\
+<a href="https://github.com/somebody1234">lang developer of 0 languages</a>');
+});
+
+app.get('/rph/bbworld.json', (req, res) => {
+  res.setHeader('content-type', 'application/json+oembed');
+  res.send(`{
+  "author_name": "bbworld",
+  "author_url": "https://github.com/bbworld1",
+  "cache_age": 300,
+  "thumbnail_url": "https://wtmoo.is/images/rph/bbworld.png"
+}`);
+});
+
 app.get('/rph/pankek', (req, res) => {
   res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
 <meta content="lang developer of 0 languages" property="og:description">\
