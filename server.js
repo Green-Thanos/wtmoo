@@ -78,21 +78,30 @@ app.get('/yeo', (req, res) => {
 });
 
 app.get('/rph', (req, res) => {
-  res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
-<meta content="lang developer of 0 languages" property="og:description">\
-<meta content="https://wtmoo.is/images/rph/pankek.png" property="og:image">\
-<meta name="theme-color" content="#90f3ee">\
-<link type="application/json+oembed" href="https://wtmoo.is/rph/index.json" />\
-<a href="http://github.com/somebody1234">lang developer of 0 languages</a>');
+  res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}h1,h2,h3,h4,h5,h6,ul{margin:0;}</style>\
+<meta content="very funny discord pls dont join" property="og:description">\
+<meta content="https://wtmoo.is/images/rph/rph.webp" property="og:image">\
+<meta name="theme-color" content="#7788cb">\
+<link type="application/json+oembed" href="https://wtmoo.is/rph/rph.json" />\
+<h4><a href="https://discord.gg/rph">discord</a></h4>\
+<h4>users</h4>\
+<ul>\
+<li><a href="/rph/arson">arson</a></li>\
+<li><a href="/rph/neko">neko</a></li>\
+<li><a href="/rph/grian">grian</a></li>\
+<li><a href="/rph/pankek">pankek</a></li>\
+<li><a href="/rph/phantz">phantz</a></li>\
+<li><a href="/rph/rare">rare (a.k.a. neverrare)</a></li>\
+</ul>');
 });
 
-app.get('/rph/index.json', (req, res) => {
+app.get('/rph/rph.json', (req, res) => {
   res.setHeader('content-type', 'application/json+oembed');
   res.send(`{
   "author_name": "r/ProgrammerHumor discord",
-  "author_url": "",
+  "author_url": "https://discord.gg/rph",
   "cache_age": 300,
-  "thumbnail_url": "https://wtmoo.is/images/rph/pankek.png"
+  "thumbnail_url": "https://wtmoo.is/images/rph/rph.webp"
 }`);
 });
 
@@ -102,14 +111,14 @@ app.get('/rph/pankek', (req, res) => {
 <meta content="https://wtmoo.is/images/rph/pankek.png" property="og:image">\
 <meta name="theme-color" content="#90f3ee">\
 <link type="application/json+oembed" href="https://wtmoo.is/rph/pankek.json" />\
-<a href="http://github.com/somebody1234">lang developer of 0 languages</a>');
+<a href="https://github.com/somebody1234">lang developer of 0 languages</a>');
 });
 
 app.get('/rph/pankek.json', (req, res) => {
   res.setHeader('content-type', 'application/json+oembed');
   res.send(`{
   "author_name": "pankek",
-  "author_url": "http://github.com/somebody1234",
+  "author_url": "https://github.com/somebody1234",
   "cache_age": 300,
   "thumbnail_url": "https://wtmoo.is/images/rph/pankek.png"
 }`);
