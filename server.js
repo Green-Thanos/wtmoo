@@ -9,12 +9,24 @@ const fs = require('fs').promises,
 /* global calc */
 lazy('calc', () => require('mathjs').evaluate);
 
-
 // TODO: dark theme
 const app = require('express')();
 app.use(cookieParser());
 app.use('/ace', require('express').static('ace'));
 app.use('/images', require('express').static('images'));
+
+function redirect(endpoint, url) {
+  app.get(endpoint, (req, res) => {
+    res.redirect(url);
+  });
+}
+
+function sendText(endpoint, text) {
+  app.get(endpoint, (req, res) => {
+    res.setHeader('content-type', 'text/plain');
+    res.send(text);
+  });
+}
 
 const minutes = n => n * 60000,
   hours = n => n * 3600000,
@@ -73,40 +85,35 @@ app.get('/lizard', (req, res) => {
 app.get('/yeo', (req, res) => {
   res.redirect('https://cdn.glitch.com/0cd3bfc0-6ead-44dc-a210-6a4af7171875%2Fc08dbfc2-8710-43dd-8eed-e097b1296781.image.png?v=1606923594058');
 });
- // learn / 
-app.get('/learn/js', (req, res) => {
-  res.redirect('https://javascript.info/');
-});
 
-app.get('learn/programming', (req, res) => {
-  res.redirect('https://www.edx.org/course/cs50s-introduction-to-computer-science');
-});
+// learn / 
+redirect('/learn/js', 'https://javascript.info/');
+redirect('/learn/javascript', '/learn/js');
 
-app.get('learn/css', (req, res) => {
-  res.redirect('https://css-tricks.com/where-do-you-learn-html-css-in-2020/');
-});
+redirect('/learn/programming', 'https://www.edx.org/course/cs50s-introduction-to-computer-science');
 
-app.get('learn/css/grid', (req, res) => {
-  res.redirect('https://css-tricks.com/snippets/css/complete-guide-grid/');
-});
+redirect('/learn/css', 'https://css-tricks.com/where-do-you-learn-html-css-in-2020/');
+redirect('/learn/css/grid', 'https://css-tricks.com/snippets/css/complete-guide-grid/');
+redirect('/learn/css/flex', '/learn/css/flexbox');
+redirect('/learn/css/flexbox', 'https://css-tricks.com/snippets/css/a-guide-to-flexbox/');
 
-app.get('learn/css/flex', (req, res) => {
-  res.redirect('/learn/css/flexbox'); // ah :ok_hand:
-});
-
-app.get('learn/css/flexbox', (req, res) => {
-  res.redirect('https://css-tricks.com/snippets/css/a-guide-to-flexbox/');
-});
-
-app.get('learn/ai', (req, res) => {
+app.get('/learn/ai', (req, res) => {
   res.setHeader('content-type', 'text/plain');
   res.send('still being determined');
 });
 
-app.get('learn/regex', (req, res) => {
-  res.setHeader('content-type', 'text/plain');
-  res.send('still being determined');
-});
+// TODO: may change in the future
+redirect('/learn/regex', 'https://regexone.com/');
+
+// TODO: official guide may not always be the best tutorial
+redirect('/learn/elixir', 'https://elixir-lang.org/getting-started/introduction.html');
+redirect('/learn/ex', '/learn/elixir');
+redirect('/learn/exs', '/learn/elixir');
+
+redirect('/learn/haskell', 'http://learnyouahaskell.com/chapters');
+redirect('/learn/hs', '/learn/haskell');
+
+redirect('/learn/interpreter', 'http://craftinginterpreters.com/contents.html');
 // rph / 
 
 app.get('/rph', (req, res) => {
