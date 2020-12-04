@@ -83,7 +83,7 @@ app.get('/rph/pankek', (req, res) => {
 <meta content="https://wtmoo.is/images/rph/pankek.png" property="og:image">\
 <meta name="theme-color" content="#90f3ee">\
 <link type="application/json+oembed" href="https://wtmoo.is/rph/pankek.json" />\
-lang developer of 0 languages');
+<a href="http://github.com/somebody1234">lang developer of 0 languages</a>');
 });
 
 app.get('/rph/pankek.json', (req, res) => {
@@ -136,8 +136,8 @@ app.get('/rph/rare.json', (req, res) => {
 app.get('/rph/phantz', (req, res) => {
   res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
 <meta content="martian doom slayer with a super shotgun (or two)" property="og:description">\
-<meta content="https://wtmoo.is/images/rph/rare.png" property="og:image">\
-<meta name="theme-color" content="#ffd966">\
+<meta content="https://wtmoo.is/images/rph/phantz.png" property="og:image">\
+<meta name="theme-color" content="#d07640">\
 <link type="application/json+oembed" href="https://wtmoo.is/rph/phantz.json" />\
 <a href="https://github.com/TotallyNotChase">martian doom slayer with a super shotgun (or two)</a>');
 });
@@ -145,7 +145,7 @@ app.get('/rph/phantz', (req, res) => {
 app.get('/rph/phantz.json', (req, res) => {
   res.setHeader('content-type', 'application/json+oembed');
   res.send(`{
-  "author_name": "rare",
+  "author_name": "phantz",
   "author_url": "https://github.com/TotallyNotChase",
   "cache_age": 300,
   "thumbnail_url": "https://wtmoo.is/images/rph/phantz.png"
@@ -158,7 +158,7 @@ app.get('/rph/aplet', (req, res) => {
 <meta content="https://wtmoo.is/images/rph/aplet.png" property="og:image">\
 <meta name="theme-color" content="#f1e05a">\
 <link type="application/json+oembed" href="https://wtmoo.is/rph/aplet.json" />\
-');
+<a href="https://github.com/Aplet123">jaba applet</a>');
 });
 
 app.get('/rph/aplet.json', (req, res) => {
