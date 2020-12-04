@@ -79,7 +79,20 @@ app.get('/yeo', (req, res) => {
 
 app.get('/rph/pankek', (req, res) => {
   res.setHeader('content-type','text/plain');
-  res.send('lang developer of 0 languages');
+  res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
+<meta content="lang developer of 0 languages" property="og:description">\
+<meta content="https://wtmoo.is/images/rph/pankek.png" property="og:image">\
+<link type="application/json+oembed" href="https://wtmoo.is/rph/pankek.json" />\
+lang developer of 0 languages');
+});
+
+app.get('/rph/pankek.json', (req, res) => {
+  res.setHeader('content-type', 'application/json+oembed');
+  res.send(`{
+  "author_name": "pankek",
+  "cache_age": 300,
+  "thumbnail_url": "https://wtmoo.is/images/rph/pankek.png"
+}`);
 });
 
 app.get('/rph/grian', (req, res) => {
@@ -89,28 +102,36 @@ app.get('/rph/grian', (req, res) => {
 
 app.get('/rph/arson', (req, res) => {
   res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
-<meta content="arson" property="og:title">\
 <meta content="don\'t worry he\'s not actually an arsonist" property="og:description">\
 <meta content="mee42.dev" property="og:site_name">\
 <meta content="https://wtmoo.is/images/rph/arson.png" property="og:image">\
+<link type="application/json+oembed" href="https://wtmoo.is/rph/arson.json" />\
 <a href="https://mee42.dev/">not actually an arsonist</a>');
+});
+
+app.get('/rph/arson.json', (req, res) => {
+  res.setHeader('content-type', 'application/json+oembed');
+  res.send(`{
+  "author_name": "arson",
+  "author_url": "https://mee42.dev",
+  "cache_age": 300,
+  "thumbnail_url": "https://wtmoo.is/images/rph/arson.png"
+}`);
 });
 
 app.get('/rph/neko', (req, res) => {
   res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
-<meta content="aka neko" property="og:title">\
 <meta content="really a cat irl" property="og:description">\
 <meta content="skneko.moe" property="og:site_name">\
 <meta content="https://wtmoo.is/images/rph/neko.png" property="og:image">\
-<link type="application/json+oembed" href="/rph/neko.json" />\
+<link type="application/json+oembed" href="https://wtmoo.is/rph/neko.json" />\
 <a href="https://skneko.moe">a cat</a>');
 });
 
 app.get('/rph/neko.json', (req, res) => {
   res.setHeader('content-type', 'application/json+oembed');
   res.send(`{
-  "title": "aka neko",
-  "author_name": "SaltyKawaiiNeko",
+  "author_name": "neko",
   "author_url": "https://skneko.moe",
   "cache_age": 300,
   "thumbnail_url": "https://wtmoo.is/images/rph/neko.png"
