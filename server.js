@@ -77,6 +77,10 @@ app.get('/yeo', (req, res) => {
   res.redirect('https://cdn.glitch.com/0cd3bfc0-6ead-44dc-a210-6a4af7171875%2Fc08dbfc2-8710-43dd-8eed-e097b1296781.image.png?v=1606923594058');
 });
 
+app.get('/mdn', (req, res) => {
+  res.redirect('https://developer.mozilla.org/en-US/');
+});
+
 app.get('/rph', (req, res) => {
   res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}h1,h2,h3,h4,h5,h6,ul{margin:0;}</style>\
 <meta content="very funny discord pls dont join" property="og:description">\
