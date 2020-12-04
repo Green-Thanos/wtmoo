@@ -503,6 +503,7 @@ powered by <a href="http://vanilla-js.com/"><img src="/images/vanillajs.png" sty
 <a href="/q/list">list of search engines supported by metasearch</a><br>';
 
 const langs = [
+  [['c', 'mr pant fave lang'], /*'http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2479.pdf'*/ 'https://en.cppreference.com/w/c/language'],
   [['haskell', 'hs'], 'https://www.haskell.org/'],
   [['go', 'golang'], 'https://golang.org/'],
   [['javascript', 'js'], 'https://developer.mozilla.org/en-US/docs/Web/JavaScript'],
