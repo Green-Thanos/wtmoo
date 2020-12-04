@@ -124,6 +124,26 @@ app.get('/rph/pankek.json', (req, res) => {
 }`);
 });
 
+// https://cdn.discordapp.com/avatars/362198518129098752/ffc2bf2481beadc7216d6d187a91f49e.png?size=128
+
+app.get('/rph/legendofmiracles', (req, res) => {
+  res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
+<meta content="linux shill with edgy username" property="og:description">\
+<meta content="https://wtmoo.is/images/rph/legendofmiracles.png" property="og:image">\
+<meta name="theme-color" content="#4475ae">\
+<link type="application/json+oembed" href="https://wtmoo.is/rph/legendofmiracles.json" />\
+linux shill with edgy username');
+});
+
+app.get('/rph/legendofmiracles.json', (req, res) => {
+  res.setHeader('content-type', 'application/json+oembed');
+  res.send(`{
+  "author_name": "legendofmiracles",
+  "cache_age": 300,
+  "thumbnail_url": "https://wtmoo.is/images/rph/legendofmiracles.png"
+}`);
+});
+
 app.get('/rph/grian', (req, res) => {
   res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
 <meta content="best kotlin shill" property="og:description">\
@@ -478,7 +498,7 @@ app.get('/pl/syntax', (req, res) => {
 });
 
 let home = '<meta content="wtmoo is wtmoo" property="og:title"><meta content="wtmoo" property="og:site_name"><meta content="https://wtmoo.is/wtmoo.png" property="og:image"><meta name="viewport" content="width=device-width,initial-scale=1"><style>h1,h2,h3,h4,h5,h6{margin:0.5em 0;}ul{margin:0;padding-inline-start:20px;}</style><title>wtmoo is</title><a href="/">help</a><br><a href="https://glitch.com/edit/#!/wtmoo">source</a><br>\
-powered by <a href="http://vanilla-js.com/"><img src="/images/vanillajs.png"></img></a><br>\
+powered by <a href="http://vanilla-js.com/"><img src="/images/vanillajs.png" style="vertical-align: middle;"></img></a><br>\
 <a href="/q">metasearch</a><br>\
 <a href="/q/list">list of search engines supported by metasearch</a><br>';
 
