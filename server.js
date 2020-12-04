@@ -157,11 +157,11 @@ app.get('/rph/rph.json', (req, res) => {
 
 app.get('/rph/bbworld', (req, res) => {
   res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
-<meta content="" property="og:description">\
+<meta content="godforsaken scratch shill" property="og:description">\
 <meta content="https://wtmoo.is/images/rph/bbworld.png" property="og:image">\
-<meta name="theme-color" content="#90f3ee">\
+<meta name="theme-color" content="#f6a21b">\
 <link type="application/json+oembed" href="https://wtmoo.is/rph/bbworld.json" />\
-<a href="https://github.com/somebody1234">lang developer of 0 languages</a>');
+<a href="https://github.com/bbworld1">godforsaken scratch shill</a>');
 });
 
 app.get('/rph/bbworld.json', (req, res) => {
