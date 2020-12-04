@@ -92,12 +92,23 @@ app.get('/rph/arson', (req, res) => {
 <meta content="arson" property="og:title">\
 <meta content="don\'t worry he\'s not actually an arsonist" property="og:description">\
 <meta content="mee42.dev" property="og:site_name">\
-<meta content="https://cdn.glitch.com/0cd3bfc0-6ead-44dc-a210-6a4af7171875%2Farson.png?v=1607043193633" property="og:image">\
+<meta content="https://wtmoo.is/images/rph/arson.png" property="og:image">\
 <a href="https://mee42.dev/">not actually an arsonist</a>');
 });
 
 app.get('/rph/neko', (req, res) => {
-  res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style><a href="https://skneko.moe">a cat</a>');
+  res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
+<meta content="neko" property="og:title">\
+<meta content="really a cat irl" property="og:description">\
+<meta content="skneko.moe" property="og:site_name">\
+<meta content="https://wtmoo.is/images/rph/neko.png" property="og:image">\
+<link type="application/json+oembed" href="/rph/neko.json" />\
+<a href="https://skneko.moe">a cat</a>');
+});
+
+app.get('/rph/neko.json', (req, res) => {
+  res.setHeader('content-type', 'application/json');
+  res.send('');
 });
 
 app.get('/rph/λ', (req, res) => {
