@@ -337,7 +337,7 @@ app.get('/pl/syntax', (req, res) => {
   res.redirect('http://rigaux.org/language-study/syntax-across-languages.html');
 });
 
-let home = '<meta name="viewport" content="width=device-width,initial-scale=1"><style>h1,h2,h3,h4,h5,h6{margin:0.5em 0;}ul{margin:0;padding-inline-start:20px;}</style><title>wtmoo is</title><a href="/">help</a><br><a href="https://glitch.com/edit/#!/wtmoo">source</a><br>\
+let home = '<meta content="wtmoo is wtmoo" property="og:title"><meta content="wtmoo" property="og:site_name"><meta content="https://wtmoo.is/wtmoo.png" property="og:image"><meta name="viewport" content="width=device-width,initial-scale=1"><style>h1,h2,h3,h4,h5,h6{margin:0.5em 0;}ul{margin:0;padding-inline-start:20px;}</style><title>wtmoo is</title><a href="/">help</a><br><a href="https://glitch.com/edit/#!/wtmoo">source</a><br>\
 <a href="/q">metasearch</a><br>\
 <a href="/q/list">list of search engines supported by metasearch</a><br>';
 
