@@ -108,7 +108,11 @@ app.get('/rph/neko', (req, res) => {
 
 app.get('/rph/neko.json', (req, res) => {
   res.setHeader('content-type', 'application/json');
-  res.send('');
+  res.send(`{
+  "title": "neko",
+  "author_name": "SaltyKawaiiNeko",
+  "author_url": "https://skneko.moe"
+}`);
 });
 
 app.get('/rph/λ', (req, res) => {

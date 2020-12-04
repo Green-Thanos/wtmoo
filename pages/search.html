@@ -1,153 +1,249 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta content="wtmoo metasearch" property="og:title">
-  <meta content="wtmoo" property="og:site_name">
-  <meta content="https://wtmoo.is/wtmoo.png" property="og:image">
-  <link rel="search" type="application/opensearchdescription+xml" href="https://wtmoo.is/search.xml" title="wtmoo metasearch">
-  <title>wtmoo metasearch</title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: Whitney, 'Hind Light', 'Ek Mukta', Cantarell, 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
-      /* font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace; */
-    }
+  <head>
+    <meta content="wtmoo metasearch" property="og:title" />
+    <meta content="wtmoo" property="og:site_name" />
+    <meta content="https://wtmoo.is/wtmoo.png" property="og:image" />
+    <link
+      rel="search"
+      type="application/opensearchdescription+xml"
+      href="https://wtmoo.is/search.xml"
+      title="wtmoo metasearch"
+    />
+    <title>wtmoo metasearch</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell,
+          "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+        /* font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace; */
+      }
 
-    body {
-      display: flex;
-      flex-flow: column nowrap;
-    }
+      body {
+        display: flex;
+        flex-flow: column nowrap;
+      }
 
-    :focus { outline: none; }
-    #title { font-size: 500%; }
-    #content { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; width: 60%; max-width: 50em; }
-    input {
-      font-size: 200%; border: 1px solid #888; padding: 0 6px;
-      font-family: Whitney, 'Hind Light', 'Ek Mukta', Cantarell, 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
-      /* font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace; */
-    }
-    #bang.error { background-color: #fbb; }
-    #bang { background-color: #eee; text-align: right; grid-column: 1 / 2; grid-row: 1 / 2; border-radius: 5px 0 0 5px; } #query { grid-column: 2 / 6; grid-row: 1 / 2; border-left: none; border-radius: 0 5px 5px 0; }
-    #bangnote { grid-column: 1 / 2; grid-row: 2 / 3; }
-    #engines { grid-column: 1 / 6; grid-row: 3 / 4; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; }
-    #engines > div > :nth-child(1) { text-align: left; }
-    #engines > div > :nth-child(2) { text-align: right; }
-    #engines > :nth-child(odd) { background-color: #eee; }
-    #engines > .current { background-color: #cce; }
-    .bang { color: #2962ff; }
-    .hidden { display: none !important; }
-  </style>
-</head>
-<body>
-  <center>
-    <h1 id="title">!wtmoo</h1>
-    <div id="content">
-      <!-- TODO: grow if it's too big -->
-      <input type="text" id="bang" value="!g">
-      <input type="text" id="query" placeholder="search here">
-      <span id="bangnote">google</span>
-      <div id="engines" class="hidden"></div>
-    </div>
-  </center>
-  <script>
-    const engines = $;
-    const engined = {};
-    const engineList = [];
-    const engineNames = {};
-    const allEngines = [];
-    for (const [aliases, url] of engines) { const name = aliases[0]; engineList.push(name); for (const alias of aliases) { engined[alias] = url; engineNames[alias] = name; allEngines.push(alias); } }
-    
-    let bang = document.getElementById('bang'),
-      query = document.getElementById('query'),
-      bangnote = document.getElementById('bangnote'),
-      enginesDiv = document.getElementById('engines');
-    query.focus();
-    function refreshEngines() {
-      while (enginesDiv.lastChild) {
-        enginesDiv.removeChild(enginesDiv.lastChild);
+      :focus {
+        outline: none;
       }
-      const queryEngine = bang.value.slice(1);
-      if (queryEngine in engineNames) {
-        bangnote.innerText = engineNames[queryEngine];
-      } else {
-        bangnote.innerText = '';
+      #title {
+        font-size: 500%;
       }
-      const toAdd = [];
-      if (queryEngine in engined) { toAdd.push(queryEngine); }
-      for (const engine of allEngines) {
-        if (engine.startsWith(queryEngine) && engine !== queryEngine) { toAdd.push(engine); }
+      #content {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        width: 60%;
+        max-width: 50em;
       }
-      for (const engine of allEngines) {
-        if (engine.includes(queryEngine) && !engine.startsWith(queryEngine)) { toAdd.push(engine); }
+      input {
+        font-size: 200%;
+        border: 1px solid #888;
+        padding: 0 6px;
+        font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell,
+          "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+        /* font-family: 'FantasqueSansMono NF', 'JetBrains Mono', 'Fira Code', Consolas, monospace; */
       }
-      for (const engine of toAdd) {
-        const result = document.createElement('div');
-        if (queryEngine === engine) { result.classList.add('current'); }
-        const bang = document.createElement('div'),
-          name = document.createElement('div');
-        bang.innerHTML = '<b>!</b>' + engine.replace(new RegExp(queryEngine), '<b>$&</b>');
-        bang.classList.add('bang');
-        name.innerText = engineNames[engine];
-        result.appendChild(bang); result.appendChild(name);
-        enginesDiv.appendChild(result);
+      #bang.error {
+        background-color: #fbb;
       }
-    }
-    function onBangKeydown(e) {
-      switch (e.key) {
-        case ' ':
-          query.focus(); enginesDiv.classList.add('hidden'); query.selectionStart = 0; query.value = '';
-          e.preventDefault();
-          e.stopPropagation();
-          break;
+      #bang {
+        background-color: #eee;
+        text-align: right;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        border-radius: 5px 0 0 5px;
+        min-width: 0;
       }
-    }
-    function onBangKeyup(e) {
-      if (e.ctrlKey || e.altKey || e.shiftKey) { return; }
-      if (bang.value.length === 0) {
-        bang.value = '!';
+      #query {
+        grid-column: 2 / 6;
+        grid-row: 1 / 2;
+        order-left: none;
+        border-radius: 0 5px 5px 0;
       }
-      refreshEngines();
-      if (bang.value.slice(1) in engined) { bang.classList.remove('error'); } else { bang.classList.add('error'); }
-    }
-    function onBangFocusin(e) {
-      bang.selectionStart = 0;
-    }
-    function onBangFocusout(e) {
-      if (bang.value.slice(1) in engined) { bang.classList.remove('error'); } else { bang.classList.add('error'); }
-    }
-    function onQueryKeydown(e) {
-      if (e.ctrlKey || e.altKey || e.shiftKey) { return; }
-      switch (e.key) {
-        case 'Backspace':
-          if (query.value.length === 0) {
-            bang.focus(); refreshEngines(); enginesDiv.classList.remove('hidden'); bang.selectionStart = bang.value.length;
+      #bangnote {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+      }
+      #engines {
+        grid-column: 1 / 6;
+        grid-row: 3 / 4;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      }
+      #engines > div > :nth-child(1) {
+        text-align: left;
+      }
+      #engines > div > :nth-child(2) {
+        text-align: right;
+      }
+      #engines > :nth-child(odd) {
+        background-color: #eee;
+      }
+      #engines > .current {
+        background-color: #cce;
+      }
+      .bang {
+        color: #2962ff;
+      }
+      .hidden {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <h1 id="title">!wtmoo</h1>
+      <div id="content">
+        <!-- TODO: grow if it's too big -->
+        <input type="text" id="bang" value="!g" />
+        <input type="text" id="query" placeholder="search here" />
+        <span id="bangnote">google</span>
+        <div id="engines" class="hidden"></div>
+      </div>
+    </center>
+    <script>
+      const engines = $;
+      const engined = {};
+      const engineList = [];
+      const engineNames = {};
+      const allEngines = [];
+      for (const [aliases, url] of engines) {
+        const name = aliases[0];
+        engineList.push(name);
+        for (const alias of aliases) {
+          engined[alias] = url;
+          engineNames[alias] = name;
+          allEngines.push(alias);
+        }
+      }
+
+      let bang = document.getElementById("bang"),
+        query = document.getElementById("query"),
+        bangnote = document.getElementById("bangnote"),
+        enginesDiv = document.getElementById("engines");
+      query.focus();
+      function refreshEngines() {
+        while (enginesDiv.lastChild) {
+          enginesDiv.removeChild(enginesDiv.lastChild);
+        }
+        const queryEngine = bang.value.slice(1);
+        if (queryEngine in engineNames) {
+          bangnote.innerText = engineNames[queryEngine];
+        } else {
+          bangnote.innerText = "";
+        }
+        const toAdd = [];
+        if (queryEngine in engined) {
+          toAdd.push(queryEngine);
+        }
+        for (const engine of allEngines) {
+          if (engine.startsWith(queryEngine) && engine !== queryEngine) {
+            toAdd.push(engine);
+          }
+        }
+        for (const engine of allEngines) {
+          if (engine.includes(queryEngine) && !engine.startsWith(queryEngine)) {
+            toAdd.push(engine);
+          }
+        }
+        for (const engine of toAdd) {
+          const result = document.createElement("div");
+          if (queryEngine === engine) {
+            result.classList.add("current");
+          }
+          const bang = document.createElement("div"),
+            name = document.createElement("div");
+          bang.innerHTML =
+            "<b>!</b>" + engine.replace(new RegExp(queryEngine), "<b>$&</b>");
+          bang.classList.add("bang");
+          name.innerText = engineNames[engine];
+          result.appendChild(bang);
+          result.appendChild(name);
+          enginesDiv.appendChild(result);
+        }
+      }
+      function onBangKeydown(e) {
+        switch (e.key) {
+          case " ":
+            query.focus();
+            enginesDiv.classList.add("hidden");
+            query.selectionStart = 0;
+            query.value = "";
             e.preventDefault();
             e.stopPropagation();
-          }
-          break;
-        case 'Enter':
-          if (bang.value.slice(1) in engined) {
-            const url = engined[bang.value.slice(1)]
-              .replace('%q', encodeURIComponent(query.value))
-              .replace('%+q', encodeURIComponent(query.value.replace(/\s+/g, '+')))
-              .replace('%-q', encodeURIComponent(query.value.replace(/\s+/g, '-')));
-            location.href = url;
-          }
-          e.preventDefault();
-          e.stopPropagation();
-          break;
+            break;
+        }
       }
-    }
-    function onEnginesClick(e) {
-      console.log(e, e.target);
-    }
-    bang.addEventListener('keydown', onBangKeydown);
-    bang.addEventListener('keyup', onBangKeyup);
-    bang.addEventListener('focusin', onBangFocusin);
-    bang.addEventListener('focusout', onBangFocusout);
-    query.addEventListener('keydown', onQueryKeydown);
-    enginesDiv.addEventListener('click', onEnginesClick);
-  </script>
-</body>
+      function onBangKeyup(e) {
+        if (e.ctrlKey || e.altKey || e.shiftKey) {
+          return;
+        }
+        if (bang.value.length === 0) {
+          bang.value = "!";
+        }
+        refreshEngines();
+        if (bang.value.slice(1) in engined) {
+          bang.classList.remove("error");
+        } else {
+          bang.classList.add("error");
+        }
+      }
+      function onBangFocusin(e) {
+        bang.selectionStart = 0;
+      }
+      function onBangFocusout(e) {
+        if (bang.value.slice(1) in engined) {
+          bang.classList.remove("error");
+        } else {
+          bang.classList.add("error");
+        }
+      }
+      function onQueryKeydown(e) {
+        if (e.ctrlKey || e.altKey || e.shiftKey) {
+          return;
+        }
+        switch (e.key) {
+          case "Backspace":
+            if (query.value.length === 0) {
+              bang.focus();
+              refreshEngines();
+              enginesDiv.classList.remove("hidden");
+              bang.selectionStart = bang.value.length;
+              e.preventDefault();
+              e.stopPropagation();
+            }
+            break;
+          case "Enter":
+            if (bang.value.slice(1) in engined) {
+              const url = engined[bang.value.slice(1)]
+                .replace("%q", encodeURIComponent(query.value))
+                .replace(
+                  "%+q",
+                  encodeURIComponent(query.value.replace(/\s+/g, "+"))
+                )
+                .replace(
+                  "%-q",
+                  encodeURIComponent(query.value.replace(/\s+/g, "-"))
+                );
+              location.href = url;
+            }
+            e.preventDefault();
+            e.stopPropagation();
+            break;
+        }
+      }
+      function onEnginesClick(e) {
+        console.log(e, e.target);
+      }
+      bang.addEventListener("keydown", onBangKeydown);
+      bang.addEventListener("keyup", onBangKeyup);
+      bang.addEventListener("focusin", onBangFocusin);
+      bang.addEventListener("focusout", onBangFocusout);
+      query.addEventListener("keydown", onQueryKeydown);
+      enginesDiv.addEventListener("click", onEnginesClick);
+    </script>
+  </body>
 </html>
