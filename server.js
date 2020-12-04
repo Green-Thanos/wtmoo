@@ -120,7 +120,7 @@ app.get('/rph/rare', (req, res) => {
 <meta content="https://wtmoo.is/images/rph/rare.png" property="og:image">\
 <meta name="theme-color" content="#ffd966">\
 <link type="application/json+oembed" href="https://wtmoo.is/rph/rare.json" />\
-very rare');
+<a href="https://github.com/neverRare">very rare</a>');
 });
 
 app.get('/rph/rare.json', (req, res) => {
@@ -130,6 +130,25 @@ app.get('/rph/rare.json', (req, res) => {
   "author_url": "https://github.com/neverRare",
   "cache_age": 300,
   "thumbnail_url": "https://wtmoo.is/images/rph/rare.png"
+}`);
+});
+
+app.get('/rph/phantz', (req, res) => {
+  res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
+<meta content="martian doom slayer with a super shotgun (or two)" property="og:description">\
+<meta content="https://wtmoo.is/images/rph/rare.png" property="og:image">\
+<meta name="theme-color" content="#ffd966">\
+<link type="application/json+oembed" href="https://wtmoo.is/rph/phantz.json" />\
+<a href="https://github.com/TotallyNotChase">martian doom slayer with a super shotgun (or two)</a>');
+});
+
+app.get('/rph/phantz.json', (req, res) => {
+  res.setHeader('content-type', 'application/json+oembed');
+  res.send(`{
+  "author_name": "rare",
+  "author_url": "https://github.com/TotallyNotChase",
+  "cache_age": 300,
+  "thumbnail_url": "https://wtmoo.is/images/rph/phantz.png"
 }`);
 });
 
