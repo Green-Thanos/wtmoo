@@ -4,6 +4,7 @@ function lazy(name, fn) {
 
 const fs = require('fs').promises,
   fsConst = require('fs').constants,
+  resolve = require('path').resolve,
   fetch = require('node-fetch'),
   cookieParser = require('cookie-parser');
 /* global calc */
@@ -88,8 +89,13 @@ app.get('/yeo', (req, res) => {
 
 app.get('/guides/*', async (req, res, next) => {
   const url = decodeURIComponent(req.originalUrl.slice(8));
-  console.log(req.originalUrl, url);
-  next();
+  const path = resolve('/', url + '.js');
+  try {
+    const file = await fs.open(path, 'r');
+  } catch {
+    // opening file failed
+    next();
+  }
 });
 
 // learn / 
