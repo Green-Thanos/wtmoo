@@ -88,6 +88,10 @@ app.get('/guides/*', async (req, res, next) => {
   const path = resolve('/', url + '.js');
   try {
     const file = await fs.open(path, 'r');
+    const result = '';
+    function html(...c) { return '<html>' + c.join('') + '</html>'; }
+    eval(await file.readFile());
+    res.send(result);
   } catch {
     // opening file failed
     next();
