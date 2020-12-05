@@ -110,8 +110,13 @@ app.get('/learn/ai', (req, res) => {
   res.send('still being determined');
 });
 
+app.get('/learn/sql', (req, res) => {
+  res.setHeader('content-type', 'text/plain');
+  res.send('still being determined');
+});
+
 // TODO: may change in the future
-redirect('/learn/regex', 'https://regexone.com/');
+redirect('/learn/regex', 'https://regex101.com/');
 
 // TODO: official guide may not always be the best tutorial
 redirect('/learn/elixir', 'https://elixir-lang.org/getting-started/introduction.html');
@@ -229,7 +234,7 @@ app.get('/rph/grian', (req, res) => {
 <meta content="https://wtmoo.is/images/rph/grian.png" property="og:image">\
 <meta name="theme-color" content="#e6c296">\
 <link type="application/json+oembed" href="https://wtmoo.is/rph/grian.json" />\
-best kotlin shill');
+<a href="https://github.com/grian32/">best kotlin shill</a>');
 });
 
 app.get('/rph/grian.json', (req, res) => {
