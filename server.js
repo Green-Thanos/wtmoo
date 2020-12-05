@@ -133,6 +133,8 @@ redirect('/learn/verification', '/learn/softwareverification');
 redirect('/learn/pltheory', 'https://plfa.github.io/');
 
 redirect('/learn/lean', 'https://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/');
+
+redirect('/learn/wat', 'https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format');
 // rph / 
 
 app.get('/rph', (req, res) => {
