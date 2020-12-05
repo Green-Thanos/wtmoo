@@ -90,6 +90,9 @@ app.get('/guides/*', async (req, res, next) => {
     const file = await fs.open(path, 'r');
     const result = '';
     function html(...c) { return '<html>' + c.join('') + '</html>'; }
+    function _text(tag) { return function (text, ...extra) { if (text instanceof Array) { text = text.reduce((p, c) => p + extra.shift().toString() + c); } return `<${tag}>${text}</${tag}>`; } }
+    const header = _text('h1');
+    const text = _text('p');
     eval(await file.readFile());
     res.send(result);
   } catch {
