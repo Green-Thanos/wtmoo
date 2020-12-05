@@ -8,5 +8,6 @@ typedef enum NodeType {
 typedef struct Node {
   NodeType type;
   const char *contents;
+  Node *children;
 } Node;
 `
