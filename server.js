@@ -164,6 +164,7 @@ app.get('/rph', (req, res) => {
 <li><a href="/rph/pankek">pankek</a></li>\
 <li><a href="/rph/phantz">phantz</a></li>\
 <li><a href="/rph/rare">rare (a.k.a. neverrare)</a></li>\
+<li><a href="/rph/phireh">phireh</a></li>\
 </ul>');
 });
 
@@ -350,28 +351,46 @@ app.get('/rph/neko.json', (req, res) => {
 }`);
 });
 
+app.get('/rph/phireh', (req, res) => {
+  res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
+<meta content="neko\'s friend idk" property="og:description">\
+<meta content="https://wtmoo.is/images/rph/phireh.png" property="og:image">\
+<meta name="theme-color" content="#a75aa8">\
+<link type="application/json+oembed" href="https://wtmoo.is/rph/phireh.json" />\
+purple slime (he says it\'s a zergling but i\'m not sure i believe him)');
+});
+
+app.get('/rph/phireh.json', (req, res) => {
+  res.setHeader('content-type', 'application/json+oembed');
+  res.send(`{
+  "author_name": "phireh",
+  "cache_age": 300,
+  "thumbnail_url": "https://wtmoo.is/images/rph/phireh.png"
+}`);
+});
+
 app.get('/rph/λ', (req, res) => {
   res.setHeader('content-type','text/plain');
   res.send('god of the stateless');
 });
 
-app.get('/rph/neko', (req, res) => {
+app.get('/wtmoo', (req, res) => {
   res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
-<meta content="really a cat irl" property="og:description">\
-<meta content="skneko.moe" property="og:site_name">\
-<meta content="https://wtmoo.is/images/rph/neko.png" property="og:image">\
-<meta name="theme-color" content="#ad1457">\
-<link type="application/json+oembed" href="https://wtmoo.is/rph/neko.json" />\
-<a href="https://skneko.moe">a cat</a>');
+<meta content="heck if i know" property="og:description">\
+<meta content="wtmoo.is" property="og:site_name">\
+<meta content="https://wtmoo.is/wtmoo.png" property="og:image">\
+<meta name="theme-color" content="#eeeeee">\
+<link type="application/json+oembed" href="https://wtmoo.is/wtmoo.json" />\
+heck if i know');
 });
 
-app.get('/rph/neko.json', (req, res) => {
+app.get('/wtmoo.json', (req, res) => {
   res.setHeader('content-type', 'application/json+oembed');
   res.send(`{
-  "author_name": "neko",
-  "author_url": "https://skneko.moe",
+  "author_name": "wtmoo",
+  "author_url": "https://wtmoo.is",
   "cache_age": 300,
-  "thumbnail_url": "https://wtmoo.is/images/rph/neko.png"
+  "thumbnail_url": "https://wtmoo.is/wtmoo.png"
 }`);
 });
 
@@ -767,7 +786,7 @@ const competitions = [
   [['cssbattle', 'cssb'], 'https://cssbattle.dev/'],
 ];
 home += '<h5>programming competitions</h5><ul>';
-for (const [aliases, url] of competitions) { home += `<li><a href="/encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
+for (const [aliases, url] of competitions) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
 home += '</ul>';
 const misc = [
   [['sbcl'], 'http://www.sbcl.org/'],
