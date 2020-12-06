@@ -2,18 +2,24 @@
 source=https://github.com/SuperPaintman/vscode-monokai-extended
 name=Monokai
 
-[colors]
-primary=eeeeee bg 272822
-secondary=bbbbbb bg 3c3d37
-tertiary=888888 bg 15160e
+[vars]
+grey=75715e
+light-grey=cfcfc2
+whitish=f8f8f0
 
-selection=49483e
+[main]
+primary='whitish bg 272822
+secondary='light-grey bg 3c3d37
+tertiary='grey bg 15160e
+
+select=bg 49483e
+find=000000 bg ffe792
 
 link=84b4e4
 link-visited=3088bb
 
 [pl]
-cursor=f8f8f0
+cursor=whitish
 current-line=bg 35352b
 whitespace=6a6a6466
 comment=75715e
