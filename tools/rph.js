@@ -35,7 +35,7 @@ module.exports = function (app) {
 <meta content="https://wtmoo.is/images/rph/${name}.png" property="og:image">
 <meta name="theme-color" content="#${color}">
 <link type="application/json+oembed" href="https://wtmoo.is/rph/${name}.json" />${site ? `
-<a href="https://github.com/bbworld1">${desc2}</a>`;
+<a href="${site}">${desc2}</a>` : desc2}`;
     const json = `{
   "author_name": "${name}",${site ? `
   "author_url": "${site}",` : ''}
@@ -144,104 +144,10 @@ linux shill with edgy username');
 }`);
   });
 
-  app.get('/rph/phantz', (req, res) => {
-    res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
-<meta content="also known as shirt (with a z)" property="og:description">\
-<meta content="https://wtmoo.is/images/rph/phantz.png" property="og:image">\
-<meta name="theme-color" content="#d07640">\
-<link type="application/json+oembed" href="https://wtmoo.is/rph/phantz.json" />\
-<a href="https://github.com/TotallyNotChase">martian pro gamer with a super shotgun (or two)</a>');
-  });
-
-  app.get('/rph/phantz.json', (req, res) => {
-    res.setHeader('content-type', 'application/json+oembed');
-    res.send(`{
-  "author_name": "phantz",
-  "author_url": "https://github.com/TotallyNotChase",
-  "cache_age": 300,
-  "thumbnail_url": "https://wtmoo.is/images/rph/phantz.png"
-}`);
-  });
-
-  app.get('/rph/aplet', (req, res) => {
-    res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
-<meta content="jaba applet" property="og:description">\
-<meta content="https://wtmoo.is/images/rph/aplet.png" property="og:image">\
-<meta name="theme-color" content="#f1e05a">\
-<link type="application/json+oembed" href="https://wtmoo.is/rph/aplet.json" />\
-<a href="https://github.com/Aplet123">jaba applet</a>');
-  });
-
-  app.get('/rph/aplet.json', (req, res) => {
-    res.setHeader('content-type', 'application/json+oembed');
-    res.send(`{
-  "author_name": "aplet",
-  "author_url": "https://github.com/Aplet123",
-  "cache_age": 300,
-  "thumbnail_url": "https://wtmoo.is/images/rph/aplet.png"
-}`);
-  });
-
-  app.get('/rph/arson', (req, res) => {
-    res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
-<meta content="don\'t worry he\'s not actually an arsonist" property="og:description">\
-<meta content="mee42.dev" property="og:site_name">\
-<meta content="https://wtmoo.is/images/rph/arson.png" property="og:image">\
-<meta name="theme-color" content="#b12a0b">\
-<link type="application/json+oembed" href="https://wtmoo.is/rph/arson.json" />\
-<a href="https://mee42.dev/">not actually an arsonist</a>');
-  });
-
-  app.get('/rph/arson.json', (req, res) => {
-    res.setHeader('content-type', 'application/json+oembed');
-    res.send(`{
-  "author_name": "arson",
-  "author_url": "https://mee42.dev",
-  "cache_age": 300,
-  "thumbnail_url": "https://wtmoo.is/images/rph/arson.png"
-}`);
-  });
-
-  app.get('/rph/neko', (req, res) => {
-    res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
-<meta content="really a cat irl" property="og:description">\
-<meta content="skneko.moe" property="og:site_name">\
-<meta content="https://wtmoo.is/images/rph/neko.png" property="og:image">\
-<meta name="theme-color" content="#ad1457">\
-<link type="application/json+oembed" href="https://wtmoo.is/rph/neko.json" />\
-<a href="https://skneko.moe">a cat</a>');
-  });
-
-  app.get('/rph/neko.json', (req, res) => {
-    res.setHeader('content-type', 'application/json+oembed');
-    res.send(`{
-  "author_name": "neko",
-  "author_url": "https://skneko.moe",
-  "cache_age": 300,
-  "thumbnail_url": "https://wtmoo.is/images/rph/neko.png"
-}`);
-  });
-
-  app.get('/rph/phireh', (req, res) => {
-    res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
-<meta content="neko\'s friend idk" property="og:description">\
-<meta content="https://wtmoo.is/images/rph/phireh.png" property="og:image">\
-<meta name="theme-color" content="#a75aa8">\
-<link type="application/json+oembed" href="https://wtmoo.is/rph/phireh.json" />\
-purple slime (he says it\'s a zergling but i\'m not sure i believe him)');
-  });
-
-  app.get('/rph/phireh.json', (req, res) => {
-    res.setHeader('content-type', 'application/json+oembed');
-    res.send(`{
-  "author_name": "phireh",
-  "cache_age": 300,
-  "thumbnail_url": "https://wtmoo.is/images/rph/phireh.png"
-}`);
-  });
-
-  app.get('/rph/λ', (req, res) => {
-    res.setHeader('content-type','text/plain');
-    res.send('god of the stateless');
-  });
+  rph({name: 'phantz', site: 'https://github.com/TotallyNotChase', color: 'd07640', desc: 'also known as shirt (with a z)', desc2: 'martian pro gamer with a super shotgun (or two)'});
+  rph({name: 'aplet', site: 'https://github.com/Aplet123', color: 'f1e05a', desc: 'ja🅱️a applet', desc2: 'jaba applet'});
+  rph({name: 'arson', site: 'https://mee42.dev', domain: 'mee42.dev', color: 'b12a0b', desc: 'don\'t worry he\'s not actually an arsonist', desc2: 'not actually an arsonist'});
+  rph({name: 'neko', site: 'https://skneko.moe', domain: 'skneko.moe', color: 'ad1457', desc: 'really a cat irl', desc2: 'a cat'});
+  rph({name: 'phireh', color: 'a75aa8', desc: 'neko\'s friend idk', desc2: 'purple slime (he says it\'s a zergling but i\'m not sure i believe him)'});
+  rph({name: 'λ', color: '5d8623', desc: 'god of the stateless', desc2: 'nerd that plays mtg and stuff'});
 }
