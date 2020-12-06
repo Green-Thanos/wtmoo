@@ -1,18 +1,17 @@
 :root {
   --primary: #main.primary#;
   --primary-background: #main.primary.bg#;
+  --secondary: #main.secondary#;
+  --secondary-background: #main.secondary.bg#;
+  --tertiary: #main.tertiary#;
+  --tertiary-background: #main.tertiary.bg#;
+  --select: #main.select#;
+  --select-background: #main.select.bg#;
+  --find: #main.find#;
+  --find-background: #main.find.bg#;
+  --link: #main.link#;
+  --link-visited: #main.link-visited#;
 }
-
-[main]
-primary='whitish bg/272822
-secondary='light-grey bg/3c3d37
-tertiary='grey bg/15160e
-
-select=bg/49483e
-find=000000 bg/ffe792
-
-link=84b4e4
-link-visited=3088bb
 
 [pl]
 cursor='whitish
