@@ -355,6 +355,26 @@ app.get('/rph/λ', (req, res) => {
   res.send('god of the stateless');
 });
 
+app.get('/rph/neko', (req, res) => {
+  res.send('<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>\
+<meta content="really a cat irl" property="og:description">\
+<meta content="skneko.moe" property="og:site_name">\
+<meta content="https://wtmoo.is/images/rph/neko.png" property="og:image">\
+<meta name="theme-color" content="#ad1457">\
+<link type="application/json+oembed" href="https://wtmoo.is/rph/neko.json" />\
+<a href="https://skneko.moe">a cat</a>');
+});
+
+app.get('/rph/neko.json', (req, res) => {
+  res.setHeader('content-type', 'application/json+oembed');
+  res.send(`{
+  "author_name": "neko",
+  "author_url": "https://skneko.moe",
+  "cache_age": 300,
+  "thumbnail_url": "https://wtmoo.is/images/rph/neko.png"
+}`);
+});
+
 app.get('/wtmoo', (req, res) => {
   res.setHeader('content-type', 'text/plain');
   res.send('eternal confusion');
