@@ -1,20 +1,7 @@
-[meta]
-source=https://github.com/SuperPaintman/vscode-monokai-extended
-name=Monokai
-
-[vars]
-grey=75715e
-light-grey=cfcfc2
-whitish=f8f8f0
-yellow=e6db74
-blue=66d9ef
-purple=ae81ff
-red=f92672
-green=a6e22e
-orange=fd971f
-light-orange=e69f66
-# added by pankek
-teal=6be68b
+:root {
+  --primary: #main.primary#;
+  --primary-background: #main.primary.bg#;
+}
 
 [main]
 primary='whitish bg/272822
@@ -44,3 +31,4 @@ type='blue eff/italic
 storage='blue
 storage-type='blue
 effect='teal
+
