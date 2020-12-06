@@ -6,6 +6,7 @@ module.exports = function (app) {
     [['duckduckgo', 'ddg'], 'https://duckduckgo.com/?q=%+q'],
     [['ecosia', 'ec'], 'https://www.ecosia.org/search?q=%+q'],
     [['lmgtfy'], 'https://lmgtfy.app/#gsc.q=%q'],
+    [['wtmoo', 'wtm'], 'https://wtmoo.is/%q'],
     // non text
     [['google images', 'googleimages', 'gimages', 'gi'], 'https://www.google.com/search?q=%+q&tbm=isch'],
     [['google videos', 'googlevideos', 'gvideos', 'ggv'], 'https://www.google.com/search?q=%+q&tbm=vid'],
