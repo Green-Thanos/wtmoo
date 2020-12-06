@@ -1,0 +1,4 @@
+name: #meta.name#
+colors:
+  editor.foreground: #pl.primary#
+  editor.background: #pl.primary-background#
