@@ -6,29 +6,39 @@ name=Monokai
 grey=75715e
 light-grey=cfcfc2
 whitish=f8f8f0
+yellow=e6db74
+blue=66d9ef
+purple=ae81ff
+red=f92672
+green=a6e22e
+orange=fd971f
+light-orange=e69f66
+# added by pankek
+teal=6be68b
 
 [main]
-primary='whitish bg 272822
-secondary='light-grey bg 3c3d37
-tertiary='grey bg 15160e
+primary='whitish bg/272822
+secondary='light-grey bg/3c3d37
+tertiary='grey bg/15160e
 
-select=bg 49483e
-find=000000 bg ffe792
+select=bg/49483e
+find=000000 bg/ffe792
 
 link=84b4e4
 link-visited=3088bb
 
 [pl]
-cursor=whitish
-current-line=bg 35352b
+cursor='whitish
+current-line=bg/35352b
 whitespace=6a6a6466
-comment=75715e
-keyword=f92672
-string=e6db74
-number=ae81ff
-constant=ae81ff
-operator=f92672
-name=a6e22e
-property=a6e22e
-type=66d9ef italic
-effect=6be68b
+comment='grey
+keyword='red
+string='yellow
+number='purple
+constant='purple
+variable='whitish
+operator='red
+name='green
+property='green
+type='blue eff/italic
+effect='teal
