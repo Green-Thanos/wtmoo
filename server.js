@@ -63,9 +63,8 @@ async function cache(url, path, age = days(1)) {
   }
 }
 
-app.get('/ask', (req, res) => {
-  res.redirect('https://dontasktoask.com/');
-});
+redirect('/ask', 'https://dontasktoask.com/');
+redirect('/help', 'https://dontasktoask.com/');
 
 app.get('/helpvampire', (req, res) => res.sendFile('pages/vampire.html', { root: __dirname }));
 
