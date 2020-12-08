@@ -37,7 +37,7 @@ function text(req, res, text, status=200) {
   }
 }
 
-function getQS(url) { return url.slice(url.indexOf('?') + 1); }
+function getQS(url) { return url.includes('?') ? url.slice(url.indexOf('?') + 1) : null; }
 
 const minutes = n => n * 60000,
   hours = n => n * 3600000,
@@ -179,7 +179,7 @@ redirect('/personal/aoc/2020/day/4/hs/cursed', 'https://tio.run/##jVhtb5tIEP7Orx
 
 const redirects = {};
 
-const ctx = {app, redirects, text, escapeHTML, getQS};
+const ctx = {app, redirects, redirect, text, escapeHTML, getQS};
 require('./tools/dns.js')(ctx);
 require('./tools/theme.js')(ctx);
 require('./tools/learn.js')(ctx);
@@ -188,7 +188,7 @@ require('./tools/embed.js')(ctx);
 require('./tools/query.js')(ctx);
 require('./tools/my.js')(ctx);
 require('./tools/home.js')(ctx);
-require()
+require('./tools/badge.js')(ctx);
 
 app.use((req, res, next) => {
   const url = decodeURIComponent(req.originalUrl.slice(1));
