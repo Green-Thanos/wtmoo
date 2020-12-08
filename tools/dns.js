@@ -5,7 +5,6 @@ for (const k in dns_) { if (/^[A-Z]+$/.test(k)) { dnsErrors[dns_[k]] = k; } }
 
 module.exports = function ({app, text}) {
   async function reverseDNS(req, res) {
-    res.setHeader('content-type', 'text/plain');
     try {
       const servers = await dns.reverse(req.params.ip);
       text(req, res, servers.join('\n'));
@@ -17,7 +16,6 @@ module.exports = function ({app, text}) {
   app.get('/reversedns/:ip', reverseDNS);
 
   async function forwardDNS(req, res) {
-    res.setHeader('content-type', 'text/plain');
     try {
       const addresses = await dns.lookup(req.params.ip, { all: true, verbatim: true });
       text(req, res, addresses.map(a => a.address).join('\n'));
@@ -30,7 +28,6 @@ module.exports = function ({app, text}) {
   app.get('/forwarddns/:ip', forwardDNS);
 
   async function listDNS(req, res) {
-    res.setHeader('content-type', 'text/plain');
     const servers = await dns.getServers();
     text(req, res, servers.join('\n'));
   }
