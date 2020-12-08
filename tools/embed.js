@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function ({app}) {
   app.get('/embed', (req, res) => {
     res.send(
       '<head>' +

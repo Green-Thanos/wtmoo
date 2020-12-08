@@ -1,4 +1,4 @@
-module.exports = function (app, redirectd) {
+module.exports = function ({app, redirects: redirectd}) {
   let home = '<meta content="wtmoo is wtmoo" property="og:title"><meta content="wtmoo" property="og:site_name"><meta content="https://wtmoo.is/wtmoo.png" property="og:image"><meta name="viewport" content="width=device-width,initial-scale=1"><style>h1,h2,h3,h4,h5,h6{margin:0.5em 0;}ul{margin:0;padding-inline-start:20px;}</style><title>wtmoo is</title><a href="/">help</a><br><a href="https://glitch.com/edit/#!/wtmoo">source</a><br>\
   powered by <a href="http://vanilla-js.com/"><img src="/images/vanillajs.png" style="vertical-align: middle;"></img></a><br>\
   <a href="/q">metasearch</a><br>\

@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function ({app}) {
   let home = '<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}h1,h2,h3,h4,h5,h6,ul{margin:0;}</style>\
 <meta content="very funny discord pls dont join" property="og:description">\
 <meta content="https://wtmoo.is/images/rph/rph.webp" property="og:image">\

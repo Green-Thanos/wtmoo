@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function ({app}) {
   const engines = [
     // general
     [['google', 'g'], 'https://www.google.com/search?q=%+q'],

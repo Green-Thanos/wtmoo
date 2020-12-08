@@ -22,11 +22,13 @@ function redirect(endpoint, url) {
   });
 }
 
-function sendText(endpoint, text) {
-  app.get(endpoint, (req, res) => {
+function text(text, req, res) {
+  if (/discord/i.test(req.headers['user-agent'])) {
+    res.send(`<meta content="${text}" property="og:description">`);
+  } else {
     res.setHeader('content-type', 'text/plain');
     res.send(text);
-  });
+  }
 }
 
 const minutes = n => n * 60000,
@@ -169,14 +171,15 @@ redirect('/personal/aoc/2020/day/4/hs/cursed', 'https://tio.run/##jVhtb5tIEP7Orx
 
 const redirects = {};
 
-require('./tools/dns.js')(app);
-require('./tools/theme.js')(app);
-require('./tools/learn.js')(app);
-require('./tools/rph.js')(app);
-require('./tools/embed.js')(app);
-require('./tools/query.js')(app);
-require('./tools/my.js')(app);
-require('./tools/home.js')(app, redirects);
+const ctx = {app, redirects, text};
+require('./tools/dns.js')(ctx);
+require('./tools/theme.js')(ctx);
+require('./tools/learn.js')(ctx);
+require('./tools/rph.js')(ctx);
+require('./tools/embed.js')(ctx);
+require('./tools/query.js')(ctx);
+require('./tools/my.js')(ctx);
+require('./tools/home.js')(ctx);
 
 app.use((req, res, next) => {
   const url = decodeURIComponent(req.originalUrl.slice(1));

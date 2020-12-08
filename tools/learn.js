@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function ({app}) {
   function redirect(endpoint, url) {
     app.get(endpoint, (req, res) => {
       res.redirect(url);

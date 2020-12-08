@@ -3,7 +3,7 @@ const dns_ = require("dns");
 const dnsErrors = {};
 for (const k in dns_) { if (/^[A-Z]+$/.test(k)) { dnsErrors[dns_[k]] = k; } }
 
-module.exports = function (app) {
+module.exports = function ({app}) {
   app.get('/my', (req, res) => {
     res.send('<meta name="viewport" content="width=device-width,initial-scale=1"><title>what is my</title><a href="/my">help</a><br><a href="/my/h">headers</a><br><a href="/my/ip">ip</a><br><a href="/my/ua">user agent</a><br><a href="/ua">domain</a><br><a href="https://glitch.com/edit/#!/wim">source</a>');
   });
