@@ -30,17 +30,13 @@ function escapeHTML(unsafe) {
 
 function text(req, res, text, status=200) {
   if (/discord/i.test(req.headers['user-agent'])) {
+    console.log(text);
     res.send(`<meta content="${escapeHTML(text)}" property="og:description">`);
   } else {
     res.setHeader('content-type', 'text/plain');
     res.status(status).send(text);
   }
 }
-
-app.get('/asdaf', async (req, res) => {
-        const foo = await Promise.resolve(0);
-text(req, res, 'lol');
-        });
 
 const minutes = n => n * 60000,
   hours = n => n * 3600000,
