@@ -30,13 +30,21 @@ function escapeHTML(unsafe) {
 
 function text(req, res, text, status=200) {
   if (/discord/i.test(req.headers['user-agent'])) {
-    console.log(text);
+    console.log(`<meta content="${escapeHTML(text)}" property="og:description">`);
     res.send(`<meta content="${escapeHTML(text)}" property="og:description">`);
   } else {
     res.setHeader('content-type', 'text/plain');
     res.status(status).send(text);
   }
 }
+
+app.get('/asdaf', async (req, res) => {
+        const foo = await Promise.resolve(0);
+text(req, res, `8.8.8.8
+8.8.4.4
+2001:4860:4860::8844
+2001:4860:4860::8888`);
+        });
 
 const minutes = n => n * 60000,
   hours = n => n * 3600000,
