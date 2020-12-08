@@ -162,6 +162,7 @@ module.exports = function (app, redirectd) {
     [['unicode'], 'https://shapecatcher.com/'],
     [['tryitonline', 'tio'], 'https://tio.run/'],
     [['codegolf.stackexchange', 'codegolf.se', 'ppcg.se', 'ppcg', 'cgse'], 'https://codegolf.stackexchange.com/'],
+    [['the nineteenth byte', 'tnb'], 'https://chat.stackexchange.com/rooms/240/the-nineteenth-byte'],
   ];
   home += '<h5>misc</h5><ul>';
   for (const [aliases, url] of misc) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
