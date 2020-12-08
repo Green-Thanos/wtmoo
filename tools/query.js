@@ -23,6 +23,7 @@ module.exports = function ({app}) {
     [['spotify'], 'https://open.spotify.com/search/%q'],
     [['deezer'], 'https://www.deezer.com/search/%q'],
     [['soundcloud'], 'https://soundcloud.com/search?q=%q'],
+    [['musescore'], 'https://musescore.com/sheetmusic?text=%+q'],
     // info
     [['wikipedia', 'wp', 'w'], 'https://en.wikipedia.org/w/index.php?search=%+q'],
     [['stack overflow', 'stackoverflow', 'so'], 'https://stackoverflow.com/search?q=%+q'],
@@ -101,6 +102,14 @@ module.exports = function ({app}) {
     [['geogebra', 'ggb'], 'https://www.geogebra.org/search/%q'],
     [['learnxinyminutes', 'lxiym'], 'https://learnxinyminutes.com/docs/%q'],
     [['wolfram alpha', 'wolfram|alpha', 'wolframalpha', 'w|a', 'wa'], 'https://www.wolframalpha.com/input/?i=%+q'],
+    // journals
+    [['bmj open', 'bmjopen', 'bmj'], 'https://bmjopen.bmj.com/search/%q'],
+    [['scienceopen'], 'https://www.scienceopen.com/'],
+    // misc.
+    [['top.gg', 'topgg'], 'https://top.gg/search?q=%q'],
+    [['top.gg servers', 'topggservers'], 'https://top.gg/servers/search?q=%q'],
+    [['discord street', 'discord.st', 'discordst'], 'https://discord.st/?q=%+q'],
+    [['discord street emojis', 'discord.st emojis', 'discordstemojis'], 'https://discord.st/emojis/?q=%+q'],
   ];
   let searchHome; require('fs').promises.readFile('pages/search.html', 'utf8').then(text => searchHome = text.replace('$', JSON.stringify(engines)));
   const engined = {};
