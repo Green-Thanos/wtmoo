@@ -22,12 +22,19 @@ function redirect(endpoint, url) {
   });
 }
 
-function text(text, req, res) {
+function escapeHTML(unsafe) {
+  return unsafe.replace(/[&<>"'\n]/g, m => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', '\'': '&#039;', '\n': '&#010;'
+  })[m]);
+}
+
+function text(req, res, text, status=200) {
   if (/discord/i.test(req.headers['user-agent'])) {
-    res.send(`<meta content="${text}" property="og:description">`);
+    console.log(escapeHTML(text));
+    res.send(`<meta content="${escapeHTML(text)}" property="og:description">`);
   } else {
     res.setHeader('content-type', 'text/plain');
-    res.send(text);
+    res.status(status).send(text);
   }
 }
 
@@ -171,7 +178,7 @@ redirect('/personal/aoc/2020/day/4/hs/cursed', 'https://tio.run/##jVhtb5tIEP7Orx
 
 const redirects = {};
 
-const ctx = {app, redirects, text};
+const ctx = {app, redirects, text, escapeHTML};
 require('./tools/dns.js')(ctx);
 require('./tools/theme.js')(ctx);
 require('./tools/learn.js')(ctx);
