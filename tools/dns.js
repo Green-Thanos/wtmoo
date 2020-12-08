@@ -15,4 +15,11 @@ module.exports = function (app) {
   }
   app.get('/rdns/:ip', reverseDNS);
   app.get('/reversedns/:ip', reverseDNS);
+
+  async function listDNS(req, res) {
+    res.setHeader('content-type', 'text/plain');
+    const servers = await dns.getServers();
+    res.send(servers.join('\n'));
+  }
+  app.get('/dns', listDNS);
 }

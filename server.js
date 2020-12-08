@@ -169,7 +169,7 @@ redirect('/personal/aoc/2020/day/4/hs/cursed', 'https://tio.run/##jVhtb5tIEP7Orx
 
 const redirects = {};
 
-require('./tools/rdns.js')(app);
+require('./tools/dns.js')(app);
 require('./tools/theme.js')(app);
 require('./tools/learn.js')(app);
 require('./tools/rph.js')(app);
