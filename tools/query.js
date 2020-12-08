@@ -19,6 +19,10 @@ module.exports = function ({app}) {
     // videos
     [['youtube', 'yt'], 'https://www.youtube.com/results?search_query=%+q'],
     [['twitch', 'twitch.tv', 'ttv'], 'https://www.twitch.tv/search?term=%q'],
+    // music
+    [['spotify'], 'https://open.spotify.com/search/%q'],
+    [['deezer'], 'https://www.deezer.com/search/%q'],
+    [['soundcloud'], 'https://soundcloud.com/search?q=%q'],
     // info
     [['wikipedia', 'wp', 'w'], 'https://en.wikipedia.org/w/index.php?search=%+q'],
     [['stack overflow', 'stackoverflow', 'so'], 'https://stackoverflow.com/search?q=%+q'],
