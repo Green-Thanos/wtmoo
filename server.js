@@ -135,6 +135,10 @@ app.get('/wtmoo', (req, res) => {
   res.send('eternal confusion');
 });
 
+app.get('/gh', (req, res) => {
+  res.redirect("https://github.com/");
+});
+
 app.get('/run', (req, res) => res.sendFile('pages/run.html', { root: __dirname }));
 
 app.get('/wtmoo.png', (req, res) => res.sendFile('wtmoo.png', { root: __dirname }));
