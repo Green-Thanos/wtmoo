@@ -32,7 +32,7 @@ module.exports = function ({app, text}) {
   async function listDNS(req, res) {
     res.setHeader('content-type', 'text/plain');
     const servers = await dns.getServers();
-    text(servers.join('\n'));
+    text(req, res, servers.join('\n'));
   }
   app.get('/dns', listDNS);
   app.get('/dns/list', listDNS);

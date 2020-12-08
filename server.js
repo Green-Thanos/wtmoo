@@ -23,20 +23,24 @@ function redirect(endpoint, url) {
 }
 
 function escapeHTML(unsafe) {
-  return unsafe.replace(/[&<>"'\n]/g, m => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', '\'': '&#039;', '\n': '&#010;'
+  return unsafe.replace(/[&<>"']/g, m => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', '\'': '&#039;' //, '\n': '&#010;'
   })[m]);
 }
 
 function text(req, res, text, status=200) {
   if (/discord/i.test(req.headers['user-agent'])) {
-    console.log(escapeHTML(text));
     res.send(`<meta content="${escapeHTML(text)}" property="og:description">`);
   } else {
     res.setHeader('content-type', 'text/plain');
     res.status(status).send(text);
   }
 }
+
+app.get('/asdaf', async (req, res) => {
+        const foo = await Promise.resolve(0);
+text(req, res, 'lol');
+        });
 
 const minutes = n => n * 60000,
   hours = n => n * 3600000,
