@@ -1,10 +1,4 @@
-module.exports = function ({app}) {
-  function redirect(endpoint, url) {
-    app.get(endpoint, (req, res) => {
-      res.redirect(url);
-    });
-  }
-  
+module.exports = function ({app, redirect}) {
   redirect('/learn/js', 'https://javascript.info/');
   redirect('/learn/javascript', '/learn/js');
 
@@ -50,4 +44,7 @@ module.exports = function ({app}) {
   redirect('/learn/lean', 'https://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/');
 
   redirect('/learn/wat', 'https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format');
+  redirect('/learn/s6', 'https://skarnet.org/software/s6-rc/faq.html');
+  redirect('/learn/s6-rc', 'https://skarnet.org/software/s6-rc/faq.html');
+  redirect('/learn/s6rc', 'https://skarnet.org/software/s6-rc/faq.html');
 }
