@@ -111,6 +111,7 @@ module.exports = function ({app}) {
     [['discord street', 'discord.st', 'discordst'], 'https://discord.st/?q=%+q'],
     [['discord street emojis', 'discord.st emojis', 'discordstemojis'], 'https://discord.st/emojis/?q=%+q'],
     [['gandi'], 'https://shop.gandi.net/en/domain/suggest?search=%q'],
+    [['sigma aldrich', 'sigmaaldrich', 'sa'], 'https://www.sigmaaldrich.com/catalog/search?term=%+q'],
   ];
   let searchHome; require('fs').promises.readFile('pages/search.html', 'utf8').then(text => searchHome = text.replace('$', JSON.stringify(engines)));
   const engined = {};
