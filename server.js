@@ -55,6 +55,7 @@ async function cache(url, path, age = days(1)) {
     if (new Date() - stat.mtimeMs > age) {
       const res = await fetch(url);
       const body = await res.text();
+      await file.read({ length: 0, position: 0 });
       await file.writeFile(body);
       await file.close();
       return body;
@@ -150,12 +151,12 @@ app.get('/calc/:expression', (req, res) => {
 
 app.get('/tld', (req, res) => {
   res.setHeader('content-type', 'text/plain');
-  cache('https://data.iana.org/TLD/tlds-alpha-by-domain.txt', 'tlds', days(1))
+  cache('https://data.iana.org/TLD/tlds-alpha-by-domain.txt', 'tlds')
     .then(body => res.send(body.slice(body.indexOf('\n') + 1).toLowerCase()));
 });
 
 app.get('/tld/for/:domain', async (req, res) => {
-  const tldsRaw = await cache('https://data.iana.org/TLD/tlds-alpha-by-domain.txt', 'tlds', days(1));
+  const tldsRaw = await cache('https://data.iana.org/TLD/tlds-alpha-by-domain.txt', 'tlds');
   const tlds = tldsRaw.toLowerCase().split('\n').slice(1, -1);
   const ret = [];
   for (let extras = 0; extras < req.params.domain.length; extras++) {
