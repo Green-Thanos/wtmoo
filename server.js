@@ -155,7 +155,6 @@ app.get('/tld', (req, res) => {
 });
 
 app.get('/tld/for/:domain', async (req, res) => {
-  res.setHeader('content-type', 'text/plain');
   const tldsRaw = await cache('https://data.iana.org/TLD/tlds-alpha-by-domain.txt', 'tlds', days(1));
   const tlds = tldsRaw.toLowerCase().split('\n').slice(1, -1);
   const ret = [];
@@ -172,7 +171,7 @@ app.get('/tld/for/:domain', async (req, res) => {
       }
     }
   }
-  res.send(ret.join("\n"));
+  text(req, res, ret.join("\n"));
 });
 
 app.get('/pl/syntax', (req, res) => {
@@ -183,7 +182,7 @@ redirect('/personal/aoc/2020/day/4/hs/cursed', 'https://tio.run/##jVhtb5tIEP7Orx
 
 const redirects = {}, embeds = {};
 
-const ctx = {app, redirects, redirect, text, escapeHTML, getQS, embeds};
+const ctx = {app, redirects, redirect, text, escapeHTML, getQS, embeds, lazy, cache};
 require('./tools/dns.js')(ctx);
 require('./tools/theme.js')(ctx);
 require('./tools/learn.js')(ctx);
