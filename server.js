@@ -162,7 +162,7 @@ app.get('/tld/for/:domain', async (req, res) => {
   for (let extras = 0; extras < req.params.domain.length; extras++) {
     const slice = req.params.domain.slice(0, req.params.domain.length - extras);
     for (const tld of tlds) {
-      if (slice.length - tld.length < 3) {
+      if (slice.length - tld.length < 1) {
         continue;
       }
       if (slice.endsWith(tld)) {
