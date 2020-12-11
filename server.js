@@ -195,7 +195,7 @@ require('./tools/home.js')(ctx);
 require('./tools/badge.js')(ctx);
 
 app.use((req, res, next) => {
-  const url = decodeURIComponent(req.originalUrl.slice(1));
+  let url = decodeURIComponent(req.originalUrl.slice(1));
   console.log(url);
   if (/discord/i.test(req.headers['user-agent']) && url.toLowerCase().replace(/_+/g, ' ') in embeds) { url = url.toLowerCase().replace(/_+/g, ' '); }
   if (/discord/i.test(req.headers['user-agent']) && url.toLowerCase() in embeds) {
