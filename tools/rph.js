@@ -33,7 +33,7 @@ module.exports = function ({app}) {
   rph({name: 'bbworld', site: 'https://github.com/bbworld1', color: 'f6a21b', desc: 'godforsaken scratch shill', desc2: 'scratch cat\'s sockpuppet'});
   rph({name: 'pankek', site: 'https://github.com/somebody1234', color: '90f3ee', desc: 'lang developer of 0 languages', desc2: 'lang developer of 0 languages'});
   rph({name: 'legendofmiracles', color: '4475ae', desc: 'linux shill with edgy username', desc2: 'no miracles here unfortunately'});
-  rph({name: 'grian', color: 'e6c296', desc: 'best kotlin shill', desc2: 'kotlin shill (don\'t fite him)'});
+  rph({name: 'grian', site: 'https://github.com/grian32', color: 'e6c296', desc: 'best kotlin shill', desc2: 'kotlin shill (don\'t fite him)'});
   rph({name: 'rare', site: 'https://github.com/neverRare', color: 'ffd966', desc: 'very rare', desc2: 'extra super duper rare'});
   rph({name: 'phantz', site: 'https://github.com/TotallyNotChase', color: 'd07640', desc: 'also known as shirt (with a z)', desc2: 'martian pro gamer with a super shotgun (or two)'});
   rph({name: 'aplet', site: 'https://aplet.me/', color: 'f1e05a', desc: 'ja🅱️a applet', desc2: 'jaba applet'});
