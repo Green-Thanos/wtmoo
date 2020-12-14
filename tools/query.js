@@ -140,13 +140,24 @@ module.exports = function ({app}) {
     res.setHeader('content-type', 'text/plain');
     res.send(engineList.join('\n') + '\n');
   });
+  
+  app.get('/q/:query', (req, res) => {
+    const match = req.params.query.match(/^!?(.+?) (.+)$/);
+    if (match === null) {
+      res.setHeader('content-type', 'text/plain');
+      res.status(404).send('invalid search');
+    } else {
+      const [_full, engine, query] = match;
+      res.redirect(`/q/${engine}/${query}`);
+    }
+  });
 
   app.get('/q/:engine/:query', (req, res) => {
     if (req.params.engine in engined) {
       res.redirect(engined[req.params.engine]
         .replace('%q', encodeURIComponent(req.params.query))
-        .replace('%+q', encodeURIComponent(req.params.query.replace(/\s+/g, '+')))
-        .replace('%-q', encodeURIComponent(req.params.query.replace(/\s+/g, '-'))));
+        .replace('%+q', encodeURIComponent(req.params.query.replace(/\s+/g, ' ')).replace(/%20/g, '+'))
+        .replace('%-q', encodeURIComponent(req.params.query.replace(/\s+/g, ' ')).replace(/%20/g, '-')));
     } else {
       res.setHeader('content-type', 'text/plain');
       res.status(404).send('invalid search engine');
