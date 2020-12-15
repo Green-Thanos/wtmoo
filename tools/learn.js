@@ -48,4 +48,5 @@ module.exports = function ({app, redirect}) {
   redirect('/learn/s6', 'https://skarnet.org/software/s6-rc/faq.html');
   redirect('/learn/s6-rc', 'https://skarnet.org/software/s6-rc/faq.html');
   redirect('/learn/s6rc', 'https://skarnet.org/software/s6-rc/faq.html');
+  redirect('/learn/latex', 'https://www.overleaf.com/learn/latex/Tutorials');
 }
