@@ -7,7 +7,9 @@ module.exports = function ({app, redirect}) {
   redirect('/learn/coding', 'https://www.edx.org/course/cs50s-introduction-to-computer-science');
   redirect('/learn/code', 'https://www.edx.org/course/cs50s-introduction-to-computer-science');
   
-  redirect('/learn/ctf', 'https://2020.angstromctf.com/challenges');
+  // Changed from aplet's thing since not all the challenges are up ~grian
+  // TODO: change to actual something, this is morre or less placeholder
+  redirect('/learn/ctf', 'https://play.picoctf.org/practice');
 
   redirect('/learn/css', 'https://css-tricks.com/where-do-you-learn-html-css-in-2020/');
   redirect('/learn/css/grid', 'https://css-tricks.com/snippets/css/complete-guide-grid/');
@@ -48,10 +50,11 @@ module.exports = function ({app, redirect}) {
 
   redirect('/learn/lean', 'https://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/');
 
-  redirect('/learn/wat', 'https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format');
+  redirect('/learn/wasm', 'https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format');
+  redirect('/learn/wat', '/learn/wasm');
 
   redirect('/learn/s6', 'https://skarnet.org/software/s6-rc/faq.html');
-  redirect('/learn/s6-rc', 'https://skarnet.org/software/s6-rc/faq.html');
-  redirect('/learn/s6rc', 'https://skarnet.org/software/s6-rc/faq.html');
+  redirect('/learn/s6-rc', '/learn/s6');
+  redirect('/learn/s6rc', '/learn/s6');
   redirect('/learn/latex', 'https://www.overleaf.com/learn/latex/Tutorials');
 }
