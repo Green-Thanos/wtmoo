@@ -76,6 +76,18 @@ async function cache(url, path, age = days(1)) {
 
 redirect('/ask', 'https://dontasktoask.com/');
 redirect('/help', 'https://dontasktoask.com/');
+redirect('/your/question', 'https://dontasktoask.com/');
+redirect('/yourquestion', 'https://dontasktoask.com/');
+
+app.get('/downvote/:query', (req, res) => {
+  res.redirect('https://idownvotedbecau.se/' + req.params.query);
+});
+app.get('/dv/:query', (req, res) => {
+  res.redirect('https://idownvotedbecau.se/' + req.params.query);
+});
+app.get('/so/:query', (req, res) => {
+  res.redirect('https://stackoverflow.com/help/' + req.params.query);
+});
 
 app.get('/helpvampire', (req, res) => res.sendFile('pages/vampire.html', { root: __dirname }));
 
