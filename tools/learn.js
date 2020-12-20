@@ -3,6 +3,11 @@ module.exports = function ({app, redirect}) {
   redirect('/learn/javascript', '/learn/js');
 
   redirect('/learn/programming', 'https://www.edx.org/course/cs50s-introduction-to-computer-science');
+  redirect('/learn/program', 'https://www.edx.org/course/cs50s-introduction-to-computer-science');
+  redirect('/learn/coding', 'https://www.edx.org/course/cs50s-introduction-to-computer-science');
+  redirect('/learn/code', 'https://www.edx.org/course/cs50s-introduction-to-computer-science');
+  
+  redirect('/learn/ctf', 'https://2020.angstromctf.com/challenges');
 
   redirect('/learn/css', 'https://css-tricks.com/where-do-you-learn-html-css-in-2020/');
   redirect('/learn/css/grid', 'https://css-tricks.com/snippets/css/complete-guide-grid/');
