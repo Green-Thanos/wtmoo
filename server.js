@@ -104,6 +104,8 @@ app.get('/shit', (req, res) => {
 redirect('/lizard', 'https://cdn.glitch.com/0cd3bfc0-6ead-44dc-a210-6a4af7171875%2Flizard.jpeg');
 redirect('/yeo', 'https://cdn.glitch.com/0cd3bfc0-6ead-44dc-a210-6a4af7171875%2Fc08dbfc2-8710-43dd-8eed-e097b1296781.image.png');
 redirect('/rickroll', 'https://tenor.com/view/rick-and-morty-pickle-rick-rickroll-meme-rick-astley-gif-17840768');
+redirect('/nou', 'https://i.redd.it/enzdxesehcc11.png');
+
 
 app.get('/guides/*', async (req, res, next) => {
   const url = decodeURIComponent(req.originalUrl.slice(8));
