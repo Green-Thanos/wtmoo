@@ -38,7 +38,7 @@ module.exports = function ({app, redirects: redirectd, embeds}) {
     [['clang'], 'https://clang.llvm.org/'],
     [['gnu c compiler', 'gcc'], 'https://gcc.gnu.org/'],
     [['tiny c compiler', 'tcc'], 'https://bellard.org/tcc/'],
-    [['glasgow haskell compiler', 'ghc'], 'https://www.haskell.org/ghc/']
+    [['glasgow haskell compiler', 'ghc'], 'https://www.haskell.org/ghc/'],
     // compiler libs
     [['llvm'], 'https://llvm.org/'],
   ];
