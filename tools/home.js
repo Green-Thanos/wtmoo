@@ -34,6 +34,17 @@ module.exports = function ({app, redirects: redirectd, embeds}) {
   home += '<h5>programming languages</h5><ul>';
   for (const [aliases, url] of langs) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
   home += '</ul>';
+  const compilers = [
+    [['clang'], 'https://clang.llvm.org/'],
+    [['gnu c compiler', 'gcc'], 'https://gcc.gnu.org/'],
+    [['tiny c compiler', 'tcc'], 'https://bellard.org/tcc/'],
+    [['glasgow haskell compiler', 'ghc'], 'https://www.haskell.org/ghc/']
+    // compiler libs
+    [['llvm'], 'https://llvm.org/'],
+  ];
+  home += '<h5>compilers</h5><ul>';
+  for (const [aliases, url] of compilers) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
+  home += '</ul>';
   const distros = [
     [['arch linux', 'archlinux', 'arch'], 'https://wiki.archlinux.org/index.php/Arch_Linux'],
     [['ubuntu'], 'https://ubuntu.com/'],
