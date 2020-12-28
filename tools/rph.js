@@ -8,7 +8,7 @@ module.exports = function ({app}) {
 <h4>users</h4>\
 <ul>';
 
-  function rph({name, site, domain, desc, desc2, color}) {
+  function rph({name, site, domain, desc, desc2, color, image}) {
     home += '<li><a href="/rph/' + name + '">' + name + '</a></li>';
     const page = `<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>
 <meta content="${desc}" property="og:description">${domain ? `
@@ -21,7 +21,7 @@ module.exports = function ({app}) {
   "author_name": "${name}",${site ? `
   "author_url": "${site}",` : ''}
   "cache_age": 300,
-  "thumbnail_url": "https://wtmoo.is/images/rph/${name}.png"
+  "thumbnail_url": "https://wtmoo.is/images/rph/${image || name  + '.png'}"
 }`;
     app.get('/rph/' + name, (req, res) => res.send(page));
     app.get('/rph/' + name + '.json', (req, res) => {
