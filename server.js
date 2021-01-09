@@ -207,6 +207,7 @@ require('./tools/query.js')(ctx);
 require('./tools/my.js')(ctx);
 require('./tools/home.js')(ctx);
 require('./tools/badge.js')(ctx);
+require('./tools/modules.js')(ctx);
 
 app.use((req, res, next) => {
   let url = decodeURIComponent(req.originalUrl.slice(1));
