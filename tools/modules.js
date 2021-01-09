@@ -19,23 +19,31 @@ module.exports = function ({app}) {
   app.get('/m/crates/:crate', async (req, res) => {
     res.setHeader('content-type', 'text/plain');
     const info = await crateInfo(req.params.crate);
-    const readmeReq = await fetch(info.crate.readme_path);
+    const readmeReq = await fetch('https://crates.io' + info.versions[0].readme_path);
     const readme = await readmeReq.text();
     const result = `\
 description: ${info.crate.description}
 version: ${info.crate.newest_version}
 downloads: ${info.crate.downloads}
 `;
-    result += turndown(readme);
+    result += turndown(readme.replace(/<a[^>]+><\/a>/g, ''));
     res.send(result);
   });
 
   app.get('/m/crates/:crate/readme', async (req, res) => {
     res.setHeader('content-type', 'text/plain');
     const info = await crateInfo(req.params.crate);
-    const readmeReq = await fetch(info.crate.readme_path);
+    const readmeReq = await fetch('https://crates.io' + info.versions[0].readme_path);
     const readme = await readmeReq.text();
-    res.send(turndown(readme));
+    res.send(turndown(readme.replace(/<a[^>]+><\/a>/g, '')));
+  });
+
+  app.get('/m/crates/:crate/:version/readme', async (req, res) => {
+    res.setHeader('content-type', 'text/plain');
+    const info = await crateInfo(req.params.crate);
+    const readmeReq = await fetch('https://crates.io' + info.versions.filter(version => version.num === req.params.version)[0].readme_path);
+    const readme = await readmeReq.text();
+    res.send(turndown(readme.replace(/<a[^>]+><\/a>/g, '')));
   });
 
   app.get('/m/crates/:crate/features', async (req, res) => {
@@ -51,10 +59,6 @@ downloads: ${info.crate.downloads}
   app.get('/m/crates/:crate/versions', async (req, res) => {
     res.setHeader('content-type', 'text/plain');
     const info = await crateInfo(req.params.crate);
-    const result = '';
-    for (const key in info.crate.features) {
-      result += `${key} = [${info.crate.features[key].map(s => JSON.stringify(s)).join(', ')}]\n`;
-    }
-    res.send(result);
+    res.send(info.versions.map(version => version.num).join('\t'));
   });
 }
