@@ -100,7 +100,7 @@ readme:
       .replace(/<a.*?>(.*?)<\/a>/g, '$1')
       .replace(/<span.*?>\[.+?\]\s*?<\/span>\s*?\[src\]/g, '')
     )
-      .replace(/;;TAB;;/g, ';;')
+      .replace(/;;TAB;;/g, '\t')
       .replace(/\\_/g, '_'));
   });
 }
