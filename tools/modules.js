@@ -6,7 +6,9 @@ const fetch = require('node-fetch');
 
 /* globals turndown */
 lazy('turndown', () => {
-  const turndownService = new require('turndown')()
+  const turndownService = new require('turndown')();
+  // TODO: gfm tables not working?
+  // turndownService.use(require('turndown-plugin-gfm').gfm);
   return turndownService.turndown.bind(turndownService);
 });
 
@@ -91,6 +93,12 @@ readme:
     const info = await crateInfo(req.params.crate);
     const docsReq = await fetch(info.crate.documentation);
     const docs = await docsReq.text();
-    res.send(turndown(docs.replace(/^.+<section id="main" class="content">/s, '').replace(/<a[^>]+>(.*?)<\/a>/g, '$1').replace(/<script>.+?<\/script>/gs, '').replace(/\[.+?\]\[src\]/g, '')).replace(/\\_/g, '_'));
+    res.send(turndown(docs
+      .replace(/^.+<section id="main" class="content">/s, '')
+      .replace(/<a[^>]*?>(.*?)<\/a>/g, '$1')
+      .replace(/<script>.*?<\/script>/gs, '')
+      .replace(/<\/t[dh]>\s*?<\/t[dh][^>]*?>/gs, '\t')
+      .replace(/\[.+?\]\[src\]/g, ''))
+      .replace(/\\_/g, '_'));
   });
 }
