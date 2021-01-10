@@ -96,11 +96,12 @@ readme:
     res.send(turndown(docs
       .replace(/^.+<section id="main" class="content">/s, '')
       .replace(/<section id="search" class="content hidden">.+$/s, '')
-      .replace(/<\/td>\s*?<td.*?>/g, ';;TAB;;')
+      .replace(/<\/td>\s*?<td.*?>/g, ';;NL;;')
+      .replace(/<td.*?>(.*?)<\/td>/gs, (m, g1) => '<td>' + g1.replace(/<\/?p>/g, '') + '</td>')
       .replace(/<a.*?>(.*?)<\/a>/g, '$1')
       .replace(/<span.*?>\[.+?\]\s*?<\/span>\s*?\[src\]/g, '')
     )
-      .replace(/;;TAB;;/g, '\t')
+      .replace(/;;NL;;/g, '\n')
       .replace(/\\_/g, '_'));
   });
 }
