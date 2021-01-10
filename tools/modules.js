@@ -39,7 +39,7 @@ last updated: ${timeDelta(new Date-new Date(info.crate.updated_at))} ago
 downloads: ${info.crate.downloads}
 readme:
 `;
-    result += turndown(readme.replace(/<a[^>]+><\/a>/g, ''));
+    result += turndown(readme.replace(/<a[^>]+>(.*?)<\/a>/g, '$1'));
     res.send(result);
   });
 
@@ -48,7 +48,7 @@ readme:
     const info = await crateInfo(req.params.crate);
     const readmeReq = await fetch('https://crates.io' + info.versions[0].readme_path);
     const readme = await readmeReq.text();
-    res.send(turndown(readme.replace(/<a[^>]+><\/a>/g, '')));
+    res.send(turndown(readme.replace(/<a[^>]+>(.*?)<\/a>/g, '$1')));
   });
 
   app.get('/m/crates/:crate/:version/readme', async (req, res) => {
@@ -56,7 +56,7 @@ readme:
     const info = await crateInfo(req.params.crate);
     const readmeReq = await fetch('https://crates.io' + info.versions.find(version => version.num === req.params.version).readme_path);
     const readme = await readmeReq.text();
-    res.send(turndown(readme.replace(/<a[^>]+><\/a>/g, '')));
+    res.send(turndown(readme.replace(/<a[^>]+>(.*?)<\/a>/g, '$1')));
   });
 
   app.get('/m/crates/:crate/features', async (req, res) => {
@@ -84,5 +84,13 @@ readme:
     res.setHeader('content-type', 'text/plain');
     const info = await crateInfo(req.params.crate);
     res.send(info.versions.map(version => version.num).join('\t'));
+  });
+
+  app.get('/m/crates/:crate/docs', async (req, res) => {
+    res.setHeader('content-type', 'text/plain');
+    const info = await crateInfo(req.params.crate);
+    const docsReq = await fetch(info.crate.documentation);
+    const docs = await docsReq.text();
+    res.send(turndown(docs.replace(/<a[^>]+>(.*?)<\/a>/g, '$1')));
   });
 }
