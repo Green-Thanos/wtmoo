@@ -16,6 +16,17 @@ module.exports = function ({app}) {
     return await req.json();
   }
 
+  function timeDelta(diff) {
+    diff = 0|diff/60000;
+    if (diff < 60) return diff === 0 ? '<1 minute' : diff === 1 ? '1 minute' : diff + ' minutes';
+    diff = 0|diff/60;
+    if (diff < 60) return diff === 1 ? '1 hour' : diff + ' hours';
+    diff = 0|diff/24;
+    if (diff < 30) return diff === 1 ? '1 day' : diff + ' days';
+    if (diff < 365) return diff < 60 ? '1 month' : (0|diff/30) + ' months';
+    return (0|diff/365) + ' years';
+  }
+
   app.get('/m/crates/:crate', async (req, res) => {
     res.setHeader('content-type', 'text/plain');
     const info = await crateInfo(req.params.crate);
@@ -23,8 +34,10 @@ module.exports = function ({app}) {
     const readme = await readmeReq.text();
     let result = `\
 description: ${info.crate.description}
-version: ${info.crate.newest_version}
+latest version: ${info.crate.newest_version}
+last updated: ${timeDelta(new Date-new Date(info.crate.updated_at))} ago
 downloads: ${info.crate.downloads}
+readme:
 `;
     result += turndown(readme.replace(/<a[^>]+><\/a>/g, ''));
     res.send(result);
