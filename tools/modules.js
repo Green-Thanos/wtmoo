@@ -95,10 +95,12 @@ readme:
     const docs = await docsReq.text();
     res.send(turndown(docs
       .replace(/^.+<section id="main" class="content">/s, '')
-      .replace(/<a[^>]*?>(.*?)<\/a>/g, '$1')
-      .replace(/<script>.*?<\/script>/gs, '')
-      .replace(/<\/t[dh]>\s*?<\/t[dh][^>]*?>/gs, '\t')
-      .replace(/\[.+?\]\[src\]/g, ''))
+      .replace(/<section id="search" class="content hidden">.+$/s, '')
+      .replace(/<\/td>\s*?<td.*?>/g, ';;TAB;;')
+      .replace(/<a.*?>(.*?)<\/a>/g, '$1')
+      .replace(/<span.*?>\[.+?\]\s*?<\/span>\s*?\[src\]/g, '')
+    )
+      .replace(/;;TAB;;/g, ';;')
       .replace(/\\_/g, '_'));
   });
 }
