@@ -29,6 +29,9 @@ module.exports = function ({app}) {
       res.send(json);
     });
   }
+  // WHERE ARE THE PFPS FROM
+  // FOR DISPLAYING THE EMBED
+  // ~~ GRIAN @ PANKEK
 
   rph({name: 'bbworld', site: 'https://github.com/bbworld1', color: 'f6a21b', desc: 'godforsaken scratch shill', desc2: 'scratch cat\'s sockpuppet'});
   rph({name: 'pankek', site: 'https://github.com/somebody1234', color: '90f3ee', desc: 'lang developer of 0 languages', desc2: 'lang developer of 0 languages'});
