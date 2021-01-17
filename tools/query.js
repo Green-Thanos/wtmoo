@@ -1,4 +1,4 @@
-module.exports = function ({app}) {
+module.exports = function ({app, root}) {
   const engines = [
     // general
     [['google', 'g'], 'https://www.google.com/search?q=%+q'],
@@ -119,8 +119,7 @@ module.exports = function ({app}) {
   const engineList = [];
   for (const [aliases, url] of engines) { engineList.push(aliases[0]); for (const alias of aliases) { engined[alias] = url; } }
 
-  app.get('/favicon.ico', (req, res) => res.sendFile('favicon.ico', { root: __dirname }));
-  app.get('/search.xml', (req, res) => res.sendFile('pages/search.xml', { root: __dirname }));
+  app.get('/search.xml', (req, res) => { res.charset = 'utf-8'; res.sendFile('./pages/search.xml', { root }) });
 
   app.get('/q', (req, res) => {
     if (req.query.q) {

@@ -74,6 +74,8 @@ async function cache(url, path, age = days(1)) {
   }
 }
 
+app.get('/favicon.ico', (req, res) => res.sendFile('favicon.ico', { root: __dirname }));
+
 redirect('/ask', 'https://dontasktoask.com/');
 redirect('/help', 'https://dontasktoask.com/');
 redirect('/your/question', 'https://dontasktoask.com/');
@@ -197,7 +199,7 @@ redirect('/personal/aoc/2020/day/4/hs/cursed', 'https://tio.run/##jVhtb5tIEP7Orx
 
 const redirects = {}, embeds = {};
 
-const ctx = {app, redirects, redirect, text, escapeHTML, getQS, embeds, lazy, cache};
+const ctx = {app, redirects, redirect, text, escapeHTML, getQS, embeds, lazy, cache, root: __dirname};
 require('./tools/dns.js')(ctx);
 require('./tools/theme.js')(ctx);
 require('./tools/learn.js')(ctx);
