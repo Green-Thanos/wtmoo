@@ -13,6 +13,7 @@ lazy('calc', () => require('mathjs').evaluate);
 // TODO: dark theme
 const app = require('express')();
 const { Router } = require('express');
+const subdomain = require('express-subdomain');
 app.use(cookieParser());
 app.use('/ace', require('express').static('ace'));
 app.use('/images', require('express').static('images'));
@@ -39,6 +40,12 @@ function text(req, res, text, status=200) {
 }
 
 function getQS(url) { return url.includes('?') ? url.slice(url.indexOf('?') + 1) : null; }
+
+const use = app.use.bind(app);
+app.sub = function (path, router) {
+  use(subdomain(path, router));
+  use('/' + path, router);
+}
 
 const minutes = n => n * 60000,
   hours = n => n * 3600000,

@@ -123,7 +123,7 @@ module.exports = function ({app, root, Router}) {
   
   app.get('/search.xml', (req, res) => res.sendFile('./pages/search.xml', { root }));
 
-  app.get('/q', (req, res) => {
+  q.get('/', (req, res) => {
     if (req.query.q) {
       const match = req.query.q.match(/^!?(.+?) (.+)$/);
       if (match === null) {
@@ -138,12 +138,12 @@ module.exports = function ({app, root, Router}) {
     }
   });
 
-  app.get('/q/list', (req, res) => {
+  q.get('/list', (req, res) => {
     res.setHeader('content-type', 'text/plain');
     res.send(engineList.join('\n') + '\n');
   });
   
-  app.get('/q/:query', (req, res) => {
+  q.get('/:query', (req, res) => {
     const match = req.params.query.match(/^!?(.+?) (.+)$/);
     if (match === null) {
       res.setHeader('content-type', 'text/plain');
@@ -154,7 +154,7 @@ module.exports = function ({app, root, Router}) {
     }
   });
 
-  app.get('/q/:engine/:query', (req, res) => {
+  q.get('/:engine/:query', (req, res) => {
     if (req.params.engine in engined) {
       res.redirect(engined[req.params.engine]
         .replace('%q', encodeURIComponent(req.params.query))
@@ -165,4 +165,6 @@ module.exports = function ({app, root, Router}) {
       res.status(404).send('invalid search engine');
     }
   });
+  
+  app.sub('q', q);
 }
