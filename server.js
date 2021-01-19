@@ -12,6 +12,7 @@ lazy('calc', () => require('mathjs').evaluate);
 
 // TODO: dark theme
 const app = require('express')();
+const { Router } = require('express');
 app.use(cookieParser());
 app.use('/ace', require('express').static('ace'));
 app.use('/images', require('express').static('images'));
@@ -199,7 +200,7 @@ redirect('/personal/aoc/2020/day/4/hs/cursed', 'https://tio.run/##jVhtb5tIEP7Orx
 
 const redirects = {}, embeds = {};
 
-const ctx = {app, redirects, redirect, text, escapeHTML, getQS, embeds, lazy, cache, root: __dirname};
+const ctx = {app, redirects, redirect, text, escapeHTML, getQS, embeds, lazy, cache, root: __dirname, Router};
 require('./tools/dns.js')(ctx);
 require('./tools/theme.js')(ctx);
 require('./tools/learn.js')(ctx);

@@ -9,10 +9,11 @@
   "dependencies": {
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",
-    "mathjs": "^8.1.0",
+    "mathjs": "^9.0.0",
     "cookie-parser": "^1.4.5",
     "turndown": "^6.0.0",
-    "turndown-plugin-gfm": "^1.0.2"
+    "turndown-plugin-gfm": "^1.0.2",
+    "express-subdomain": "^1.0.5"
   },
   "engines": {
     "node": "12.x"
