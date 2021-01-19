@@ -40,7 +40,7 @@ module.exports = function ({app}) {
   rph({name: 'arson', site: 'https://mee42.dev', domain: 'mee42.dev', color: 'b12a0b', desc: 'don\'t worry he\'s not actually an arsonist', desc2: 'not actually an arsonist'});
   rph({name: 'neko', site: 'https://skneko.moe', domain: 'skneko.moe', color: 'ad1457', desc: 'really a cat irl', desc2: 'a cat'});
   rph({name: 'phireh', color: 'a75aa8', desc: 'neko\'s friend idk', desc2: 'purple slime (he says it\'s a zergling but i\'m not sure i believe him)'});
-  rph({name: 'λ', color: '5d8623', desc: 'god of the stateless', desc2: 'nerd that plays mtg and stuff'});
+  rph({name: `${encodeURI('λ')}`, color: '5d8623', desc: 'god of the stateless', desc2: 'nerd that plays mtg and stuff'});
   // please make the sites show up for drain and hurb and qwerrtz like they do for arson thank you @ pankek ~ grian 
   rph({name: 'drain', site: 'https://github.com/adrian154', color: 'fcf5c7', desc: 'is literally a cat', desc2: 'neko also has this but neko fucking died so'}); 
   rph({name: 'hurb', site: 'https://github.com/Green-Thanos/', color: '3b8c34', desc: 'green thanos', desc2: 'green thanos? really?'});
