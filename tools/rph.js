@@ -44,6 +44,8 @@ module.exports = function ({app}) {
   rph({name: 'neko', site: 'https://skneko.moe', domain: 'skneko.moe', color: 'ad1457', desc: 'really a cat irl', desc2: 'a cat'});
   rph({name: 'phireh', color: 'a75aa8', desc: 'neko\'s friend idk', desc2: 'purple slime (he says it\'s a zergling but i\'m not sure i believe him)'});
   rph({name: 'λ', color: '5d8623', desc: 'god of the stateless', desc2: 'nerd that plays mtg and stuff'});
+  // doing drain and hurb
+  rph({name: 'drain', color: 'ffffff', desc: 'is literally a cat', desc2: 'idk what to put here help'});
   
   home += '</ul>'
   
