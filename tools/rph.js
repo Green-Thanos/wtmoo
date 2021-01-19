@@ -44,8 +44,10 @@ module.exports = function ({app}) {
   rph({name: 'neko', site: 'https://skneko.moe', domain: 'skneko.moe', color: 'ad1457', desc: 'really a cat irl', desc2: 'a cat'});
   rph({name: 'phireh', color: 'a75aa8', desc: 'neko\'s friend idk', desc2: 'purple slime (he says it\'s a zergling but i\'m not sure i believe him)'});
   rph({name: 'λ', color: '5d8623', desc: 'god of the stateless', desc2: 'nerd that plays mtg and stuff'});
-  // doing drain and hurb and qwertz
-  rph({name: 'drain', site: 'https://github.com/adrian154', color: '000000', desc: 'is literally a cat', desc2: 'idk what to put here help'});
+  // doing drain and hurb and qwertz ~grian holy shit this is annoying to do 
+  rph({name: 'drain', site: 'https://github.com/adrian154', color: 'fcf5c7', desc: 'is literally a cat', desc2: 'neko also has this but neko fucking died so'}); 
+  rph({name: 'hurb', site: 'https://github.com/Green-Thanos/', color: '3b8c34', desc: 'green thanos', desc2: 'green thanos? really?'});
+  rph({name: 'qwertz', site: 'site TBD', color: })
   
   home += '</ul>'
   
