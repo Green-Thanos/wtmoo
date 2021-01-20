@@ -18,7 +18,7 @@ module.exports = (function () {
   // TODO: change to actual something, this is morre or less placeholder
   redirect('/ctf', 'https://play.picoctf.org/practice');
 
-  redirect('/css', 'https://css-tricks.com/where-do-you-learn-html-css-in-2020/');
+  redirect('/css', 'https://css-tricks.com/where-do-you-learn-html-css-in-2020/');  
   redirect('/css/grid', 'https://css-tricks.com/snippets/css/complete-guide-grid/');
   redirect('/css/flex', '/css/flexbox');
   redirect('/css/flexbox', 'https://css-tricks.com/snippets/css/a-guide-to-flexbox/');
