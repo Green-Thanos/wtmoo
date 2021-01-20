@@ -115,15 +115,15 @@
           title="Engine"
           aria-label="Engine"
         />
-        <form action="." method="GET">
-        <input
-          name="q"
-          type="text"
-          id="query"
-          placeholder="search here"
-          title="Search"
-          aria-label="Search"
-        />
+        <form action="./" method="GET" role="search">
+          <input
+            name="q"
+            type="text"
+            id="query"
+            placeholder="search here"
+            title="Search"
+            aria-label="Search"
+          />
         </form>
         <span id="bangnote">google</span>
         <div id="engines" class="hidden"></div>
@@ -244,14 +244,14 @@
           case "Enter":
             if (bang.value.slice(1) in engined) {
               const url = engined[bang.value.slice(1)]
-                .replace("%q", encodeURIComponent(query.value))
+                .replace("%q", encodeURI(query.value))
                 .replace(
                   "%+q",
-                  encodeURIComponent(query.value.replace(/\s+/g, "+"))
+                  encodeURI(query.value.replace(/\s+/g, "+"))
                 )
                 .replace(
                   "%-q",
-                  encodeURIComponent(query.value.replace(/\s+/g, "-"))
+                  encodeURI(query.value.replace(/\s+/g, "-"))
                 );
               location.href = url;
             }
