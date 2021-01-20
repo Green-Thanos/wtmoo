@@ -70,6 +70,9 @@
         grid-column: 2 / 6;
         grid-row: 1 / 2;
         order-left: none;
+      }
+      #query > input {
+        width: 100%;
         border-radius: 0 5px 5px 0;
       }
       #bangnote {
@@ -115,11 +118,10 @@
           title="Engine"
           aria-label="Engine"
         />
-        <form action="./" method="GET" role="search">
+        <form action="./" method="GET" role="search" id="query">
           <input
             name="q"
             type="text"
-            id="query"
             placeholder="search here"
             title="Search"
             aria-label="Search"
@@ -146,7 +148,7 @@
       }
 
       let bang = document.getElementById("bang"),
-        query = document.getElementById("query"),
+        query = document.getElementById("query").children[0],
         bangnote = document.getElementById("bangnote"),
         enginesDiv = document.getElementById("engines");
       query.focus();
