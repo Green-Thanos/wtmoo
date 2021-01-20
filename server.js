@@ -23,11 +23,6 @@ function redirect(endpoint, url) {
     res.redirect(url);
   });
 }
-Router.prototype.redirect = function redirect(endpoint, url) {
-  this.get(endpoint, (req, res) => {
-    res.redirect(url);
-  });
-}
 
 function escapeHTML(unsafe) {
   return unsafe.replace(/[&<>"']/g, m => ({
@@ -214,7 +209,7 @@ const redirects = {}, embeds = {};
 const ctx = {app, redirects, redirect, text, escapeHTML, getQS, embeds, lazy, cache, root: __dirname, Router};
 require('./tools/dns.js')(ctx);
 // require('./tools/theme.js')(ctx);
-require('./tools/learn.js')(ctx);
+app.use('/learn', require('./tools/learn.js'));
 app.use('/rph', require('./tools/rph.js'));
 require('./tools/embed.js')(ctx);
 require('./tools/query.js')(ctx);
