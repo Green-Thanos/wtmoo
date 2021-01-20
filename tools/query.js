@@ -1,4 +1,4 @@
-module.exports = function ({app, root, Router}) {
+module.exports = (function () {
   const engines = [
     // general
     [['google', 'g'], 'https://www.google.com/search?q=%+q'],
@@ -119,9 +119,9 @@ module.exports = function ({app, root, Router}) {
   const engineList = [];
   for (const [aliases, url] of engines) { engineList.push(aliases[0]); for (const alias of aliases) { engined[alias] = url; } }
 
-  const q = new Router();
+  const q = new require('express').Router();
   
-  app.get('/search.xml', (req, res) => res.sendFile('./pages/search.xml', { root }));
+  q.get('/search.xml', (req, res) => res.sendFile('../pages/search.xml', { root: __dirname }));
 
   q.get('/', (req, res) => {
     if (req.query.q) {
@@ -166,5 +166,5 @@ module.exports = function ({app, root, Router}) {
     }
   });
   
-  app.sub('q', q);
-}
+  return q;
+})();

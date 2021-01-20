@@ -39,12 +39,6 @@ function text(req, res, text, status=200) {
   }
 }
 
-const use = app.use.bind(app);
-app.sub = function (path, router) {
-  use(subdomain(path, router));
-  use('/' + path, router);
-}
-
 const minutes = n => n * 60000,
   hours = n => n * 3600000,
   days = n => n * 86400000;
@@ -209,12 +203,17 @@ require('./tools/dns.js')(ctx);
 // require('./tools/theme.js')(ctx);
 app.use('/learn', require('./tools/learn.js'));
 app.use('/rph', require('./tools/rph.js'));
-require('./tools/embed.js')(ctx);
-require('./tools/query.js')(ctx);
+app.use('/embed', require('./tools/embed.js'));
 require('./tools/my.js')(ctx);
 require('./tools/home.js')(ctx);
 app.use('/badge', require('./tools/badge.js'));
-require('./tools/modules.js')(ctx);
+app.use('/morequire('./tools/modules.js')(ctx);
+
+const q = require('./tools/query.js');
+app.use(subdomain('q', q));
+app.use('/q', q);
+app.use(subdomain('query', q));
+app.use('/query', q);
 
 app.use((req, res, next) => {
   let url = decodeURIComponent(req.originalUrl.slice(1));

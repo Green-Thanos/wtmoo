@@ -1,5 +1,7 @@
-module.exports = function ({app}) {
-  app.get('/embed', (req, res) => {
+module.exports = (function () {
+  const embed = new require('express').Router;
+  
+  embed.get('/', (req, res) => {
     res.send(
       '<head>' +
         (req.query.title || req.query.t ? `<meta content="${req.query.title || req.query.t}" property="og:title">` : '') +
@@ -11,4 +13,6 @@ module.exports = function ({app}) {
       '</head>'
     );
   });
-}
+  
+  return embed;
+})();

@@ -12,7 +12,7 @@ lazy('turndown', () => {
   return turndownService.turndown.bind(turndownService);
 });
 
-module.exports = function ({app}) {
+module.exports = (function () {
   async function crateInfo(crate) {
     const req = await fetch('https://crates.io/api/v1/crates/' + crate);
     return await req.json();
@@ -28,8 +28,10 @@ module.exports = function ({app}) {
     if (diff < 365) return diff < 60 ? '1 month' : (0|diff/30) + ' months';
     return (0|diff/365) + ' years';
   }
+  
+  const m = new require('express').Router();
 
-  app.get('/m/crates/:crate', async (req, res) => {
+  m.get('/crates/:crate', async (req, res) => {
     res.setHeader('content-type', 'text/plain');
     const info = await crateInfo(req.params.crate);
     const readmeReq = await fetch('https://crates.io' + info.versions[0].readme_path);
@@ -45,7 +47,7 @@ readme:
     res.send(result);
   });
 
-  app.get('/m/crates/:crate/readme', async (req, res) => {
+  m.get('/crates/:crate/readme', async (req, res) => {
     res.setHeader('content-type', 'text/plain');
     const info = await crateInfo(req.params.crate);
     const readmeReq = await fetch('https://crates.io' + info.versions[0].readme_path);
@@ -53,7 +55,7 @@ readme:
     res.send(turndown(readme.replace(/<a[^>]+>(.*?)<\/a>/g, '$1')));
   });
 
-  app.get('/m/crates/:crate/:version/readme', async (req, res) => {
+  m.get('/crates/:crate/:version/readme', async (req, res) => {
     res.setHeader('content-type', 'text/plain');
     const info = await crateInfo(req.params.crate);
     const readmeReq = await fetch('https://crates.io' + info.versions.find(version => version.num === req.params.version).readme_path);
@@ -61,7 +63,7 @@ readme:
     res.send(turndown(readme.replace(/<a[^>]+>(.*?)<\/a>/g, '$1')));
   });
 
-  app.get('/m/crates/:crate/features', async (req, res) => {
+  m.get('/crates/:crate/features', async (req, res) => {
     res.setHeader('content-type', 'text/plain');
     const info = await crateInfo(req.params.crate);
     let result = '';
@@ -71,7 +73,7 @@ readme:
     res.send(result);
   });
 
-  app.get('/m/crates/:crate/:version/features', async (req, res) => {
+  m.get('/crates/:crate/:version/features', async (req, res) => {
     res.setHeader('content-type', 'text/plain');
     const info = await crateInfo(req.params.crate);
     let result = '';
@@ -82,13 +84,13 @@ readme:
     res.send(result);
   });
 
-  app.get('/m/crates/:crate/versions', async (req, res) => {
+  m.get('/crates/:crate/versions', async (req, res) => {
     res.setHeader('content-type', 'text/plain');
     const info = await crateInfo(req.params.crate);
     res.send(info.versions.map(version => version.num).join('\t'));
   });
 
-  app.get('/m/crates/:crate/docs', async (req, res) => {
+  m.get('/crates/:crate/docs', async (req, res) => {
     res.setHeader('content-type', 'text/plain');
     const info = await crateInfo(req.params.crate);
     const docsReq = await fetch(info.crate.documentation);
@@ -104,4 +106,6 @@ readme:
       .replace(/;;NL;;/g, '\n')
       .replace(/\\_/g, '_'));
   });
-}
+  
+  return m;
+})();
