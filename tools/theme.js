@@ -22,5 +22,23 @@ module.exports = function ({app}) {
   // but does it affect the currently online server? no
   // why would you want it to do that wtf
   // // oh embeds
-  // also 
+  // also updating is effort
+  // here to update i literally just stop typing for 2 seconds
+  // i mean you can do the same with github
+  // github pages go brrrrrrrrrrrrrrrrrr
+  // wait fuck is this site completely static
+  // close enough
+  // oh wait im an idiot
+  // fml
+  // i swear literally apart from calc (that nobody uses) it's 190% static
+  // where are you going to host the node app though
+  // that actually gens the thing
+  // that whats the what
+  // inglis pls
+  // whats a gen and what thing is it genning
+  // well yea this is a node app and you "generate" the site right
+  // with like express or whatever and passing fuckin strings of html to that but more or less
+  // "generate" but only bc im lazy could just as well plain html
+  // also gh has like jekyll
+  // how hard would it be to convert this to just generating html files for hosting on gh pages
 }
