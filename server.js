@@ -199,20 +199,20 @@ redirect('/personal/aoc/2020/day/4/hs/cursed', 'https://tio.run/##jVhtb5tIEP7Orx
 
 const redirects = {}, embeds = {};
 const ctx = {app, redirects, redirect, text, escapeHTML, embeds, lazy, cache, root: __dirname, Router};
-require('./tools/dns.js')(ctx);
+app.use(require('./tools/dns.js'));
+// NOTE: theme.js is empty
 // require('./tools/theme.js')(ctx);
 app.use('/learn', require('./tools/learn.js'));
 app.use('/rph', require('./tools/rph.js'));
 app.use('/embed', require('./tools/embed.js'));
-require('./tools/my.js')(ctx);
+app.use('/my', require('./tools/my.js'));
 require('./tools/home.js')(ctx);
 app.use('/badge', require('./tools/badge.js'));
-app.use('/morequire('./tools/modules.js')(ctx);
+app.use('/m', require('./tools/modules.js'));
 
 const q = require('./tools/query.js');
 app.use(subdomain('q', q));
 app.use('/q', q);
-app.use(subdomain('query', q));
 app.use('/query', q);
 
 app.use((req, res, next) => {

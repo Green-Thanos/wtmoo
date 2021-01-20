@@ -1,5 +1,5 @@
 module.exports = (function () {
-  const embed = new require('express').Router;
+  const embed = new require('express').Router();
   
   embed.get('/', (req, res) => {
     res.send(

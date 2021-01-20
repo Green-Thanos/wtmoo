@@ -1,6 +1,6 @@
-const dns = require("dns").promises;
+const dns = require('dns').promises;
 const dnsErrors = {};
-for (const k in require("dns")) { if (/^[A-Z]+$/.test(k)) { dnsErrors[require("dns")[k]] = k; } }
+for (const k in require('dns')) { if (/^[A-Z]+$/.test(k)) { dnsErrors[require('dns')[k]] = k; } }
 
 module.exports = function ({app, text}) {
   async function reverseDNS(req, res) {
