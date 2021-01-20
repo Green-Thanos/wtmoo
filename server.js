@@ -211,7 +211,7 @@ const ctx = {app, redirects, redirect, text, escapeHTML, getQS, embeds, lazy, ca
 require('./tools/dns.js')(ctx);
 require('./tools/theme.js')(ctx);
 require('./tools/learn.js')(ctx);
-require('./tools/rph.js')(ctx);
+app.use('/rph', require('./tools/rph.js'));
 require('./tools/embed.js')(ctx);
 require('./tools/query.js')(ctx);
 require('./tools/my.js')(ctx);

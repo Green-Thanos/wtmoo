@@ -1,4 +1,4 @@
-module.exports = function ({app}) {
+module.exports = (function () {
   // uhoh stinkers
   const people = {
     bbworld: {site: 'https://github.com/bbworld1', color: 'f6a21b', desc: 'godforsaken scratch shill', desc2: 'scratch cat\'s sockpuppet'},
@@ -18,22 +18,16 @@ module.exports = function ({app}) {
     qwertz: {site: 'https://github.com/christusdsouza', color: '00ffbb', desc: 'plays football i guess', desc2: 'soccer'}
   };
   
-  app.get('/rph/:name', (req, res, next) => {
-    const isJson = name.endsWith('.json');
+  const rph = new require('express').Router();
+  
+  rph.get('/:name', (req, res, next) => {
+    const isJson = req.params.name.endsWith('.json');
     const name = isJson ? req.params.name.replace(/\.json$/, '') : req.params.name;
     if (!(name in people)) {
       next();
     }
     const {site, domain, desc, desc2, color, image} = people[name];
     if (!isJson) {
-      res.setHeader('content-type', 'application/json+oembed');
-      res.send(`{
-  "author_name": "${name}",${site ? `
-  "author_url": "${site}",` : ''}
-  "cache_age": 300,
-  "thumbnail_url": "https://wtmoo.is/images/rph/${image || name  + '.png'}"
-}`);
-    } else {
       res.send(`<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>
 <meta content="${desc}" property="og:description">${domain ? `
 <meta content="${domain}" property="og:site_name">` : ''}
@@ -41,10 +35,18 @@ module.exports = function ({app}) {
 <meta name="theme-color" content="#${color}">
 <link type="application/json+oembed" href="https://wtmoo.is/rph/${name}.json" />${site ? `
 <a href="${site}">${desc2}</a>` : desc2}`);
+    } else {
+      res.setHeader('content-type', 'application/json+oembed');
+      res.send(`{
+  "author_name": "${name}",${site ? `
+  "author_url": "${site}",` : ''}
+  "cache_age": 300,
+  "thumbnail_url": "https://wtmoo.is/images/rph/${image || name  + '.png'}"
+}`);
     }
   })
   
-  app.get('/rph', (req, res) => {
+  rph.get('/', (req, res) => {
     res.send(`<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}h1,h2,h3,h4,h5,h6,ul{margin:0;}</style>\
 <meta content="very funny discord pls dont join" property="og:description">\
 <meta content="https://wtmoo.is/images/rph/rph.webp" property="og:image">\
@@ -57,7 +59,7 @@ ${Object.keys(people).map(name => '<li><a href="/rph/' + name + '">' + name + '<
 </ul>`);
   });
 
-  app.get('/rph/rph.json', (req, res) => {
+  rph.get('/rph.json', (req, res) => {
     res.setHeader('content-type', 'application/json+oembed');
     res.send(`{
   "author_name": "r/ProgrammerHumor discord",
@@ -66,5 +68,6 @@ ${Object.keys(people).map(name => '<li><a href="/rph/' + name + '">' + name + '<
   "thumbnail_url": "https://wtmoo.is/images/rph/rph.webp"
 }`);
   });
-}
-
+  
+  return rph;
+})();
