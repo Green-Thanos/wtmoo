@@ -39,8 +39,6 @@ function text(req, res, text, status=200) {
   }
 }
 
-function getQS(url) { return url.includes('?') ? url.slice(url.indexOf('?') + 1) : null; }
-
 const use = app.use.bind(app);
 app.sub = function (path, router) {
   use(subdomain(path, router));
@@ -206,7 +204,7 @@ app.get('/pl/syntax', (req, res) => {
 redirect('/personal/aoc/2020/day/4/hs/cursed', 'https://tio.run/##jVhtb5tIEP7OrxiRKgaZnGK7jm0iV0qTNI1UpdGld9L55QMGHNAR7AJu4zvfb8/NvrCzEBxXjvEw88zs7LO7M5DIy/8Ok@Tl5d@TI/hycXfzx8XNNXxKwud4kYS3aV54qR/mjlJdrtIifC5yODr5z4if1qusgPssTDZBCFEcxOkjWNbxse2Atduxa7vNruMxXq@/O@AlCV7SrQPrLE4LB/Jo9dOBB379uFqh9Vu2CXFAL8nxZ5kzTBrY5WDfN14SL@MwgJvPl78xPyPwCg@@bdchjOFjnBXRX6GXwQ5u83wTSvn6eR1nXhGvUqn4HMaPUcEEL84uV8mKo7ZhKd57ec4GvL3Cm8vVJi2y7e2VGOsOB5qg@gHuhIIljjqWOap56oafYAQ@MfDgZxRmIZ8ruC7en3yA6WXkZXMjTpfxM7yH8Vh6XH9XeEabwvMLGwhdxLKI4HziHG@AGIE4GIOpbsxzYSVW0KpuSmuNJ4RUNSVO0od2ISm9YpOZyhsVveSXxZVyadMIRyvdlXa1BsysbkxiA4mrcMHZIy50VthCnQsA0aETowFqjLwiSINKUhQ3uknxojOkD1NSo3GkmTV2KkRpECJIp0oDeLBAhdid1T10V91AE0bxxDznN9YDpDZTPIDZbltcl9oV2u@qnE94AG1gEQKvKxYoxb0Oq4M58TNVSYsfL0yE/crkuOPY5D/VrVBx50NxdxlDS477yqvMpDE3PKYZ9KHdNlhNAytyCxs2CIhcq0A1bGxhmc65elObDzvu1fn4iPLd6ZyArAp//fP69@Ti/v727oYVWeEsikXV3TQZGTP8mKUqR03LbLl8lVqQ28pDAFoybZ60UBS2Zi1DmrXcPRh/kIl4tSxwtugynascWCFsTVuuiJi8ykA4cLyW1HTOsuIBonb7lbmoWB22E2X6lKklUhXNBBa2ytlC3cKupi11mIllssXLxTRRYtGVZsE1tmmUG6AHx8cGa3BiJyEx4Il7sYO8@o7pwm5nsF5IDkwQKvLxjHRVlLtTBGCKcltyF@ydsFRsLCHCXEAoC2nk5Apwuq2BdzsQykIaOViMhW2WUcIZ8Qzst@puYRheEECxXYP1w0tYaxZrNZ1aqHSAK@35/BVMDm3pMDey3cIwstALWriwrVnacvkFtyqreFbGwrsWB@D@tQkKFVAJqIZ6C@CXVqnIEdZuT/25giAflIMts8TIC8xxi98Mv/jhs2KTpY7yrgxa4BFSfvEeP2o0zX7hHr9a62l2jtDlEb9FzVk2pf1OPn6TupPqVfszbfJTPazZbY1gRk5Qc9M6W7Ojv8eRGl7Vzwigddoa82qPYofELok9Et@T2CfxjMQBiUMSR0r0x/Lw51fxY4yPyRNRU/mR1JTluayhU4GuaWX7lC6BOPeaDx6oiOYZ0TwjmmdE84xonhHNM6J5RjTPiOYZ0TxR9EhckOiTGJIYkLgk8YLEjyReknhF4jWJn5RIXH8On2tEC02dZaatUcxUkl@/5NcX/Ao0koulKw54X2NF1pqJx3EsodZsIZ7M8YGGVVAsmAn2f1UXHDrqTu30OvJAOnTGHHVsHO0kzOHkBBza4XORTovnU2Ym@4CwoEnmzMqelgzuCxfX0MWtwmphScKb0M4vQz13Ibt4gIxgRgH2jiYHs3t6emra5VPYPkjnMKRLEGjC/KDMKRNtSfB0cDLYFHyVvN@IxfG6p03jaZjG8errrgbt7hm07oAj9xpHrgMbhy@3GV@mPlsm038y5TKdN8POfg02@DXY8CDM7IxOmX1cXW3N3Hnb3H3b3FPmBl7EZOO0TO81xOyPpHnPCIOBtIu3hwbA8BBgpAMashwczLJ59am4tI5kwyyL3jsQfyRNbBvrXZNzpZBqW1UVLNN7WjRQpAEWyeYAIEvfBjxm20OAAxGif5I3AY0cUi2WAK0xv@awwqYNP7RAqobLOHxDGvz/YOy/PPSmxRvM7VewbGkdw3pTPBTZlxR@4y8mhvHkxSnbCit8o0nCgp5swQy3mYs1ozdLZ8YseizczmDgP8E6DlDCs8D1oZ@4m8KHBQd3RxCh4ihc@v5oCLFQigj8wpx7vcHZaX/Y74OPd933I@7cGfW7wEfp97XYuBYyTGcAIqPumRhkeHY27A/YG56YXSanwN5en7y17GqZsufSXuj2lgYolGRNJ3P2yjad4GsgTOb2y8v/');
 
 const redirects = {}, embeds = {};
-const ctx = {app, redirects, redirect, text, escapeHTML, getQS, embeds, lazy, cache, root: __dirname, Router};
+const ctx = {app, redirects, redirect, text, escapeHTML, embeds, lazy, cache, root: __dirname, Router};
 require('./tools/dns.js')(ctx);
 // require('./tools/theme.js')(ctx);
 app.use('/learn', require('./tools/learn.js'));
@@ -215,7 +213,7 @@ require('./tools/embed.js')(ctx);
 require('./tools/query.js')(ctx);
 require('./tools/my.js')(ctx);
 require('./tools/home.js')(ctx);
-require('./tools/badge.js')(ctx);
+app.use('/badge', require('./tools/badge.js'));
 require('./tools/modules.js')(ctx);
 
 app.use((req, res, next) => {
