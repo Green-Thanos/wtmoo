@@ -1,7 +1,6 @@
-const dns = require("dns").promises;
-const dns_ = ;
+const dns = require('dns').promises;
 const dnsErrors = {};
-for (const k in require('dns')) { if (/^[A-Z]+$/.test(k)) { dnsErrors[dns_[k]] = k; } }
+for (const k in require('dns')) { if (/^[A-Z]+$/.test(k)) { dnsErrors[require('dns')[k]] = k; } }
 
 module.exports = (function () {
   const my = new require('express').Router();
