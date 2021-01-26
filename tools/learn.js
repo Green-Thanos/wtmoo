@@ -64,6 +64,8 @@ module.exports = (function () {
   redirect('/s6-rc', '/s6');
   redirect('/s6rc', '/s6');
   redirect('/latex', 'https://www.overleaf.com/latex/Tutorials');
+  
+  redirect('/steno', 'https://www.artofchording.com/');
 
   return learn;
 })();
