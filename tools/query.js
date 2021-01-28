@@ -124,6 +124,7 @@ module.exports = (function () {
   q.get('/search.xml', (req, res) => res.sendFile('../pages/search.xml', { root: __dirname }));
 
   q.get('/', (req, res) => {
+    console.log('wtf');
     if (req.query.q) {
       const match = req.query.q.match(/^!?(.+?) (.+)$/);
       if (match === null) {

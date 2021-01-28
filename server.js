@@ -9,7 +9,7 @@ const fs = require('fs').promises,
   cookieParser = require('cookie-parser');
 /* global calc */
 lazy('calc', () => require('mathjs').evaluate);
-
+  
 // TODO: dark theme
 const app = require('express')();
 const { Router } = require('express');
@@ -17,6 +17,11 @@ const subdomain = require('express-subdomain');
 app.use(cookieParser());
 app.use('/ace', require('express').static('ace'));
 app.use('/images', require('express').static('images'));
+
+app.use((req, res, next) => {
+  console.log(req.url);
+  next();
+});
 
 function redirect(endpoint, url) {
   app.get(endpoint, (req, res) => {
@@ -236,6 +241,6 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
   res.status(404).sendFile("pages/404.html", { root: __dirname });
-})
+});
 
 app.listen(process.env.PORT);
