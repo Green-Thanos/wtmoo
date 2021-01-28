@@ -26,7 +26,7 @@ module.exports = (function () {
     if (!(name in people)) {
       next();
     }
-    const {site, domain, desc, desc2, color, image} = people[name];
+    const {site = null, domain, desc, desc2, color, image} = people[name];
     if (!isJson) {
       res.send(`<style>body{font-family: Whitney, "Hind Light", "Ek Mukta", Cantarell, "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}</style>
 <meta content="${desc}" property="og:description">${domain ? `

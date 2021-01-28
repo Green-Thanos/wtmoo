@@ -33,4 +33,4 @@ module.exports = function ({app, text}) {
   app.get('/dns', listDNS);
   app.get('/dns/list', listDNS);
   app.get('/listdns', listDNS);
-}
+};

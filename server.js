@@ -17,12 +17,6 @@ const subdomain = require('express-subdomain');
 app.use(cookieParser());
 app.use('/ace', require('express').static('ace'));
 app.use('/images', require('express').static('images'));
-
-app.use((req, res, next) => {
-  console.log(req.url);
-  next();
-});
-
 function redirect(endpoint, url) {
   app.get(endpoint, (req, res) => {
     res.redirect(url);
@@ -204,9 +198,10 @@ redirect('/personal/aoc/2020/day/4/hs/cursed', 'https://tio.run/##jVhtb5tIEP7Orx
 
 const redirects = {}, embeds = {};
 const ctx = {app, redirects, redirect, text, escapeHTML, embeds, lazy, cache, root: __dirname, Router};
-app.use(require('./tools/dns.js'));
+require('./tools/dns.js')(ctx);
 // NOTE: theme.js is empty
 // require('./tools/theme.js')(ctx);
+
 app.use('/learn', require('./tools/learn.js'));
 app.use('/rph', require('./tools/rph.js'));
 app.use('/embed', require('./tools/embed.js'));

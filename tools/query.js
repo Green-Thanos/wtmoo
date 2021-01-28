@@ -121,6 +121,10 @@ module.exports = (function () {
 
   const q = new require('express').Router();
   
+  q.use((req, res, next) => {
+    console.log(req.url);
+  });
+  
   q.get('/search.xml', (req, res) => res.sendFile('../pages/search.xml', { root: __dirname }));
 
   q.get('/', (req, res) => {
