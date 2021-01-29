@@ -41,7 +41,7 @@ module.exports = (function () {
   redirect('/ex', '/elixir');
   redirect('/exs', '/elixir');
 
-  redirect('/haskell', 'http:/youahaskell.com/chapters');
+  redirect('/haskell', 'http://learnyouahaskell.com/chapters');
   redirect('/hs', '/haskell');
 
   redirect('/interpreter', 'http://craftinginterpreters.com/contents.html');

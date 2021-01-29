@@ -222,11 +222,11 @@
         bang.selectionStart = 0;
       }
       function onBangFocusout(e) {
-        enginesDiv.classList.add("hidden");
+        setTimeout(() => enginesDiv.classList.add("hidden"), 1000);
         if (bang.value.slice(1) in engined) {
-          setTimeout(() => bang.classList.remove("error"), 50);
+          bang.classList.remove("error");
         } else {
-          setTimeout(() => bang.classList.add("error"), 50);
+          bang.classList.add("error");
         }
       }
       function onQueryKeydown(e) {
