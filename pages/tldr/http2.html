@@ -1,16 +1,41 @@
 <style>
+  h1, h2, h3, h4, h5, h6 { margin: 0.7em 0; }
+  pre { margin: 0; }
+  body { font-family: Roboto, sans-serif; background: #222; color: white; }
+  code { font-family: 'Fantasque Sans Mono Nerd Font', 'Fantasque Sans Mono', 'JetBrains Mono', 'Fira Code', monospace; }
 </style>
 <title>RFC 7540: HTTP/2</title>
 <h3>client upgrade request</h3>
-<pre><code>GET {path} HTTP/1.1
+<pre><code><!--
+-->GET {path} HTTP/1.1
 Host: {host}
 Connection: Upgrade, HTTP2-Settings
 Upgrade: h2c
 HTTP2-Settings: {base64url encoding of HTTP/2 SETTINGS payload}
 </code></pre>
 <h3>server upgrade response (not supported)</h3>
-ignore upgrade header (i.e. no specialcasing needed)
-<pre><code>HTTP/1.1 200 OK
+<span>ignore upgrade header (i.e. no specialcasing needed)</span>
+<pre><code><!--
+-->HTTP/1.1 200 OK
 Content-Length: {length}
 Content-Type: {type}
+
+{body}
 </code></pre>
+<h3>server upgrade response (supported)</h3>
+<pre><code><!--
+-->HTTP/1.1 101 Switching Protocols
+Connection: Upgrade
+Upgrade: h2c
+</code></pre>
+<h3>client connection preface</h3>
+<span>c string literal:</span>
+<pre><code><!--
+-->PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n</code></pre>
+<span>or equivalent hex:</span>
+<pre><code><!--
+-->505249202a20485454502f322e300d0a0d0a534d0d0a0d0a</code></pre>
+<span>followed by <code>SETTINGS</code> frame which may be empty.</span>
+<h3><code>SETTINGS</code> frame</h3>
+<span>type=0x4</span><br />
+<span>flag: ack (0x1)</span>
