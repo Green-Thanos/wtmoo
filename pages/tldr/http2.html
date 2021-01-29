@@ -46,5 +46,13 @@ Upgrade: h2c
 <span>flag: ack (0x1)</span>
 <h4>format</h4>
 <pre><code data-format data-format-for="SETTINGS_PARAM">16 Identifier
-32 Value</code></pre>
+32 Value
+enum Identifier
+0x1 SETTINGS_HEADER_TABLE_SIZE      type
+0x2 SETTINGS_ENABLE_PUSH
+0x3 SETTINGS_MAX_CONCURRENT_STREAMS
+0x4 SETTINGS_INITIAL_WINDOW_SIZE
+0x5 SETTINGS_MAX_FRAME_SIZE
+0x6 SETTINGS_MAX_HEADER_LIST_SIZE
+end</code></pre>
 </html>
