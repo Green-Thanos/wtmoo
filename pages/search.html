@@ -222,7 +222,7 @@
         bang.selectionStart = 0;
       }
       function onBangFocusout(e) {
-        setTimeout(() => enginesDiv.classList.add("hidden"), 1000);
+        setTimeout(() => enginesDiv.classList.add("hidden"));
         if (bang.value.slice(1) in engined) {
           bang.classList.remove("error");
         } else {
