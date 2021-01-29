@@ -1,3 +1,4 @@
+<html data-spec-type="rfc" data-spec-id="7540">
 <style>
   h1, h2, h3, h4, h5, h6 { margin: 0.7em 0; }
   pre { margin: 0; }
@@ -37,5 +38,13 @@ Upgrade: h2c
 -->505249202a20485454502f322e300d0a0d0a534d0d0a0d0a</code></pre>
 <span>followed by <code>SETTINGS</code> frame which may be empty.</span>
 <h3><code>SETTINGS</code> frame</h3>
-<span>type=0x4</span><br />
+<span>(if malformed, respond with connection error <code>PROTOCOL_ERROR</code>)</span><br />
+<span>(if <code>length % 6 != 0</code>, respond with connection error <code>FRAME_SIZE_ERROR</code>)</span><br />
+<span>type: 0x4</span><br />
+<span>stream identifier: 0x0</span><br />
+<span>(if not 0x0, respond with connection error <code>PROTOCOL_ERROR</code>)</span><br />
 <span>flag: ack (0x1)</span>
+<h4>format</h4>
+<pre><code data-format data-format-for="SETTINGS_PARAM">16 Identifier
+32 Value</code></pre>
+</html>
