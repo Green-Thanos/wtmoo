@@ -185,6 +185,7 @@ module.exports = function ({app, redirects: redirectd, embeds}) {
     [['userstyles'], 'https://userstyles.org/'],
     [['greasyfork'], 'https://greasyfork.org/'],
     [['khan academy', 'khanacademy', 'ka'], 'https://www.khanacademy.org/'],
+    [['lyah'], 'http://learnyouahaskell.com/chapters']
   ];
   home += '<h5>misc</h5><ul>';
   for (const [aliases, url] of misc) { home += `<li><a href="/${encodeURIComponent(aliases[0])}">${aliases[0]}</a></li>`; for (const alias of aliases) { redirectd[alias] = redirectd[alias.replace(/\s+/g, '')] = url; } }
