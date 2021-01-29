@@ -1,0 +1,16 @@
+<style>
+</style>
+<title>RFC 7540: HTTP/2</title>
+<h3>client upgrade request</h3>
+<pre><code>GET {path} HTTP/1.1
+Host: {host}
+Connection: Upgrade, HTTP2-Settings
+Upgrade: h2c
+HTTP2-Settings: {base64url encoding of HTTP/2 SETTINGS payload}
+</code></pre>
+<h3>server upgrade response (not supported)</h3>
+ignore upgrade header (i.e. no specialcasing needed)
+<pre><code>HTTP/1.1 200 OK
+Content-Length: {length}
+Content-Type: {type}
+</code></pre>

@@ -209,6 +209,7 @@ app.use('/my', require('./tools/my.js'));
 require('./tools/home.js')(ctx);
 app.use('/badge', require('./tools/badge.js'));
 app.use('/m', require('./tools/modules.js'));
+app.use('/tldr', require('./tools/tldr.js'));
 
 const q = require('./tools/query.js');
 app.use(subdomain('q', q));
