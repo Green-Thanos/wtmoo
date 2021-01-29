@@ -224,9 +224,9 @@
       function onBangFocusout(e) {
         enginesDiv.classList.add("hidden");
         if (bang.value.slice(1) in engined) {
-          bang.classList.remove("error");
+          setTimeout(() => bang.classList.remove("error"), 0);
         } else {
-          bang.classList.add("error");
+          setTimeout(() => bang.classList.add("error"), 0);
         }
       }
       function onQueryKeydown(e) {
@@ -262,6 +262,7 @@
             break;
         }
       }
+      document.getElementById('engines').onclick = console.log
       function onEnginesClick(e) {
         console.log(e, e.target);
       }
@@ -271,6 +272,7 @@
       bang.addEventListener("focusout", onBangFocusout);
       query.addEventListener("keydown", onQueryKeydown);
       enginesDiv.addEventListener("click", onEnginesClick);
+      refreshEngines();
     </script>
   </body>
 </html>
