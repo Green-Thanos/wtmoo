@@ -54,7 +54,7 @@ async function cache(url, path, age = days(1)) {
     if (new Date() - stat.mtimeMs > age) {
       const res = await fetch(url);
       const body = await res.text();
-      await file.read({ length: 0, position: 0 });
+      await file.truncate();
       await file.writeFile(body);
       await file.close();
       return body;
