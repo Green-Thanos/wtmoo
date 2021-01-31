@@ -80,11 +80,11 @@ module.exports = (function () {
     // funding
     [['patreon', 'pat'], 'https://www.patreon.com/search?q=%+q'],
     [['gofundme', 'gfm'], 'https://gofundme.com/mvc.php?route=homepage_norma/search&term=%q'],
-    [['pixiv'], 'https://www.pixiv.net/en/tags/%q/artworks?s_mode=s_tag'],
     // art
     [['deviantart', 'da'], 'https://www.deviantart.com/search?q=%q'],
     [['fantia', 'ft'], 'https://fantia.jp/fanclubs?keyword=%+q'],
     [['fanbox', 'pixiv fanbox', 'pxfb'], 'https://www.fanbox.cc/search?type=creator&q=%q'],
+    [['pixiv'], 'https://www.pixiv.net/en/tags/%q/artworks?s_mode=s_tag'],
     [['wattpad', 'watt'], 'https://www.wattpad.com/search/%q'],
     // social networks
     [['facebook', 'fb'], 'https://www.facebook.com/search/top/?q=%q'],

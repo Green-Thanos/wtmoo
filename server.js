@@ -51,7 +51,7 @@ async function cache(url, path, threshold = days(1)) {
     await fs.access(path, fsConst.R_OK | fsConst.W_OK);
     const file = await fs.open(path, 'a+');
     const stat = await file.stat();
-    if (new Date() - stat.mtimeMs > 1) {
+    if (new Date() - stat.mtimeMs > threshold) {
       const res = await fetch(url);
       const body = await res.text();
       console.log('truncating...')
