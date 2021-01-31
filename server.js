@@ -45,15 +45,16 @@ const minutes = n => n * 60000,
 fs.access('./data/', fsConst.R_OK | fsConst.W_OK)
   .catch(() => fs.mkdir('./data/'));
 
-async function cache(url, path, age = days(1)) {
+async function cache(url, path, threshold = days(1)) {
   path = './data/' + path;
   try {
     await fs.access(path, fsConst.R_OK | fsConst.W_OK);
     const file = await fs.open(path, 'a+');
     const stat = await file.stat();
-    if (new Date() - stat.mtimeMs > age) {
+    if (new Date() - stat.mtimeMs > 1) {
       const res = await fetch(url);
       const body = await res.text();
+      console.log('truncating...')
       await file.truncate();
       await file.writeFile(body);
       await file.close();
