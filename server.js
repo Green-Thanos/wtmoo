@@ -242,4 +242,4 @@ app.use((req, res) => {
   res.status(404).sendFile("pages/404.html", { root: __dirname });
 });
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT, () => console.log('Port %s', process.env.PORT));
