@@ -1,6 +1,7 @@
 function lazy(name, fn) {
   Object.defineProperty(global, name, { get: () => { const val = fn(); Object.defineProperty(global, name, val); return val} });
 }
+require('dotenv/config');
 
 const fs = require('fs').promises,
   fsConst = require('fs').constants,
